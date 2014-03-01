@@ -1,0 +1,25 @@
+.type_pageLink input {
+float: left;
+}
+.pageLinkPlaceholder {
+margin-left: 5px;
+padding-top: 2px;
+position: relative;
+float: left;
+}
+.pageLinkPlaceholder .iconBtn {
+z-index: 100;
+position: relative;
+}
+.pageLinkPlaceholder .iconBtn.over {
+/*border-bottom: 0px;
+padding-bottom: 1px;*/
+background-color: #FFEB8F;
+}
+.type_pageId .pageLinkPlaceholder {
+margin: 0px;
+}
+.type_pageId .pageIdTitle {
+padding: 5px 0px 0px !important;
+float: left;
+}
