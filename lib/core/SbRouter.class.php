@@ -29,7 +29,7 @@ class SbRouter extends DefaultRouter {
   protected function initPageHtmlCache() {
     if (!$this->cacheEnable) return;
     $this->cacheKey = str_replace('.', '_', str_replace('-', '_', 'htmlPage'.implode('', $this->req->params)));
-    $this->cache = NgnCache::c();
+    $this->cache = FileCache::c();
     $this->cacheHtml = $this->cache->load($this->cacheKey);
   }
 

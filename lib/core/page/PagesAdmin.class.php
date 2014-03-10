@@ -20,7 +20,7 @@ class PagesAdmin extends PagesTree {
       return; // Нельзя перемещать в детей
     db()->query("UPDATE pages SET parentId=?d WHERE id=?d", $toPageId, $pageId);
     $this->updatePath($pageId);
-    NgnCache::cleanTag('pages');
+    FileCache::cleanTag('pages');
   }
   
   function moveMif($id, $toId, $where) {
@@ -28,7 +28,7 @@ class PagesAdmin extends PagesTree {
     $nodeAfter = Pages::getNode($id);
     $this->updateFolderStatus($nodeAfter['parentId']);
     $this->updatePath($id);
-    NgnCache::cleanTag('pages');
+    FileCache::cleanTag('pages');
   }
   
   protected function updatePathNode($id) {
@@ -78,7 +78,7 @@ class PagesAdmin extends PagesTree {
   function updateTitle($id, $title) {
     parent::updateTitle($id, $title);
     $this->updatePath($id);
-    NgnCache::cleanTag('pages');
+    FileCache::cleanTag('pages');
   }
 
   /**
@@ -215,12 +215,12 @@ class PagesAdmin extends PagesTree {
     O::get('PrivilegesManager')->cleanup();
     // Удаляем запись из "Избранных"
     Settings::remove('adminPagesFavorits', $id);
-    NgnCache::cleanTag('pages');
+    FileCache::cleanTag('pages');
   }
 
   function activate($id) {
     $this->_activate($id);
-    NgnCache::cleanTag('pages');
+    FileCache::cleanTag('pages');
   }
   
   private function _activate($id) {
@@ -232,7 +232,7 @@ class PagesAdmin extends PagesTree {
 
   function deactivate($id) {
     $this->_deactivate($id);
-    NgnCache::cleanTag('pages');
+    FileCache::cleanTag('pages');
   }
   
   function _deactivate($id) {

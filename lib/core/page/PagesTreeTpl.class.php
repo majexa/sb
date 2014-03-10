@@ -109,7 +109,7 @@ class PagesTreeTpl extends DbTreeTpl {
    * @return  PagesTreeTpl
    */
   static function getObjCached($pageId) {
-    $cache = NgnCache::c();
+    $cache = FileCache::c();
     if (1 or !($oPagesTreeTpl = $cache->load('menu_'.$pageId))) {
       $oPagesTreeTpl = O::get('PagesTreeTpl', $pageId);
       $cache->save($oPagesTreeTpl, 'menu_'.$pageId, ['pages']);

@@ -56,7 +56,7 @@ class PageLayoutN {
       throw new Exception('not realized');
       PageBlockCore::deleteCollection([['global', 1]]);
     }
-    NgnCache::clean();
+    FileCache::clean();
   }
   
 }

@@ -47,7 +47,7 @@ class MainTplSettings {
       db()->query('DELETE FROM page_blocks WHERE ownPageId=?d', $pageId);
     else
       db()->query('DELETE FROM page_blocks WHERE static=1'); 
-    NgnCache::clean();
+    FileCache::clean();
   }
   
 }

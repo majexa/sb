@@ -24,7 +24,7 @@
   <?
   // Site Module CSS & JS
   if (!empty($d['page']['module'])) {
-    print NgnCache::func(function() use ($d) {
+    print FileCache::func(function() use ($d) {
       return PageModuleCore::sf('site', $d['page']['module']);
     }, $d['page']['module'].'sf', FORCE_STATIC_FILES_CACHE);
   }

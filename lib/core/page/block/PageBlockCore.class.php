@@ -113,7 +113,7 @@ class PageBlockCore {
   }
 
   static function cc($id) {
-    NgnCache::c()->remove('pageBlock_'.$id);
+    FileCache::c()->remove('pageBlock_'.$id);
   }
 
   static function updateColN($id, $colN, $oid = 0) {
