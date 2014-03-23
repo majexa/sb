@@ -10,7 +10,7 @@ Ngn.Dialog.NewPage = new Class({
   
   formResponse: function(r) {
     this.parent(r);
-    Ngn.frm.initTranslateField('titlei', 'namei');
+    Ngn.Frm.initTranslateField('titlei', 'namei');
     this.message.getElement('input[name=title]').focus();
   }
   

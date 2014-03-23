@@ -17,9 +17,9 @@ Ngn.Dialog.NewModulePage = new Class({
   },
 
   afterFormResponse: function() {
-    Ngn.frm.initTranslateField('titlei', 'namei');
-    Ngn.frm.initCopySelectValue('modulei', 'namei');
-    Ngn.frm.initCopySelectTitle('modulei', 'titlei');
+    Ngn.Frm.initTranslateField('titlei', 'namei');
+    Ngn.Frm.initCopySelectValue('modulei', 'namei');
+    Ngn.Frm.initCopySelectTitle('modulei', 'titlei');
   }
 
 });
