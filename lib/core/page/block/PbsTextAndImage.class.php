@@ -11,7 +11,7 @@ class PbsTextAndImage extends PbsAbstract {
         'name' => 'text',
         'type' => 'wisiwigSimple2',
         'jsOptions' => ['tinySettings' => [
-          'content_css' => Sflm::lm('css')->getUrl('tinyContent')
+          'content_css' => Sflm::lib('css')->getUrl('tinyContent')
         ]]
       ],
       [

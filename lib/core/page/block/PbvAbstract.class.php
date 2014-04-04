@@ -62,7 +62,7 @@ abstract class PbvAbstract {
   protected $js = '';
 
   function html() {
-    Sflm::flm('js')->addClass('Ngn.pb.BlockEdit.'.ucfirst($this->pageBlock['type']), get_class($this).'::html()');
+    Sflm::frontend('js')->addObject('Ngn.pb.BlockEdit.'.ucfirst($this->pageBlock['type']), get_class($this).'::html()');
     $titleHtml = '';
     if (isset($this->moreLink)) $titleHtml .= '<a href="'.$this->moreLink['link'].'" class="hbtn small"><span>'.$this->moreLink['title'].'</span></a>';
     if ($this->buttons) {

@@ -107,12 +107,12 @@ class StmCore {
 
   static function getTags() {
     if (!Config::getVarVar('theme', 'enabled', true) or !Config::getVarVar('theme', 'theme')) return '';
-    return '<link rel="stylesheet" type="text/css" media="screen, projection" href="/'.(empty($_GET['theme']) ? Sflm::flm('css')->sflm->getCachedUrl('s2/css/common/theme').'?'.BUILD : 's2/css/common/theme?'.http_build_query($_GET['theme'])).'" />'.'<script type="text/javascript" src="/'.(empty($_GET['theme']) ? Sflm::flm('js')->getCachedUrl('s2/js/common/theme').'?'.BUILD : 's2/js/common/theme?'.http_build_query($_GET['theme'])).'"></script>';
+    return '<link rel="stylesheet" type="text/css" media="screen, projection" href="/'.(empty($_GET['theme']) ? Sflm::frontend('css')->sflm->getCachedUrl('s2/css/common/theme').'?'.BUILD : 's2/css/common/theme?'.http_build_query($_GET['theme'])).'" />'.'<script type="text/javascript" src="/'.(empty($_GET['theme']) ? Sflm::frontend('js')->getCachedUrl('s2/js/common/theme').'?'.BUILD : 's2/js/common/theme?'.http_build_query($_GET['theme'])).'"></script>';
   }
 
   static function cc() {
-    Sflm::flm('css')->clearPathCache('s2/css/common/theme');
-    Sflm::flm('js')->clearPathCache('s2/js/common/theme');
+    Sflm::frontend('css')->clearPathCache('s2/css/common/theme');
+    Sflm::frontend('js')->clearPathCache('s2/js/common/theme');
   }
 
 }

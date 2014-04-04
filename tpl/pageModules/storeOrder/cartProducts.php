@@ -1,4 +1,4 @@
-<?= Sflm::flm('css')->getTag('cpm/store/products.css') ?>
+<?= Sflm::frontend('css')->getTag('cpm/store/products.css') ?>
 <table id="productsTable">
 <tbody>
 <? foreach ($d as $v) { ?>

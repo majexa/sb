@@ -50,7 +50,7 @@ class DdoPage extends Ddo {
   /*
   function itemsBegin() {
     if (($s = parent::itemsBegin()) === '') return '';
-    return Sflm::flm('css')->getTag(Sflm::flm('css')->sflm->getCachedUrl('s2/css/common/ddItemWidth.css?pageId='.$this->page['id'])).$s;
+    return Sflm::frontend('css')->getTag(Sflm::frontend('css')->sflm->getCachedUrl('s2/css/common/ddItemWidth.css?pageId='.$this->page['id'])).$s;
   }
   */
 

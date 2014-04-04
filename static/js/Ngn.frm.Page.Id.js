@@ -1,5 +1,5 @@
-Ngn.Frm.Page.Id = new Class({
-  Extends: Ngn.Frm.Page,
+Ngn.frm.Page.Id = new Class({
+  Extends: Ngn.frm.Page,
 
   options: {
     btnClass: 'pageId',

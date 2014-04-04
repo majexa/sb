@@ -13,9 +13,9 @@
   <? if (!empty($d['pageMeta']['keywords'])) { ?>
   <meta name="keywords" content="<?= $d['pageMeta']['keywords'] ?>"/>
   <? } ?>
-  <?= Sflm::flm('css')->getTags() ?>
+  <?= Sflm::frontend('css')->getTags() ?>
   <script type="text/javascript" src="/i/js/tiny_mce/tiny_mce.js"></script>
-  <?= Sflm::flm('js')->getTags() ?>
+  <?= Sflm::frontend('js')->getTags() ?>
   <?
   // Site Module CSS & JS
   if (!empty($d['page']['module'])) {

@@ -17,9 +17,9 @@
   <meta name="keywords" content="<?= $d['pageMeta']['keywords'] ?>"/>
   <? } ?>
 
-  <?= Sflm::flm('css')->getTags(SITE_SET) // Site Set CSS ?>
+  <?= Sflm::frontend('css')->getTags(SITE_SET) // Site Set CSS ?>
   <script type="text/javascript" src="/i/js/tiny_mce/tiny_mce.js"></script>
-  <?= Sflm::flm('js')->getTags(SITE_SET) // Site Set JS ?>
+  <?= Sflm::frontend('js')->getTags(SITE_SET) // Site Set JS ?>
   <?= StmCore::getTags() // Site Theme CSS & JS ?>
   <?
   // Site Module CSS & JS

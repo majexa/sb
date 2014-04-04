@@ -9,7 +9,7 @@ Ngn.Dialog.NewPageBase = new Class({
   getOpt: function() {
     return {
       getFormData: function() {
-        var data = Ngn.Frm.toObj(this.form.eForm);
+        var data = Ngn.frm.toObj(this.form.eForm);
         data.parentId = this.options.pageId;
         return data;
       }

@@ -5,8 +5,8 @@ class SbRouter extends DefaultRouter {
   public $page;
 
   function dispatch() {
-    Sflm::flm('css')->addLib('sb');
-    Sflm::flm('js')->addLib('sb');
+    Sflm::frontend('css')->addLib('sb');
+    Sflm::frontend('js')->addLib('sb');
     $this->checkAuthMode();
     $this->initPage();
     $this->initPageHtmlCache();

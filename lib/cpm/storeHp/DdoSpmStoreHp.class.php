@@ -13,7 +13,7 @@ $f = function($v) {
 Ngn.toObj('Ngn.cart.prices');
 Ngn.cart.prices.{$v['name']} = $prices;
 window.addEvent('domready', function() {
-  Ngn.Frm.addEvent('change', '{$v['name']}', function() {
+  Ngn.frm.addEvent('change', '{$v['name']}', function() {
     Ngn.cart.setPrices('{$v['name']}');
   });
   Ngn.cart.setPrices('{$v['name']}');

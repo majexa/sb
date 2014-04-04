@@ -3,19 +3,19 @@
 class TestSflmJsSb extends NgnTestCase {
 
   function test() {
-    Sflm::$frontend = 'default';
+    Sflm::setFrontend('default');
     Sflm::clearCache();
-    Sflm::flm('js')->addLib('sb');
-    Sflm::flm('js')->store();
-    $v2 = Sflm::flm('js')->version();
-    File::replace(Sflm::$absBasePaths['sb'].'/js/Ngn.Frm.Page.js', '// -- check --', '// -- che --');
-    $contains0 = (bool)strstr(file_get_contents(Sflm::$absBasePaths['sb'].'/js/Ngn.Frm.Page.js'), '// -- che --');
-    in_array('sd/js/Ngn.Frm.Page.js', Sflm::flm('js')->getPaths());
-    $contains = (bool)strstr(Sflm::flm('js')->code(), '// -- che --');
-    Sflm::flm('js')->store();
-    $contains2 = (bool)strstr(file_get_contents(Sflm::flm('js')->cacheFile()), '// -- che --');
-    $v3 = Sflm::flm('js')->version();
-    File::replace(Sflm::$absBasePaths['sb'].'/js/Ngn.Frm.Page.js', '// -- che --', '// -- check --');
+    Sflm::frontend('js')->addLib('sb');
+    Sflm::frontend('js')->store();
+    $v2 = Sflm::frontend('js')->version();
+    File::replace(Sflm::$absBasePaths['sb'].'/js/Ngn.frm.Page.js', '// -- check --', '// -- che --');
+    $contains0 = (bool)strstr(file_get_contents(Sflm::$absBasePaths['sb'].'/js/Ngn.frm.Page.js'), '// -- che --');
+    in_array('sd/js/Ngn.frm.Page.js', Sflm::frontend('js')->getPaths());
+    $contains = (bool)strstr(Sflm::frontend('js')->code(), '// -- che --');
+    Sflm::frontend('js')->store();
+    $contains2 = (bool)strstr(file_get_contents(Sflm::frontend('js')->cacheFile()), '// -- che --');
+    $v3 = Sflm::frontend('js')->version();
+    File::replace(Sflm::$absBasePaths['sb'].'/js/Ngn.frm.Page.js', '// -- che --', '// -- check --');
     $this->assertTrue($contains0, 'File does not contain new string');
     $this->assertTrue($contains, 'Code does not contain new string');
     $this->assertTrue($contains2, 'Cached file does not contain new string');
