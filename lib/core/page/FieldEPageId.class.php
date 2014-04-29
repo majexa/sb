@@ -2,6 +2,6 @@
 
 class FieldEPageId extends FieldEHiddenWithRow {
 
-  protected $useTypeJs = true;
+  public $useTypeJs = true;
 
 }
