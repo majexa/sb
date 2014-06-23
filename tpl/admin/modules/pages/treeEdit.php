@@ -29,22 +29,22 @@
   </div>
 <? } ?>
 
-  <div id="treeContainerWrapper" style="position:relative">
-    <? if (!in_array('pages', Config::getVarVar('adminPriv', 'hideAdminModules'))) { ?>
-      <div id="treeContainer"></div>
-    <? } ?>
-    <? if ($d['filtersForm']) { ?>
-      <div class="filters" id="ddFilters">
-        <div class="cont"><?= $d['filtersForm'] ?></div>
-      </div>
-    <? } ?>
-  </div>
-  </form>
+<div id="treeContainerWrapper" style="position:relative">
+  <? if (!in_array('pages', Config::getVarVar('adminPriv', 'hideAdminModules'))) { ?>
+    <div id="treeContainer"></div>
+  <? } ?>
+  <? if ($d['filtersForm']) { ?>
+    <div class="filters" id="ddFilters">
+      <div class="cont"><?= $d['filtersForm'] ?></div>
+    </div>
+  <? } ?>
+</div>
+</form>
 
-  <script type="text/javascript">
-    $('body').addClass('newLayout');
-    window.addEvent('domready', function() {
-      new Ngn.cp.PagesInterface();
-    });
-  </script>
+<script type="text/javascript">
+  $('body').addClass('newLayout');
+  window.addEvent('domready', function() {
+    new Ngn.cp.PagesInterface();
+  });
+</script>
 

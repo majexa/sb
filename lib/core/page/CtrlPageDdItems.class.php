@@ -1,7 +1,7 @@
 <?php
 
 class CtrlPageDdItems extends CtrlPageDd {
-  use DdParamFilterCtrl, LongJobCtrl;
+  use DdParamFilterCtrl;
 
   protected $defaultAction = 'list';
 

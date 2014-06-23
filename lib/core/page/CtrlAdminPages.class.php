@@ -10,6 +10,9 @@ class CtrlAdminPages extends CtrlAdminPagesBase {
 
   protected function init() {
     parent::init();
+    Sflm::frontend('js')->addLib('cp');
+    Sflm::frontend('js')->addPath('sb/js/Ngn.cp.PagesInterface.js');
+    Sflm::frontend('js')->addPath('sb/js/Ngn.TreeEdit.Pages.cp.js');
     if (!$this->folder and $this->action == $this->defaultAction) {
       if (!empty($this->page['controller']) and
         PageControllersCore::isEditebleContent($this->page['controller'])
