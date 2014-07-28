@@ -4,7 +4,7 @@ Ngn.pb.Interface = new Class({
   Implements: [Options],
 
   options: {
-    wrapperSelector: '#blocks',
+    wrapperSelector: '#layout',
     //colSelector: '.col',
     //colBodySelector: '.blocksBody',
     handler: '.dragBox',
@@ -15,7 +15,6 @@ Ngn.pb.Interface = new Class({
   },
 
   initialize: function(options) {
-
     this.setOptions(options);
     this.eWrapper = document.getElement(this.options.wrapperSelector);
     this.initCols();
@@ -24,7 +23,6 @@ Ngn.pb.Interface = new Class({
   },
 
   cols: [],
-
   allowGlobalBtn: false,
 
   initCols: function() {
@@ -32,7 +30,6 @@ Ngn.pb.Interface = new Class({
     this.eWrapper.getElements('.col').each(function(eCol) {
       new Ngn.pb.Col(eCol, this);
       if (eCol.hasClass('ct_content')) this.allowGlobalBtn = true;
-      // -------------------
       var eColBody = eCol.getElement(this.options.colBodySelector);
       if (!eColBody) return;
       if (!eCol.hasClass('blocksNotAllowed')) {
@@ -117,7 +114,6 @@ Ngn.pb.Col = new Class({
   addBtnCreate: function() {
     Ngn.btn2('Добавить блок в ' + this.eCol.get('data-n') + '-ю колонку', 'add').inject(this.eBtns).addEvent('click', function(e) {
       e.preventDefault();
-
       // новый вариант
       new Ngn.Dialog.RequestForm({
         url: this.interface.options.controllerPath + '/json_newBlock' + (this.interface.options.simple ? 'Simple' : '') + '/' + this.eCol.get('data-n'),
@@ -143,12 +139,6 @@ Ngn.pb.Col = new Class({
 
 });
 
-Ngn.pb.el = function(data) {
-
-  //new Element('div', {
-  //});
-};
-
 Ngn.pb.getType = function(el) {
   return el.get('class').replace(/.* pbt_(\w+) .*/, '$1');
 };
@@ -162,7 +152,6 @@ Ngn.pb.BlockEdit = new Class({
   initialize: function(eBlock, interface) {
     this.interface = interface;
     this.eBlock = eBlock;
-    //if () throw new Ngn.EmptyError('block id');
     var id = this.eBlock.get('id');
     if (!id) return;
     this.id = this.eBlock.get('id').replace('block_', '');
@@ -175,7 +164,8 @@ Ngn.pb.BlockEdit = new Class({
     return {};
   },
 
-  init: function() {},
+  init: function() {
+  },
 
   initEditBlock: function() {
     var el = this.eBlock;
@@ -198,6 +188,7 @@ Ngn.pb.BlockEdit = new Class({
         new Ngn.Dialog.RequestForm($merge({
           url: this.interface.options.controllerPath + '/json_editBlock/' + this.id,
           width: 400,
+          id: 'editBlock' + this.id,
           onSubmitSuccess: function() {
             this.reload();
           }.bind(this)
@@ -206,10 +197,10 @@ Ngn.pb.BlockEdit = new Class({
     }
     var btnDelete = el.getElement('a[class~=delete]');
     if (btnDelete) {
-      //if (this.interface.options.disableDeleteBtn) {
-      //  btnDelete.dispose();
-      //  return;
-      //}
+      // if (this.interface.options.disableDeleteBtn) {
+      //   btnDelete.dispose();
+      //   return;
+      // }
       btnDelete.addEvent('click', function(e) {
         e.preventDefault();
         if (!confirm('Вы уверены?')) return;
@@ -278,6 +269,10 @@ Ngn.pb.dialogOptions.subPages = {
 Ngn.pb.dialogOptions.textAndImage = {
   width: 450
 };
+
+window.addEvent('domready', function() {
+  new Ngn.pb.Interface();
+});
 
 /*
  Ngn.pb.Text = new Class({

@@ -5,7 +5,6 @@
 
 <?php
 
-
 // --------------------------------
 print '<div id="blocks" class="pageBlocks">';
 for ($colN=1; $colN <= $d['colsNumber']; $colN++) {

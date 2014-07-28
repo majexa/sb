@@ -24,7 +24,7 @@ empty($this->page['settings']['showFormOnDefault'])) {
     $listPath = $this->d['page']['path'];
   } elseif ($this->d['page']['slave']) {
     $defaultParam = '&default['.DdCore::masterFieldName.']='.$this->d['masterItem']['id'];
-    $listPath = $this->d['pathData'][count($this->d['pathData'])-1]['link'];
+    $listPath = $this->page['pathData'][count($this->d['pathData'])-1]['link'];
   } elseif (!empty($this->d['tagsSelected'][0])) {
     $defaultParam = '&default['.$this->d['tagsSelected'][0]['groupName'].']='.
       $this->d['tagsSelected'][0]['id'];

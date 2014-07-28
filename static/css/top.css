@@ -1,0 +1,28 @@
+#top .item {
+float: left;
+padding: 5px 10px 0px 0px;
+}
+#top input {
+font-size: 12px;
+padding: 3px 3px 2px;
+}
+/*
+input.fld:focus, .fld:focus, input[type=text]:focus, input[type=password]:focus {
+background-color: #FFF6CF;
+}
+*/
+input[type=checkbox] {
+margin-top: 1px;
+vertical-align: middle;
+}
+#top .item #searchBox {
+background: url(/i/img/portal/search.gif) no-repeat top right;
+}
+#top .item #searchBox input {
+width: 90px;
+float: left;
+margin-right: 5px;
+}
+#top .item #searchBox a {
+width: 60px;
+}

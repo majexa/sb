@@ -25,16 +25,6 @@ abstract class PmsbAbstract implements ProcessDynamicPageBlock {
 
   protected function init() {}
 
-  /*
-  protected function getName() {
-    return lcfirst(Misc::removePrefix('Pmsb', get_class($this)));
-  }
-  
-  protected function getTplName() {
-    return 'pmsb/'.$this->getName();
-  }
-  */
-  
   abstract protected function initBlocks();
   
   function blocks() {

@@ -37,7 +37,7 @@ class CtrlSbPageBlocks extends CtrlDefault {
   }
 
   function action_json_newBlockSimple() {
-    return $this->newBlockFormAction('PageBlockTypeForm');
+    return $this->newBlo ckFormAction('PageBlockTypeForm');
   }
 
   /**

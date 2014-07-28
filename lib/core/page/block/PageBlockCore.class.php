@@ -38,6 +38,16 @@ class PageBlockCore {
   static protected $blocks = [];
 
   static function getBlocks($ownPageId, CtrlPage $ctrl = null) {
+    return [
+      [
+        'type' => 'text',
+        'id'   => 123,
+        'html' => 'dqwdwq',
+        'colN' => 1
+      ]
+    ];
+    return;
+
     if (isset(self::$blocks[$ownPageId])) return self::$blocks[$ownPageId];
     $staticBlocks = new PageModuleStaticBlocks($ctrl);
     $blocks = $staticBlocks->blocks;
@@ -45,7 +55,7 @@ class PageBlockCore {
     $dynamicBlockModels = array_merge($dynamicBlockModels, self::getDynamicBlockModels(0));
     $staticBlocks->processDynamicBlockModels($dynamicBlockModels);
     if ($ctrl) $ctrl->processDynamicBlockModels($dynamicBlockModels);
-    foreach ($dynamicBlockModels as $oPBM) $blocks[] = self::getBlockHtmlData($oPBM, $ctrl);
+    foreach ($dynamicBlockModels as $blockModel) $blocks[] = self::getBlockHtmlData($blockModel, $ctrl);
     $blocks = Arr::sortByOrderKey($blocks, 'oid');
     return self::$blocks[$ownPageId] = $blocks;
   }
@@ -53,13 +63,14 @@ class PageBlockCore {
   /**
    * Возвращает массив с данными блока и сгенерированным HTML
    *
-   * @param   integer   PageID
-   * @return  array
+   * @param $ownPageId
+   * @param CtrlPage $controller
+   * @return array
    */
-  static function getDynamicBlocks($ownPageId, CtrlPage $oController = null) {
+  static function getDynamicBlocks($ownPageId, CtrlPage $controller = null) {
     $blocks = [];
     foreach (self::getDynamicBlockModels($ownPageId) as $oPBM) {
-      $blocks[] = self::getBlockHtmlData($oPBM, $oController);
+      $blocks[] = self::getBlockHtmlData($oPBM, $controller);
     }
     return $blocks;
   }
@@ -86,8 +97,8 @@ class PageBlockCore {
     return Arr::getValueByKey(O::get(ClassCore::nameToClass('Pmsb', $className), $ctrl)->blocks, 'type', $type);
   }
 
-  static function getBlocksByCol($ownPageId, $colN, $oController = null) {
-    return Arr::filterByValue(self::getBlocks($ownPageId, $oController), 'colN', $colN);
+  static function getBlocksByCol($ownPageId, $colN, CtrlPage $controller = null) {
+    return Arr::filterByValue(self::getBlocks($ownPageId, $controller), 'colN', $colN);
   }
 
   static function getDynamicBlocksCount($ownPageId) {
@@ -97,7 +108,7 @@ class PageBlockCore {
   /**
    * Нормализирует номера колонок блоков из имеющихся
    *
-   * @param   array     $blocks
+   * @param   array $blocks
    * @param   integer   Всего колонок
    */
   static function sortBlocks(array $blocks, $colsN) {

@@ -84,7 +84,7 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
 
   protected function init() {
     if (!empty($this->page['module']) and !PageModuleCore::exists($this->page['module'])) throw new NotFoundException("Page module {$this->page['module']}");
-    $this->pageLabels['new'] = '→ создание '.NgnMorph::cast($this->page['settings']['itemTitle'], ['ЕД', 'РД']);
+    //$this->pageLabels['new'] = '→ создание '.NgnMorph::cast($this->page['settings']['itemTitle'], ['ЕД', 'РД']);
     $this->userId = Auth::get('id');
     $this->d['name'] = $this->getName();
     $this->setActionParams();
@@ -106,18 +106,6 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
   protected function initLayout() {
     if (!isset($this->d['layoutN'])) $this->d['layoutN'] = PageLayoutN::get($this->page['id']);
     if ($this->action == 'new' or $this->action == 'edit') $this->d['layoutN'] = 2;
-  }
-
-  protected function initBlocks() {
-    $this->initLayout();
-    $layout = Arr::getValue(PageLayout::getLayouts(), $this->d['layoutN']);
-    $blockCols = Arr::filterByValue($layout['cols'], 'type', 'blocks', true);
-    foreach ($blockCols as $n => $v) {
-      $this->d['col'.$n] = $this->tt->getTpl('page/pageBlocksOneCol', [
-        'n'      => $n,
-        'blocks' => PageBlockCore::getBlocksByCol($this->page['id'], $n, $this)
-      ]);
-    }
   }
 
   public $userGroup = false;
@@ -175,14 +163,12 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
   function setPage($page) {
     $this->page = $page;
     if (!$this->page) {
-      // Страница не существует
       $this->error404();
-      return;
+      //return;
     }
     if (empty($this->page['active']) and !$this->allowNonActivePages) {
-      // Страница не активна
       $this->error404('Page is not active');
-      return;
+      //return;
     }
     $this->d['pathData'] = $this->page['pathData'];
     $this->d['page'] = $this->page;
