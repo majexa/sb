@@ -66,8 +66,7 @@ CREATE TABLE IF NOT EXISTS `pageBlocks` (
   `global` int(1) NOT NULL DEFAULT '1',
   `settings` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `slices` (
   `id` varchar(255) NOT NULL,

@@ -109,13 +109,13 @@ class PageControllersCore {
     return ClassCore::nameToClass('CtrlPageV', $controller);
   }
 
-  static function getVirtualCtrlPageModel($controller) {
-    $class = self::getVirtualCtrlClass($controller);
+  static function getVirtualCtrlPageModel($controllerName) {
+    $class = self::getVirtualCtrlClass($controllerName);
     if (!class_exists($class)) return false;
     $page = method_exists($class, 'getVirtualPage') ? $class::getVirtualPage() : ['title' => 'empty'];
     $virtualPageModel = new DbModelVirtual($page);
-    $virtualPageModel->r['path'] = $controller;
-    $virtualPageModel->r['module'] = $controller;
+    $virtualPageModel->r['path'] = $controllerName;
+    $virtualPageModel->r['module'] = $controllerName;
     $virtualPageModel->r['active'] = true;
     $virtualPageModel->r['id'] = 9999;
     return $virtualPageModel;

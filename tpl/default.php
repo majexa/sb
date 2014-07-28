@@ -1,0 +1,1 @@
+<?= PageLayout::autoHtml($d['layoutN'], $d['page']['id'], $d['controller']) ?>

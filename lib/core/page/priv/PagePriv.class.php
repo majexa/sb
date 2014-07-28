@@ -17,15 +17,17 @@ class PagePriv extends ArrayAccesseble {
     //$this->role();
     $this->last();
   }
-  
+
   public $initPriv = [];
-  
+
   protected function first() {
     if (Misc::isGod() or Misc::isAdmin()) {
       $this->r['edit'] = true;
       $this->r['sub_edit'] = true;
       return;
     }
+    return;
+
     $r = db()->select("SELECT userId, type FROM privs WHERE pageId=?d", $this->page['id']);
     if (!$r) return;
     foreach ($r as $v) $this->initPriv[$v['userId']][$v['type']] = 1;
@@ -33,35 +35,33 @@ class PagePriv extends ArrayAccesseble {
       if (isset($this->initPriv[$this->userId])) {
         $this->r = $this->initPriv[$this->userId];
         return;
-      } elseif (isset($this->initPriv[REGISTERED_USERS_ID])) {
+      }
+      elseif (isset($this->initPriv[REGISTERED_USERS_ID])) {
         $this->r = $this->initPriv[REGISTERED_USERS_ID];
         return;
       }
     }
     if (isset($this->initPriv[ALL_USERS_ID])) $this->r = $this->initPriv[ALL_USERS_ID];
   }
-  
+
   /**
    * Возвращает привелегии для авторизованного пользователя, если пользователь не определен
-   * 
-   * @return multitype:|boolean
+   *
+   * @return bool
    */
   function getAuthPriv() {
-    if (!$this->userId and isset($this->initPriv[REGISTERED_USERS_ID]))
-      return $this->initPriv[REGISTERED_USERS_ID];
+    if (!$this->userId and isset($this->initPriv[REGISTERED_USERS_ID])) return $this->initPriv[REGISTERED_USERS_ID];
     return false;
   }
-  
+
   protected function last() {
     $this->r['view'] = true;
-    if (isset($this->r['edit']))
-      $this->r['create'] = true; // Если можем редактировать, то можем и создавать
-    if (isset($this->r['sub_edit']))
-      $this->r['sub_create'] = true; // Если можем редактировать, то можем и создавать
+    if (isset($this->r['edit'])) $this->r['create'] = true; // Если можем редактировать, то можем и создавать
+    if (isset($this->r['sub_edit'])) $this->r['sub_create'] = true; // Если можем редактировать, то можем и создавать
   }
-  
+
   protected function role() {
-    if (!Config::getVarVar('role', 'enable', true)) return; 
+    if (!Config::getVarVar('role', 'enable', true)) return;
     // Если включены роли, проверяем доступны ли привелегии для этой роли
     if (($privs = Config::getVarVar('role', 'priv')) === false) return;
     $user = DbModelCore::get('users', $this->userId);
@@ -69,15 +69,15 @@ class PagePriv extends ArrayAccesseble {
     $privs = Arr::filterByValue($privs, 'pageId', $this->page['id']);
     foreach ($privs as $v) $this->r[$v['priv']] = 1;
   }
-  
+
   protected function module() {
     if (empty($this->page['module'])) return;
     if (($class = PageModuleCore::getClass($this->page['module'], 'Pmp')) === false) return;
     $this->r = O::get($class, $this->userId)->r;
   }
-  
+
   function check($priv) {
     if (!in_array($priv, $this->r)) throw new PagePrivException($priv);
   }
-  
+
 }

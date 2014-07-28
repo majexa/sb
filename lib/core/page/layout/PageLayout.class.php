@@ -1,94 +1,94 @@
 <?php
 
 class PageLayout {
-  
+
   static $maxSpan = 24;
   static $minSpan = 5;
   static $spanWidth = 30;
-  
+
   static function getTypes() {
     return Arr::get(self::getLayouts(), 'descr', 'KEY');
   }
 
   static function getLayouts() {
     $contentCol = [
-      'type' => 'content',
+      'type'        => 'content',
       'allowBlocks' => false
     ];
     $blocksCol = [
-      'type' => 'blocks',
-      'allowBlocks' => true,
+      'type'              => 'blocks',
+      'allowBlocks'       => true,
       'allowGlobalBlocks' => true
     ];
     $blocksColNoGlobals = [
-      'type' => 'blocks',
-      'allowBlocks' => true,
+      'type'              => 'blocks',
+      'allowBlocks'       => true,
       'allowGlobalBlocks' => false
     ];
     $layouts = [
-      1 => [
+      1  => [
         'descr' => 'основная',
-        'cols' => [
+        'cols'  => [
           1 => $contentCol + ['span' => 24]
         ]
       ],
-      2 => [
+      2  => [
         'descr' => 'блочная - основная',
-        'cols' => [
+        'cols'  => [
           1 => $blocksCol + ['span' => 5],
           2 => $contentCol + ['span' => 19]
         ]
       ],
-      3 => [
+      3  => [
         'descr' => 'блочная - основная',
-        'cols' => [
+        'cols'  => [
           1 => $contentCol + ['span' => 19],
           2 => $blocksCol + ['span' => 5]
         ]
       ],
-      4 => [
+      4  => [
         'descr' => 'блочная - основная - блочная',
-        'cols' => [
+        'cols'  => [
           1 => $blocksCol + ['span' => 5],
           2 => $contentCol + ['span' => 14],
           3 => $blocksCol + ['span' => 5]
         ]
       ],
-      5 => [
+      5  => [
         'descr' => 'основная - блочная - блочная',
-        'cols' => [
+        'cols'  => [
           1 => $contentCol + ['span' => 14],
           2 => $blocksCol + ['span' => 5],
           3 => $blocksCol + ['span' => 5]
         ]
       ],
-      6 => [
+      6  => [
         'descr' => 'блочная (NG) - блочная (NG) - блочная (NG)',
-        'cols' => [
+        'cols'  => [
           1 => $blocksColNoGlobals + ['span' => 8],
           2 => $blocksColNoGlobals + ['span' => 8],
           3 => $blocksColNoGlobals + ['span' => 8]
         ]
       ],
-      7 => [
+      7  => [
         'descr' => 'блочная (NG) - блочная (NG) - блочная (NG) - блочная (NG)',
-        'cols' => [
+        'cols'  => [
           1 => $blocksColNoGlobals + ['span' => 6],
           2 => $blocksColNoGlobals + ['span' => 6],
           3 => $blocksColNoGlobals + ['span' => 6],
           4 => $blocksColNoGlobals + ['span' => 6]
         ]
       ],
-      8 => [
+      8  => [
         'descr' => 'блочная (NG) - блочная (NG)',
-        'cols' => [
+        'cols'  => [
           1 => $blocksColNoGlobals + ['span' => 12],
           2 => $blocksColNoGlobals + ['span' => 12]
         ]
       ],
-      9 => [
+      9  => [
         'descr' => 'блочная - основная - блочная',
-        'cols' => [
+        'cols'  => [
           1 => $blocksCol + ['span' => 5],
           2 => $contentCol + ['span' => 19],
           3 => $blocksCol + ['span' => 5]
@@ -96,7 +96,7 @@ class PageLayout {
       ],
       10 => [
         'descr' => 'блочная (NG) - блочная (NG) - блочная (NG)',
-        'cols' => [
+        'cols'  => [
           1 => $blocksColNoGlobals + ['span' => 5],
           2 => $blocksColNoGlobals + ['span' => 19],
           3 => $blocksColNoGlobals + ['span' => 5]
@@ -104,14 +104,14 @@ class PageLayout {
       ],
       11 => [
         'descr' => 'основная - блочная',
-        'cols' => [
+        'cols'  => [
           1 => $contentCol + ['span' => 14],
           2 => $blocksCol + ['span' => 10]
         ]
       ],
       12 => [
         'descr' => 'блочная - блочная - блочная - блочная - блочная',
-        'cols' => [
+        'cols'  => [
           1 => $blocksCol + ['span' => 24],
           2 => $blocksCol + ['span' => 3],
           3 => $blocksCol + ['span' => 7],
@@ -121,7 +121,7 @@ class PageLayout {
       ],
       13 => [
         'descr' => 'блочная (NG) - блочная (NG) - блочная (NG)',
-        'cols' => [
+        'cols'  => [
           1 => $blocksColNoGlobals + ['span' => 6],
           2 => $blocksColNoGlobals + ['span' => 12],
           3 => $blocksColNoGlobals + ['span' => 6]
@@ -129,60 +129,59 @@ class PageLayout {
       ],
       14 => [
         'descr' => 'блочная - основная',
-        'cols' => [
+        'cols'  => [
           1 => $blocksCol + ['span' => 6],
           2 => $contentCol + ['span' => 18]
         ]
       ],
       15 => [
         'descr' => 'основная - блочная',
-        'cols' => [
+        'cols'  => [
           1 => $contentCol + ['span' => 16],
           2 => $blocksCol + ['span' => 8]
         ]
       ],
       16 => [
         'descr' => 'блочная - основная',
-        'cols' => [
+        'cols'  => [
           1 => $blocksCol + ['span' => 8],
           2 => $contentCol + ['span' => 16]
         ]
       ],
       17 => [
-      'descr' => 'блочная 8 - основная 10 - блочная 6',
-      'cols' => [
-        1 => $blocksCol + ['span' => 8],
-        2 => $contentCol + ['span' => 10],
-        3 => $blocksCol + ['span' => 6]
+        'descr' => 'блочная 8 - основная 10 - блочная 6',
+        'cols'  => [
+          1 => $blocksCol + ['span' => 8],
+          2 => $contentCol + ['span' => 10],
+          3 => $blocksCol + ['span' => 6]
+        ]
       ]
-    ]
     ];
-    foreach ($layouts as $k => &$layout) {
+    foreach (array_keys($layouts) as $k) {
       $layouts[$k]['n'] = $k;
-      $layouts[$k]['allowGlobalBlocks'] = 
-        Arr::subValueExists($layouts[$k]['cols'], 'allowGlobalBlocks', true);
+      $layouts[$k]['allowGlobalBlocks'] = Arr::subValueExists($layouts[$k]['cols'], 'allowGlobalBlocks', true);
     }
     return $layouts;
   }
-  
+
   static function getColsByLayout($pageId) {
     $layouts = self::getLayouts();
     $layout = $layouts[PageLayoutN::get($pageId)];
     return $layout['cols'];
   }
-    
+
   static function allowGlobalBlocks($pageId) {
     $layouts = self::getLayouts();
     return $layouts[PageLayoutN::get($pageId)]['allowGlobalBlocks'];
   }
-  
+
   static function getContentColWidth($pageId) {
     $layouts = self::getLayouts();
     $r = Arr::getValueByKey($layouts[PageLayoutN::get($pageId)]['cols'], 'type', 'content');
-    return ($r['span']*30) + (($r['span']-1)*10);
+    return ($r['span'] * 30) + (($r['span'] - 1) * 10);
   }
 
-  static function autoHtml($layoutN, $pageId, $cntrl) {
+  static function autoHtml($layoutN, $pageId, $ctrl) {
     $html = '';
     $cols = self::getLayouts()[$layoutN]['cols'];
     $i = 0;
@@ -194,8 +193,8 @@ class PageLayout {
         if (!empty($col['allowBlocks'])) $class .= ' allowBlocks';
         if (!empty($col['allowGlobalBlocks'])) $class .= ' allowGlobalBlocks';
         $blocksHtml = Tt()->getTpl('page/pageBlocksOneCol', [
-          'n' => $n,
-          'blocks' => PageBlockCore::getBlocksByCol($pageId, $n, $cntrl)
+          'n'      => $n,
+          'blocks' => PageBlockCore::getBlocksByCol($pageId, $n, $ctrl)
         ]);
         $html .= <<<TEXT
 <div class="$class" id="col$n" data-n="$n">
@@ -204,29 +203,28 @@ class PageLayout {
   </div>
 </div>
 TEXT;
-      } elseif ($col['type'] == 'content') {
+      }
+      elseif ($col['type'] == 'content') {
         $submenu = '';
-        if (!empty($cntrl->d['submenu'])) {
-          $submenu = Tt()->getTpl('common/menu-ul', $cntrl->d['submenu']);
+        if (!empty($ctrl->d['submenu'])) {
+          $submenu = Tt()->getTpl('common/menu-ul', $ctrl->d['submenu']);
           $submenu = <<<TEXT
-        <div id="submenu" class="submenu">
-          $submenu
-        </div>
-        <div class="clear"><!-- --></div>
+<div id="submenu" class="submenu">
+  $submenu
+</div>
+<div class="clear"><!-- --></div>
 TEXT;
         }
-        $h = '<div class="mainHeader">'.
-          Tt()->getTpl('common/pathNav', $cntrl->d).
-          Tt()->getTpl('common/pageTitle', $cntrl->d).
-          '</div>'.
-          '<div class="mainBody">';
-        if ($cntrl->d['page']['settings']['showSubPages'])
-          $h .= '<div class="subPages">'.Menu::getUlObjById($cntrl->d['page']['id'], 1)->html().'</div>';
-        $h .= Tt()->getTpl($cntrl->d['tpl'], $cntrl->d);
+        $h = '<div class="mainHeader">'. //
+          Tt()->getTpl('common/pathNav', $ctrl->d). //
+          Tt()->getTpl('common/pageTitle', $ctrl->d). //
+          '</div>'.'<div class="mainBody">';
+        //if ($ctrl->d['page']['settings']['showSubPages']) $h .= '<div class="subPages">'.Menu::getUlObjById($ctrl->d['page']['id'], 1)->html().'</div>';
+        //$h .= Tt()->getTpl($ctrl->d['tpl'], $ctrl->d);
         $h .= '</div>';
-          $html .= <<<TEXT
+        $html .= <<<TEXT
 <div class="$class" id="col$n" data-n="$n">
-  <div class="body moduleBody{$cntrl->d['bodyClass']}">
+  <div class="body moduleBody{$ctrl->d['bodyClass']}">
     <div class="bcont">
       $submenu
       $h
@@ -238,5 +236,5 @@ TEXT;
     }
     return $html;
   }
-  
+
 }

@@ -3,8 +3,9 @@
 class PageBlockCore {
 
   /**
-   * @param   string
-   * @return  PbsAbstract
+   * @param $type
+   * @param array $options
+   * @return PbsAbstract
    */
   static function getStructure($type, array $options = []) {
     return O::get(ClassCore::nameToClass('Pbs', $type), $options);

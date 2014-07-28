@@ -58,11 +58,12 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
   protected $mainTplProperties;
 
   function dispatch() {
-    //try {
-    if (!$this->page) throw new Exception('$this->page not defined. use $this->setPageData before dispatch()');
+    if (!isset($this->page)) throw new Exception('page model not defined');
     if (isset($this->page['settings']['mainTpl'])) $this->d['mainTpl'] = $this->page['settings']['mainTpl'];
     parent::dispatch();
     if ($this->hasOutput) {
+      Sflm::frontend('css')->addLib('sb');
+      Sflm::frontend('js')->addLib('sb');
       $this->saveUserPage();
       $this->initOnlineUsers();
     }
@@ -178,9 +179,9 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
       $this->error404();
       return;
     }
-    if (!$this->page['active'] and !$this->allowNonActivePages) {
+    if (empty($this->page['active']) and !$this->allowNonActivePages) {
       // Страница не активна
-      $this->error404();
+      $this->error404('Page is not active');
       return;
     }
     $this->d['pathData'] = $this->page['pathData'];
@@ -315,7 +316,7 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
     $this->redirect();
   }
 
-  function error404($title = 'Страница не найдена', $text = '') {
+  function error404($title = 'Page not found', $text = '') {
     parent::error404($title, $text);
     if ($this->hasOutput) {
       $this->setPathData($this->tt->getPath(), $title);
@@ -507,6 +508,7 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
 
   protected $disablePageLog = false;
 
+  /*
   protected function afterAction() {
     $this->initBlocks();
     if (!($userId = Auth::get('id'))) $userId = 0;
@@ -524,6 +526,7 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
     }
     if (($paths = Hook::paths('afterAction', $this->page['module'])) !== false) foreach ($paths as $path) include $path;
   }
+  */
 
   public $pageLabels = [
     'edit' => '(редактирование)'

@@ -3,9 +3,8 @@
 return [
   //'common',
   'siteAuth',
-  'i/js/ngn/Ngn.cart.js',
   'pageBlocks',
-  'pageLink',
+  //'pageLink',
   'sb/js/Ngn.sb.DdItems.js',
-  'i/js/ngn/Ngn.UlMenu.js',
+  //'i/js/ngn/Ngn.UlMenu.js',
 ];

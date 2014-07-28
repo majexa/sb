@@ -15,7 +15,6 @@ class DbModelPages extends DbModel {
     $default = empty($r['module']) ? [] : PageModuleCore::getDefaultSettings($r['module']);
     $r['settings'] = array_merge($default, (array)$r['settings']);
     $r['settings'] = array_merge(PageControllersCore::getDefaultSettings($r['controller']), (array)$r['settings']);
-    //die2($r);
   }
 
   protected function init() {
@@ -80,7 +79,8 @@ class DbModelPages extends DbModel {
   /**
    * Проверяет на наличие имени страницы в списке зарезервированых слов
    *
-   * @param   string    Имя страницы
+   * @param string $name Имя страницы
+   * @return bool
    */
   static function isReserved($name) {
     if (preg_match('/pg(\d)/', $name)) return false; // Pagination
