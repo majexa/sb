@@ -42,7 +42,7 @@ class PageLayout {
       3  => [
         'descr' => 'блочная - основная',
         'cols'  => [
-          1 => $contentCol + ['span' => 19],
+          1 => $contentCol + ['span' => 10],
           2 => $blocksCol + ['span' => 5]
         ]
       ],
@@ -222,9 +222,10 @@ TEXT;
         //if ($ctrl->d['page']['settings']['showSubPages']) $h .= '<div class="subPages">'.Menu::getUlObjById($ctrl->d['page']['id'], 1)->html().'</div>';
         //$h .= Tt()->getTpl($ctrl->d['tpl'], $ctrl->d);
         $h .= '</div>';
+//        <div class="body moduleBody{$ctrl->d['bodyClass']}">
         $html .= <<<TEXT
 <div class="$class" id="col$n" data-n="$n">
-  <div class="body moduleBody{$ctrl->d['bodyClass']}">
+  <div class="body moduleBody">
     <div class="bcont">
       $submenu
       $h

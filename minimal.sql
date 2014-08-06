@@ -29,7 +29,20 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `mysite` int(1) NOT NULL DEFAULT '0',
   `slave` int(1) NOT NULL DEFAULT '0',
   UNIQUE KEY `id` (`id`),
-  KEY `home` (`home`),
-  KEY `home_2` (`home`),
-  KEY `home_3` (`home`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+  KEY `home` (`home`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `pageBlocks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `oid` int(11) NOT NULL,
+  `colN` int(2) NOT NULL DEFAULT '0',
+  `ownPageId` int(11) NOT NULL,
+  `pageId` int(11) NOT NULL,
+  `dateCreate` datetime NOT NULL,
+  `dateUpdate` datetime NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `global` int(1) NOT NULL DEFAULT '1',
+  `settings` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

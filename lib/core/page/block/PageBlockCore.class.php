@@ -38,23 +38,13 @@ class PageBlockCore {
   static protected $blocks = [];
 
   static function getBlocks($ownPageId, CtrlPage $ctrl = null) {
-    return [
-      [
-        'type' => 'text',
-        'id'   => 123,
-        'html' => 'dqwdwq',
-        'colN' => 1
-      ]
-    ];
-    return;
-
     if (isset(self::$blocks[$ownPageId])) return self::$blocks[$ownPageId];
     $staticBlocks = new PageModuleStaticBlocks($ctrl);
     $blocks = $staticBlocks->blocks;
     $dynamicBlockModels = self::getDynamicBlockModels($ownPageId);
     $dynamicBlockModels = array_merge($dynamicBlockModels, self::getDynamicBlockModels(0));
     $staticBlocks->processDynamicBlockModels($dynamicBlockModels);
-    if ($ctrl) $ctrl->processDynamicBlockModels($dynamicBlockModels);
+    //if ($ctrl) $ctrl->processDynamicBlockModels($dynamicBlockModels);
     foreach ($dynamicBlockModels as $blockModel) $blocks[] = self::getBlockHtmlData($blockModel, $ctrl);
     $blocks = Arr::sortByOrderKey($blocks, 'oid');
     return self::$blocks[$ownPageId] = $blocks;
@@ -75,19 +65,19 @@ class PageBlockCore {
     return $blocks;
   }
 
-  static function getBlockHtmlData(DbModel $oPBM, CtrlPage $oController = null) {
+  static function getBlockHtmlData(DbModel $pbm, CtrlPage $ctrl = null) {
     try {
-      $pbv = O::get(ClassCore::nameToClass('Pbv', $oPBM['type']), $oPBM, $oController);
-      $class = ClassCore::nameToClass('Pbvug', $oPBM['type']);
-      if (isset($oController) and $oController->userGroup and class_exists($class)) {
-        LogWriter::str('dd', $oPBM['id']);
+      $pbv = O::get(ClassCore::nameToClass('Pbv', $pbm['type']), $pbm, $ctrl);
+      $class = ClassCore::nameToClass('Pbvug', $pbm['type']);
+      if (isset($ctrl) and class_exists($class) and $ctrl->userGroup) {
+        LogWriter::str('dd', $pbm['id']);
         $block = O::get($class, $pbv)->getData();
       }
       else {
         $block = $pbv->getData();
       }
     } catch (Exception $e) {
-      $block['colN'] = $oPBM['colN'];
+      $block['colN'] = $pbm['colN'];
       if (IS_DEBUG) $block['html'] = Err::getErrorText($e);
     }
     return $block;

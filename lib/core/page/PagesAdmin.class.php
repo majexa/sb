@@ -23,8 +23,8 @@ class PagesAdmin extends PagesTree {
     FileCache::cleanTag('pages');
   }
   
-  function moveMif($id, $toId, $where) {
-    MifTree::move($this, 'pages', $id, $toId, $where);
+  function moveTree($id, $toId, $where) {
+    NgnTree::move($this, 'pages', $id, $toId, $where);
     $nodeAfter = Pages::getNode($id);
     $this->updateFolderStatus($nodeAfter['parentId']);
     $this->updatePath($id);

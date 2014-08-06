@@ -9,7 +9,7 @@ class PbsTextAndImage extends PbsAbstract {
       [
         'title' => 'Текст',
         'name' => 'text',
-        'type' => 'wisiwigSimple2',
+        'type' => 'wisiwigSimpleLinks',
         'jsOptions' => ['tinySettings' => [
           'content_css' => Sflm::lib('css')->getUrl('tinyContent')
         ]]

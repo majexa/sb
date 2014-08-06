@@ -79,7 +79,7 @@ class PageModuleCore {
       return $pmi->title;
     }
     else {
-      return PageControllersCore::getPropObj($page['controller'])->title;
+      return PageControllersCore::getControllerProp($page['controller'])->title;
     }
   }
 

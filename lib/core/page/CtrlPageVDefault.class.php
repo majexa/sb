@@ -1,15 +1,15 @@
 <?php
 
-class CtrlPageVDefault extends CtrlPage {
+class CtrlPageVDefault extends CtrlPageV {
 
-  static function getVirtualPage() {
+  static function _getPage() {
     return [
-      'title' => 'бла бла бла'
+      'id' => -1,
+      'title' => 'Home'
     ];
   }
 
   //function action_default() {
-
   //}
 
 }

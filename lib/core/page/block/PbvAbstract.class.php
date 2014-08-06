@@ -24,8 +24,8 @@ abstract class PbvAbstract {
   protected $extendImageData = false;
 
   /**
-   * @param null/array/DbModel
-   * @param null/CtrlPage
+   * @param null|array|DbModel $pageBlock
+   * @param CtrlPage $ctrl
    */
   function __construct($pageBlock = null, CtrlPage $ctrl = null) {
     $this->pageBlock = $pageBlock;
@@ -62,7 +62,7 @@ abstract class PbvAbstract {
   protected $js = '';
 
   function html() {
-    Sflm::frontend('js')->addObject('Ngn.pb.BlockEdit.'.ucfirst($this->pageBlock['type']), get_class($this).'::html()');
+    Sflm::frontend('js')->addObject('Ngn.pb.BlockEdit.'.ucfirst($this->pageBlock['type']), get_class($this).'::html()', false);
     $titleHtml = '';
     if (isset($this->moreLink)) $titleHtml .= '<a href="'.$this->moreLink['link'].'" class="hbtn small"><span>'.$this->moreLink['title'].'</span></a>';
     if ($this->buttons) {

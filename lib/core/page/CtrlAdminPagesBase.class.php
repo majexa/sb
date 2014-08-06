@@ -39,7 +39,7 @@ abstract class CtrlAdminPagesBase extends CtrlAdmin {
     $this->pageId = isset($this->req->params[2]) ? $this->req->params[2] : 0;
     if (!$this->pageId) $this->folder = true;
     else {
-      if (($this->page = DbModelCore::get('pages', $this->pageId)) === false) {
+      if (($this->page = PageControllersCore::getPageModel($this->pageId)) === false) {
         $this->error("Page ID={$this->pageId} not found");
       } else {
         $this->folder = (bool)$this->page['folder'];

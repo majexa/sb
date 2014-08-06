@@ -1,5 +1,8 @@
 <?php
 
+throw new Exception(' need to refactor "currentPageId", "breadcrumbsPageIds"');
+
+
 class Menu {
 
   /**
@@ -17,44 +20,30 @@ class Menu {
    *   </li>
    * </ul>
    *
-   * @param   string    Имя раздела
-   * @param   string    Шаблон тэга ссылки
-   * @param   integer   Глубина
+   * @param string $name Имя раздела
+   * @param int $depthLimit Глубина
+   * @param string $linkTpl Шаблон тэга ссылки
+   * @return string
    */
-  static function ul(
-  $name,
-  $depthLimit = 1,
-  $linkTpl = '`<a href="`.$link.`"><span>`.$title.`</span></a>`'
-  ) {
+  static function ul($name, $depthLimit = 1, $linkTpl = '`<a href="`.$link.`"><span>`.$title.`</span></a>`') {
     return self::getUlObj($name, $depthLimit, $linkTpl)->html();
   }
-  
-  /**
-   * @return PagesTreeTpl
-   */
-  static function getUlObj(
-  $name,
-  $depthLimit = 1,
-  $linkTpl = '`<a href="`.$link.`"><span>`.$title.`</span></a>`'
-  ) {
+
+  static function getUlObj($name, $depthLimit = 1, $linkTpl = '`<a href="`.$link.`"><span>`.$title.`</span></a>`') {
     if (empty($linkTpl)) throw new Exception('$linkTpl can not be empty');
     return self::getUlObjById(DbModelCore::get('pages', $name, 'name')->r['id'], $depthLimit, $linkTpl);
   }
-  
-  static function getUlObjById($pageId,
-  $depthLimit = 1,
-  $linkTpl = '`<a href="`.$link.`"><span>`.$title.`</span></a>`'
-  ) {
-    $oPagesTreeTpl = PagesTreeTpl::getObjCached($pageId);
-    $oPagesTreeTpl->setNodesBeginTpl('`<ul>`');
-    $oPagesTreeTpl->setNodesEndTpl('`</ul></li>`');
-    $oPagesTreeTpl->setNodeTpl('`<li id="mi_`.Misc::name2id($name).`"`.(!empty($class) ? ` class="`.$class.`"` : ``).`>`.'.$linkTpl);
-    $oPagesTreeTpl->setLeafTpl('`<li id="mi_`.Misc::name2id($name).`"`.(!empty($class) ? ` class="`.$class.`"` : ``).`>`.'.$linkTpl.'.`</li>`');
-    $oPagesTreeTpl->setDepthLimit($depthLimit);
-    if (($currentPageId = R::get('currentPageId')) !== false)
-      $oPagesTreeTpl->setCurrentId($currentPageId);
-    $oPagesTreeTpl->setBreadcrumbsIds(R::get('breadcrumbsPageIds'));
-    return $oPagesTreeTpl;
+
+  static function getUlObjById($pageId, $depthLimit = 1, $linkTpl = '`<a href="`.$link.`"><span>`.$title.`</span></a>`') {
+    $treeTpl = PagesTreeTpl::getObjCached($pageId);
+    $treeTpl->setNodesBeginTpl('`<ul>`');
+    $treeTpl->setNodesEndTpl('`</ul></li>`');
+    $treeTpl->setNodeTpl('`<li id="mi_`.Misc::name2id($name).`"`.(!empty($class) ? ` class="`.$class.`"` : ``).`>`.'.$linkTpl);
+    $treeTpl->setLeafTpl('`<li id="mi_`.Misc::name2id($name).`"`.(!empty($class) ? ` class="`.$class.`"` : ``).`>`.'.$linkTpl.'.`</li>`');
+    $treeTpl->setDepthLimit($depthLimit);
+    if (($currentPageId = R::get('currentPageId')) !== false) $treeTpl->setCurrentId($currentPageId);
+    $treeTpl->setBreadcrumbsIds(R::get('breadcrumbsPageIds'));
+    return $treeTpl;
   }
 
   static function flatByPageId($pageId, $linkTpl, $sep = '') {
@@ -68,23 +57,18 @@ class Menu {
     $oPagesTreeTpl->setBreadcrumbsIds(R::get('breadcrumbsPageIds'));
     return $oPagesTreeTpl->html();
   }
-  
+
   static function flat($name, $linkTpl, $sep = '') {
-    return self::flatByPageId(
-      DbModelCore::get('pages', $name, 'name')->r['id'], $linkTpl, $sep);
+    return self::flatByPageId(DbModelCore::get('pages', $name, 'name')->r['id'], $linkTpl, $sep);
   }
 
   static function flatLevel2($curPageId, $linkTpl, $sep = '') {
     $parents = DbModelPages::getTree()->getParentsReverse($curPageId);
-    return self::flatByPageId(
-      $parents[1]['id'],
-      $linkTpl,
-      $sep
-    );
+    return self::flatByPageId($parents[1]['id'], $linkTpl, $sep);
   }
 
   static function simple($name) {
     return self::flat($name, '`<a href="`.$link.`"><span>`.$title.`<span></a>`', ' | ');
   }
-  
+
 }

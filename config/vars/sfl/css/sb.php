@@ -1,9 +1,10 @@
 <?php
 
 return [
-  'common',
+  'default',
+  'interface',
+  //'i/css/common/btns.css',
   'sb/css/top.css',
-  's2/css/common/smIcons',
   //'s2/css/common/pageModules',
   //'i/css/common/editPages.css',
   //'s2/css/common/avatar.css',

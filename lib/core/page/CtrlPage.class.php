@@ -4,12 +4,12 @@
  * Особенностью этого типа контроллеров является то, что выполнение dispatch()
  * не возможно пока не быдет успешно выполнен метод setPage()
  */
-abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
+abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*/ {
 
   /**
-   * Массив с данными текущего раздела
+   * Текущий раздела
    *
-   * @var   DbModelPages
+   * @var   DbModel
    */
   public $page;
 
@@ -64,18 +64,7 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
     if ($this->hasOutput) {
       Sflm::frontend('css')->addLib('sb');
       Sflm::frontend('js')->addLib('sb');
-      $this->saveUserPage();
-      $this->initOnlineUsers();
     }
-    /*
-    } catch(Exception $e) {
-      $this->extendTplData();
-      IS_DEBUG === true ? $this->error404(
-        'Ошибка',
-        $e->getMessage().'<hr />'.getTraceText($e)
-      ) : $this->error404('Страница не доступна', 'Приносим наши извенения');
-    }
-    */
   }
 
   protected function getParamActionN() {
@@ -83,19 +72,18 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
   }
 
   protected function init() {
-    if (!empty($this->page['module']) and !PageModuleCore::exists($this->page['module'])) throw new NotFoundException("Page module {$this->page['module']}");
-    //$this->pageLabels['new'] = '→ создание '.NgnMorph::cast($this->page['settings']['itemTitle'], ['ЕД', 'РД']);
-    $this->userId = Auth::get('id');
     $this->d['name'] = $this->getName();
     $this->setActionParams();
     $this->initPriv();
-    $this->initUserGroup();
-    $this->tt->useRootPath = false;
     parent::init();
   }
 
+  function action_default() {
+    $this->d['body'] = PageLayout::autoHtml($this->d['layoutN'], $this->page['id'], $this);
+  }
+
   protected function getName() {
-    return ClassCore::classToName('CtrlPage', ClassCore::classToName('CtrlPageV', get_class($this)));
+    return ClassCore::classToName('CtrlPage', get_class($this));
   }
 
   function beforeAction() {
@@ -108,19 +96,8 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
     if ($this->action == 'new' or $this->action == 'edit') $this->d['layoutN'] = 2;
   }
 
-  public $userGroup = false;
-
-  protected function initUserGroup() {
-    if (!Config::getVarVar('userGroup', 'enable')) return;
-    if (($subdomain = O::get('SiteRequest')->getSubdomain()) === false) return;
-    if (($this->userGroup = DbModelCore::get('userGroup', $subdomain, 'name')) === false) {
-      throw new Exception('No such subdomain');
-    }
-  }
-
   protected function afterInit() {
     parent::afterInit();
-    $this->initMeta();
     $this->initHeadTitle();
   }
 
@@ -160,15 +137,16 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
     }
   }
 
-  function setPage($page) {
+  function setPage(DbModel $page) {
     $this->page = $page;
     if (!$this->page) {
       $this->error404();
-      //return;
+      return;
     }
+
     if (empty($this->page['active']) and !$this->allowNonActivePages) {
       $this->error404('Page is not active');
-      //return;
+      return;
     }
     $this->d['pathData'] = $this->page['pathData'];
     $this->d['page'] = $this->page;
@@ -197,23 +175,6 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
     }
   }
 
-  protected function initMeta() {
-    $this->d['pageMeta'] = []; //DbModelCore::get('pages_meta', $this->page['id']);
-  }
-
-  private function saveUserPage() {
-    if (!getConstant('SAVE_USER_PAGE')) return;
-    UsersCore::save($this->page['id'], $this->d['page']['title'], $this->d['page']['pathData']);
-  }
-
-  /**
-   * Добавляет tpl-данные о пользователях находящихся онлайн
-   */
-  protected function initOnlineUsers() {
-    if (!getConstant('SAVE_USER_PAGE')) return;
-    $this->d['onlineUsers'] = UsersCore::getOnline();
-  }
-
   protected function denialAuthorize() {
     $this->d['tpl'] = 'common/denialAuthorize';
   }
@@ -234,8 +195,7 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
 
   protected function prepareTplPath() {
     if ($this->adminMode) return;
-    if (!empty($this->page['module']) and
-      $this->tt->exists('pageModules/'.$this->page['module'].'/'.$this->d['tpl'])
+    if (!empty($this->page['module']) and $this->tt->exists('pageModules/'.$this->page['module'].'/'.$this->d['tpl'])
     ) {
       $this->d['tpl'] = 'pageModules/'.$this->page['module'].'/'.$this->d['tpl'];
     }
@@ -244,7 +204,7 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
   /**
    * Добавляет в ссылки пути ссылку на текущую страницу
    *
-   * @param   string    Заголовок ссылки
+   * @param string $title Заголовок ссылки
    */
   function setCurrentPathData($title) {
     $this->setPathData($this->tt->getPath(), $title);
@@ -371,7 +331,6 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
   /**
    * Определяет возможность редактирования текущим пользователем данного раздела/записи
    * см. дальнейшую реализацию метода в наследуемых классах
-   *
    */
   protected function initPriv() {
     $this->initActionsByPriv();
@@ -441,7 +400,7 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
     // Если не существует названия привилегии для этого экшена, раздрешаем экшн
     if (!isset($this->privByAction[$action])
     ) // Если для экшена нет привилегий, значит по умолчанию он разрешен
-    return true;
+      return true;
     return in_array($action, $this->allowedActions);
   }
 
@@ -470,9 +429,7 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
         $this->d['tpl'] = 'denialAuthorize';
         return;
       }
-      elseif ($this->allowAuthorizedActions and
-        in_array($this->action, $this->allowAuthorizedActions)
-      ) {
+      elseif ($this->allowAuthorizedActions and in_array($this->action, $this->allowAuthorizedActions)) {
         $this->d['tpl'] = 'denialAuthorize';
         return;
       }
@@ -490,56 +447,6 @@ abstract class CtrlPage extends CtrlCommon implements ProcessDynamicPageBlock {
       $this->defaultAction = $this->page['settings']['defaultAction'];
     }
     parent::initAction();
-  }
-
-  protected $disablePageLog = false;
-
-  /*
-  protected function afterAction() {
-    $this->initBlocks();
-    if (!($userId = Auth::get('id'))) $userId = 0;
-    $users = Config::getVar('hideOnlineStatusUsers', true);
-    if ($users and in_array($userId, $users)) return;
-    if (!$this->disablePageLog) {
-      db()->insert('users_pages', [
-        'dateCreate' => dbCurTime(),
-        'pageId'     => $this->page['id'],
-        'title'      => $this->d['pageTitle'],
-        'url'        => $_SERVER['REQUEST_URI'],
-        'userId'     => $userId,
-        'path'       => $this->page['path'],
-      ], true);
-    }
-    if (($paths = Hook::paths('afterAction', $this->page['module'])) !== false) foreach ($paths as $path) include $path;
-  }
-  */
-
-  public $pageLabels = [
-    'edit' => '(редактирование)'
-  ];
-
-  protected function getPageLabel() {
-    return isset($this->pageLabels[$this->action]) ? ' '.$this->pageLabels[$this->action] : null;
-  }
-
-  /**
-   * Удаляет раздел и все прикрепленные к нему объекты
-   */
-  function deletePage() {
-  }
-
-  function action_blocks() {
-    $this->d['blocks'] = PageBlockCore::getBlocks($this->page['id']);
-    $this->d['tpl'] = 'page/pageBlocksOneCol';
-  }
-
-  function processDynamicBlockModels(array &$blocks) {
-  }
-
-  // ====================== Default Inctance Data ==========================
-
-  static function getVirtualPage() {
-    throw new Exception('Static method "getVirtualPage" not realized in class '.get_called_class());
   }
 
 }

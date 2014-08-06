@@ -27,8 +27,6 @@ use Options;
     foreach ($this->requiredProperties as $name) if (!isset($this->$name)) throw new Exception("\$this->$name not defined. Class: ".get_class($this));
   }
 
-  protected $pageId;
-
   protected function createNode($v) {
     $v['module'] = $this->module;
     if (!$this->updateControllerAfterNodeCreate) $v['controller'] = $this->controller;
@@ -40,9 +38,13 @@ use Options;
     $v['name'] = !empty($v['name']) ? $v['name'] : $this->module;
     if (empty($v['title'])) $v['title'] = $this->title;
     unset($v['n']);
-    if (($this->page = DbModelCore::get('pages', $v['name'], 'name'))) $this->page['id'];
+    if (($this->page = DbModelCore::get('pages', $v['name'], 'name'))) {
+      throw new Exception("Page with name '{$v['name']}' already exists");
+    }
     $pageId = DbModelCore::create('pages', $v, true);
-    if ($this->updateControllerAfterNodeCreate) db()->query('UPDATE pages SET controller=? WHERE id=?d', $this->controller, $pageId);
+    if ($this->updateControllerAfterNodeCreate) {
+      db()->query('UPDATE pages SET controller=? WHERE id=?d', $this->controller, $pageId);
+    }
     $this->page = DbModelCore::get('pages', $pageId);
     return $this->page['id'];
   }
@@ -54,9 +56,6 @@ use Options;
   }
 
   protected function afterCreate() {
-    //foreach (ClassCore::getObjectsByNames('PmiBehavior', $this->behaviorNames) as $o) {
-      //$o->action($this->page['id'], $this-node);
-    //}
   }
 
   /**

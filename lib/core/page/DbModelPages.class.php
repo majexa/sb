@@ -110,15 +110,15 @@ class DbModelPages extends DbModel {
   }
 
   static function getTree() {
-    return new DbTree('pages');
+    return new PagesDbTree;
   }
 
   static function updatePath($id) {
-    O::get('PagesPathUpdater', self::getTree())->update($id);
+    (new PagesPathUpdater(self::getTree()))->update($id);
   }
 
   static function move($id, $toId, $where) {
-    MifTree::move(self::getTree(), 'pages', $id, $toId, $where);
+    NgnTree::move(self::getTree(), 'pages', $id, $toId, $where);
     DbModelPages::updatePath($id);
   }
 

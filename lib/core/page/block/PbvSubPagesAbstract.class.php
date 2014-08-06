@@ -1,5 +1,7 @@
 <?php
 
+//throw new Exception(' need to refactor "breadcrumbsPageIds"');
+
 abstract class PbvSubPagesAbstract extends PbvAbstract {
 
   public $cssClass = 'pbSubMenu';
@@ -12,6 +14,7 @@ abstract class PbvSubPagesAbstract extends PbvAbstract {
   public $pagesTreeTpl;
 
   protected function init() {
+    Sflm::frontend('css')->addPath('i/css/common/tree.css');
     if (($pageId = $this->getPageId()) === false) return;
     $pagesTreeTpl = PagesTreeTpl::getObjCached($pageId);
     $linkTpl = '`<a href="`.$link.`"><span>`.$title.`</span></a>`';
@@ -21,7 +24,7 @@ abstract class PbvSubPagesAbstract extends PbvAbstract {
     $pagesTreeTpl->setLeafTpl('`<li id="mi_`.Misc::name2id($name).`"`.(!empty($class) ? ` class="`.$class.`"` : ``).`>`.'.$linkTpl.'.`</li>`');
     $pagesTreeTpl->setDepthLimit($this->pageBlock['settings']['openDepth']);
     if (($currentPageId = R::get('currentPageId')) !== false) $pagesTreeTpl->setCurrentId($currentPageId);
-    $pagesTreeTpl->setBreadcrumbsIds(R::get('breadcrumbsPageIds'));
+    //$pagesTreeTpl->setBreadcrumbsIds(R::get('breadcrumbsPageIds'));
     $this->pagesTreeTpl = $pagesTreeTpl;
   }
 

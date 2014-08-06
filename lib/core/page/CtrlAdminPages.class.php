@@ -11,11 +11,9 @@ class CtrlAdminPages extends CtrlAdminPagesBase {
   protected function init() {
     parent::init();
     Sflm::frontend('js')->addLib('cp');
-    Sflm::frontend('js')->addPath('sb/js/Ngn.cp.PagesInterface.js');
-    Sflm::frontend('js')->addPath('sb/js/Ngn.TreeEdit.Pages.cp.js');
     if (!$this->folder and $this->action == $this->defaultAction) {
       if (!empty($this->page['controller']) and
-        PageControllersCore::isEditebleContent($this->page['controller'])
+        PageControllersCore::getControllerProp($this->page['controller'])->editebleContent
       ) {
         //$this->redirect($this->tt->getPath(3).'/editContent');
         //return;
@@ -65,14 +63,14 @@ class CtrlAdminPages extends CtrlAdminPagesBase {
     if ($oF->update()) {
       if (!empty($this->page['controller'])) {
         // Дополнительные диалоги, после схоранения св-в контроллера
-        if (($dialogs = PageControllersCore::getPropObj($this->page['controller'])->getAfterSaveDialogs($oF)) !== false) {
+        if (($dialogs = PageControllersCore::getControllerProp($this->page['controller'])->getAfterSaveDialogs($oF)) !== false) {
           $this->json['dialogs'] = $dialogs;
           return;
         }
       }
       return;
     }
-    $this->json['title'] = LANG_CONTROLLER_OPTIONS.' <b>«'.PageControllersCore::getPropObj($this->page['controller'])->title.'»</b> '.LANG_SECTION.' <b>«'.$this->d['page']['title'].'»</b>';
+    $this->json['title'] = LANG_CONTROLLER_OPTIONS.' <b>«'.PageControllersCore::getControllerProp($this->page['controller'])->title.'»</b> '.LANG_SECTION.' <b>«'.$this->d['page']['title'].'»</b>';
     return $oF;
   }
 
@@ -193,7 +191,7 @@ class CtrlAdminPages extends CtrlAdminPagesBase {
   }
 
   function action_json_getTree() {
-    $this->json = (new MifTreePages)->getTree();
+    $this->json = (new PagesTree)->getTree();
   }
 
   function action_ajax_reorder() {

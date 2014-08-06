@@ -1,8 +1,8 @@
 <?php
 
-abstract class CtrlPageVStoreOrderAbstract extends CtrlPage {
+abstract class CtrlPageVStoreOrderAbstract extends CtrlPageV {
 
-  static function getVirtualPage() {
+  static function _getPage() {
     return [
       'title' => 'Заказ'
     ];

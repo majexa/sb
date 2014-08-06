@@ -13,7 +13,7 @@ class PbsText extends PbsAbstract {
     $this->fields[] = [
       'title' => 'Текст',
       'name' => 'text',
-      'type' => 'wisiwigSimple2',
+      'type' => 'wisiwigSimple',
     ];
   }
 

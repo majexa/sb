@@ -1,11 +1,11 @@
 <?php
 
 return [
-  'common',
+  'core',
   'pageBlocks',
   'i/js/sflm/ngn/Ngn.Btn.js',
+  'sb/js/sflm/init.js',
   //'siteAuth',
-  //'sb/js/Ngn.sb.init.js',
   //'pageLink',
   //'sb/js/Ngn.sb.DdItems.js',
   //'i/js/ngn/Ngn.UlMenu.js',

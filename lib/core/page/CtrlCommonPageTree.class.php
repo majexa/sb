@@ -5,7 +5,7 @@ class CtrlCommonPageTree extends CtrlCammon {
   protected $defaultAction = 'json_getTree';
 
   function action_json_getTree() {
-    $this->json = O::get('MifTreePages')->getTree();
+    $this->json = O::get('NgnTreePages')->getTree();
   }
 
   function action_json_getNode() {
