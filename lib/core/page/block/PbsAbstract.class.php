@@ -125,7 +125,7 @@ abstract class PbsAbstract extends Options2 {
     if ($this->hasJsInit) {
       $this->fields[] = [
         'type' => 'js',
-        'js' => "new Ngn.pb.".ucfirst($this->type)."($({formId}));"
+        'js' => "new Ngn.Pb.".ucfirst($this->type)."($({formId}));"
       ];
     }
     return $this->fields;

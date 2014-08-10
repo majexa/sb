@@ -57,7 +57,7 @@ print '</div>';
 </div>
 <script type="text/javascript">
 $('body').addClass('newLayout');
-new Ngn.pb.Interface({
+new Ngn.Pb.Interface({
   controllerPath: Ngn.getPath(3)
 });
 </script>

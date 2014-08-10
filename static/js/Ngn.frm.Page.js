@@ -1,4 +1,4 @@
-Ngn.frm.Page = new Class({
+Ngn.Frm.Page = new Class({
   Implements: [Options],
 
   options: {
@@ -71,6 +71,6 @@ Ngn.frm.Page = new Class({
 
 });
 
-Ngn.frm.Page.implement(Ngn.frm.virtualElement);
+Ngn.Frm.Page.implement(Ngn.Frm.virtualElement);
 
 // -- check --

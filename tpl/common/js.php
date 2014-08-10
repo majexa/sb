@@ -36,7 +36,7 @@ document.getElements('.apeform form').each(function(eForm) {
 });
 
 <? if (Misc::isAdmin() and AdminModule::isAllowed('pageBlocks')) { ?>
-  Ngn.toObj('Ngn.pb.interface', new Ngn.pb.Interface({
+  Ngn.toObj('Ngn.Pb.interface', new Ngn.Pb.Interface({
   wrapperSelector: '.pageLayout',
   controllerPath: '/sbc/pageBlocks/' + Ngn.sd.page.id,
   colBodySelector: '.pageBlocks',

@@ -1,6 +1,6 @@
-Ngn.toObj('Ngn.pb');
+Ngn.Pb = {};
 
-Ngn.pb.Interface = new Class({
+Ngn.Pb.Interface = new Class({
   Implements: [Options],
 
   options: {
@@ -28,7 +28,7 @@ Ngn.pb.Interface = new Class({
   initCols: function() {
     var i = 0;
     this.eWrapper.getElements('.col').each(function(eCol) {
-      new Ngn.pb.Col(eCol, this);
+      new Ngn.Pb.Col(eCol, this);
       if (eCol.hasClass('ct_content')) this.allowGlobalBtn = true;
       var eColBody = eCol.getElement(this.options.colBodySelector);
       if (!eColBody) return;
@@ -83,10 +83,10 @@ Ngn.pb.Interface = new Class({
 
   initBlocks: function() {
     this.eWrapper.getElements('.block').each(function(el) {
-      var typeClsName = 'Ngn.pb.BlockEdit.' + ucfirst(Ngn.pb.getType(el));
+      var typeClsName = 'Ngn.Pb.BlockEdit.' + ucfirst(Ngn.Pb.getType(el));
       var typeCls = eval(typeClsName);
-      typeCls ? c('init ' + typeClsName) : c('init Ngn.pb.BlockEdit');
-      var cls = typeCls || Ngn.pb.BlockEdit;
+      typeCls ? c('init ' + typeClsName) : c('init Ngn.Pb.BlockEdit');
+      var cls = typeCls || Ngn.Pb.BlockEdit;
       var b = new cls(el, this);
       this.blocks[b.id] = b;
     }.bind(this));
@@ -94,7 +94,7 @@ Ngn.pb.Interface = new Class({
 
 });
 
-Ngn.pb.positionRight = function(el, eCol, padSelector) {
+Ngn.Pb.positionRight = function(el, eCol, padSelector) {
   var colW = eCol.getSizeWithoutPadding().x;
   var eFirstPageBlockEdit = eCol.getElement(padSelector);
   var eb1W = eFirstPageBlockEdit ? eFirstPageBlockEdit.getSize().x : 0;
@@ -102,7 +102,7 @@ Ngn.pb.positionRight = function(el, eCol, padSelector) {
   el.setStyle('left', colW - eb1W - selfW - 6 - 5);
 };
 
-Ngn.pb.Col = new Class({
+Ngn.Pb.Col = new Class({
 
   initialize: function(eCol, interface) {
     this.interface = interface;
@@ -140,15 +140,15 @@ Ngn.pb.Col = new Class({
 
 });
 
-Ngn.pb.getType = function(el) {
+Ngn.Pb.getType = function(el) {
   return el.get('class').replace(/.* pbt_(\w+) .*/, '$1');
 };
 
-Ngn.pb.BlockEdit = new Class({
+Ngn.Pb.BlockEdit = new Class({
 
   /**
    * @var block element
-   * @var Ngn.pb.Interface
+   * @var Ngn.Pb.Interface
    */
   initialize: function(eBlock, interface) {
     this.interface = interface;
@@ -161,7 +161,7 @@ Ngn.pb.BlockEdit = new Class({
   },
 
   getDialogOptions: function(type) {
-    if (Ngn.pb.dialogOptions[type]) return Ngn.pb.dialogOptions[type];
+    if (Ngn.Pb.dialogOptions[type]) return Ngn.Pb.dialogOptions[type];
     return {};
   },
 
@@ -170,7 +170,7 @@ Ngn.pb.BlockEdit = new Class({
 
   initEditBlock: function() {
     var el = this.eBlock;
-    var type = Ngn.pb.getType(el);
+    var type = Ngn.Pb.getType(el);
     Elements.from(Ngn.tpls.editBlock)[0].inject(el, 'top');
     el.getElement('.actv').dispose();
     this.eEditBlock = el.getElement('.editBlock');
@@ -256,23 +256,23 @@ Ngn.pb.BlockEdit = new Class({
 
 });
 
-Ngn.pb.dialogOptions = {};
+Ngn.Pb.dialogOptions = {};
 
-Ngn.pb.dialogOptions.text = {
+Ngn.Pb.dialogOptions.text = {
   vResize: Ngn.Dialog.VResize.Wisiwig,
   width: 450
 };
 
-Ngn.pb.dialogOptions.subPages = {
+Ngn.Pb.dialogOptions.subPages = {
   width: 350
 };
 
-Ngn.pb.dialogOptions.textAndImage = {
+Ngn.Pb.dialogOptions.textAndImage = {
   width: 450
 };
 
 /*
- Ngn.pb.Text = new Class({
+ Ngn.Pb.Text = new Class({
  initialize: function(eForm) {
  Ngn.dialogs.getValues().getLast().dialog.setStyle('width', '800px');
  //Ngn.dialogs.getValues().getLast().message.setStyle('height', '600px');

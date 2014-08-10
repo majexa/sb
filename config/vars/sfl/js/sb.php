@@ -3,8 +3,8 @@
 return [
   'core',
   'pageBlocks',
-  'i/js/sflm/ngn/Ngn.Btn.js',
-  'sb/js/sflm/init.js',
+  'i/js/ngn/Ngn.Btn.js',
+  'sb/js/init.js',
   //'siteAuth',
   //'pageLink',
   //'sb/js/Ngn.sb.DdItems.js',

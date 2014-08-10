@@ -1,5 +1,5 @@
 window.addEvent('domready', function() {
-  new Ngn.pb.Interface({
+  new Ngn.Pb.Interface({
     controllerPath: '/sbc/pageBlocks/' + Ngn.sb.page.id
   });
   Ngn.addBtnsAction('a.userReg', function(eBtn) {
@@ -8,4 +8,4 @@ window.addEvent('domready', function() {
     });
   });
 });
-Ngn.frm.imagedRadio
+Ngn.Frm.imagedRadio

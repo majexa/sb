@@ -1,5 +1,5 @@
-Ngn.frm.Page.Link = new Class({
-  Extends: Ngn.frm.Page,
+Ngn.Frm.Page.Link = new Class({
+  Extends: Ngn.Frm.Page,
 
   select: function(node) {
     if (!node.data.canLinked) return false;

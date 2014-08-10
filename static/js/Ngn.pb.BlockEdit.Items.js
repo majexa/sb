@@ -1,5 +1,5 @@
-Ngn.pb.BlockEdit.Items = new Class({
-  Extends: Ngn.pb.BlockEdit,
+Ngn.Pb.BlockEdit.Items = new Class({
+  Extends: Ngn.Pb.BlockEdit,
 
   init: function() {
     if (!Ngn.isAdmin) return;
