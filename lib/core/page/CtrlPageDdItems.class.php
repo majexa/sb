@@ -816,9 +816,4 @@ class CtrlPageDdItems extends CtrlPageDd {
     $this->d['submenu'] = UserMenu::get($this->mysiteOwner, $this->d['page']['id'], $this->action);
   }
 
-  function setAdminMode($flag) {
-    parent::setAdminMode($flag);
-    $this->itemsCacheEnabled = !$flag;
-  }
-
 }

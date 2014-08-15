@@ -180,7 +180,6 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
   }
 
   protected function extendTplData() {
-    if ($this->adminMode) return;
     if (empty($this->page)) return;
     if (($paths = Hook::paths('before', $this->page['module'])) !== false) {
       foreach ($paths as $path) include $path;
@@ -194,9 +193,7 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
   }
 
   protected function prepareTplPath() {
-    if ($this->adminMode) return;
-    if (!empty($this->page['module']) and $this->tt->exists('pageModules/'.$this->page['module'].'/'.$this->d['tpl'])
-    ) {
+    if (!empty($this->page['module']) and $this->tt->exists('pageModules/'.$this->page['module'].'/'.$this->d['tpl'])) {
       $this->d['tpl'] = 'pageModules/'.$this->page['module'].'/'.$this->d['tpl'];
     }
   }
@@ -292,21 +289,6 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
    */
   protected $useDefaultTplFolder = false;
 
-  function setAdminMode($flag) {
-    if ($flag) {
-      if (!$this->adminTplFolder) throw new Exception('$this->adminTplFolder not defined');
-      $this->tplFolder = 'admin/modules/pages/'.$this->adminTplFolder;
-      $this->useDefaultTplFolder = true;
-      $this->allowNonActivePages = true;
-    }
-    else {
-      $this->tplFolder = 'dd';
-      $this->useDefaultTplFolder = false;
-      $this->allowNonActivePages = false;
-    }
-    $this->adminMode = $flag;
-  }
-
   /**
    * Массив, в котором каждая привилегия определяет те экшены (без layout-префиксов),
    * которые она разрешает
@@ -397,10 +379,8 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
   protected function allowAction($action) {
     $action = $this->clearActionPrefixes($action);
     if (!isset($this->priv)) return true;
-    // Если не существует названия привилегии для этого экшена, раздрешаем экшн
-    if (!isset($this->privByAction[$action])
-    ) // Если для экшена нет привилегий, значит по умолчанию он разрешен
-      return true;
+    // Если для экшена нет привилегий, значит по умолчанию он разрешен
+    if (!isset($this->privByAction[$action])) return true;
     return in_array($action, $this->allowedActions);
   }
 
@@ -424,19 +404,18 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
       $this->error404();
       return;
     }
-    if (!$this->adminMode) {
-      if ($this->allowAuthorized and !Auth::get('id')) {
-        $this->d['tpl'] = 'denialAuthorize';
-        return;
-      }
-      elseif ($this->allowAuthorizedActions and in_array($this->action, $this->allowAuthorizedActions)) {
-        $this->d['tpl'] = 'denialAuthorize';
-        return;
-      }
-      elseif (!$this->allowAction($this->action) or isset($_GET['editNotAllowed'])) {
-        $this->error404('Действие запрещено');
-        return;
-      }
+    if ($this->allowAuthorized and !Auth::get('id')) {
+      $this->d['tpl'] = 'denialAuthorize';
+      return;
+    }
+    elseif ($this->allowAuthorizedActions and in_array($this->action, $this->allowAuthorizedActions)) {
+      $this->d['tpl'] = 'denialAuthorize';
+      return;
+    }
+    elseif (!$this->allowAction($this->action) or $this->req['editNotAllowed']) {
+      //$this->error404('Действие запрещено');
+      throw new AccessDenied;
+      return;
     }
     parent::action();
   }

@@ -9,7 +9,4 @@ class CtrlPageVDefault extends CtrlPageV {
     ];
   }
 
-  //function action_default() {
-  //}
-
 }

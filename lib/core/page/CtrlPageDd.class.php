@@ -91,6 +91,7 @@ abstract class CtrlPageDd extends CtrlPage {
   }
 
   protected function getItemsManagerOptions() {
+    throw new Exception('depricated');
     return [
       'itemId'        => $this->itemId,
       'fieldsOptions' => [
