@@ -18,7 +18,7 @@
         }
       });
     });
-    Ngn.addBtnAction('#auth .btnSubmit', function() {
+    Ngn.addBtnAction('.authBar .btnSubmit', function() {
       $('authForm').submit();
     });
   });

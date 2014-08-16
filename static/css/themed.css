@@ -1,12 +1,12 @@
 #top .iconsSet a {
 margin-bottom: 0px;
 }
-#auth {
+.authBar {
 padding: 0px 0px 0px 15px;
 }
-#auth input.fld {
+.authBar input.fld {
 width: 90px;
 }
-#auth a#btnLogin {
+.authBar a#btnLogin {
 width: 55px;
 }

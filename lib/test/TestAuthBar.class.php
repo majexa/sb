@@ -1,6 +1,6 @@
 <?php
 
-class TestAuth extends TestCasperSb {
+class TestAuthBar extends TestCasperSb {
 
   function test() {
     $this->casper([
