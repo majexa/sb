@@ -22,7 +22,10 @@ class CtrlSbPageBlocks extends CtrlDefault {
     $form = new $formClass(['submitTitle' => 'Продолжить создание блока']);
     if ($form->isSubmittedAndValid()) {
       $this->json['nextFormUrl'] = $this->tt->getPath(3).'/json_newBlockStep2/'.$this->req->param(4).'/'.$form->elementsData['type'];
-      return;
+      $this->json['nextFormOptions'] = [
+        'width' => 350
+      ];
+      return null;
     }
     return $form;
   }
@@ -43,20 +46,22 @@ class CtrlSbPageBlocks extends CtrlDefault {
    */
   function action_json_newBlockStep2() {
     $this->jsonCreateBlockTitle();
-    $oPBS = PageBlockCore::getStructure($this->req->param(5), ['pageId' => $this->page['id']]);
-    $preFields = $oPBS->getPreFields();
+    $pbs = PageBlockCore::getStructure($this->req->param(5), ['pageId' => $this->page['id']]);
+    $preFields = $pbs->getPreFields();
     if ($preFields) {
       $form = new Form(new Fields($preFields), [
         'submitTitle' => 'Продолжить создание блока'
       ]);
       if ($form->isSubmittedAndValid()) {
         $this->json['nextFormUrl'] = $this->tt->getPath(3).'/json_newBlockStep3/'.$this->req->param(4).'/'.$this->req->param(5).'?'.http_build_query($form->getData());
-        return;
+        $this->json['nextFormOptions'] = [
+          'width' => 350
+        ];
+        return null;
       }
       return $form;
     }
     else {
-      //$query = (($hiddenParams = $oPBS->getHiddenParams()) != null) ? '?'.http_build_query($hiddenParams) : '';
       return $this->action_json_newBlockStep3();
     }
   }
@@ -67,17 +72,18 @@ class CtrlSbPageBlocks extends CtrlDefault {
   function action_json_newBlockStep3() {
     $this->jsonCreateBlockTitle();
     $structure = PageBlockCore::getStructure($this->req->param(5));
-    if (!empty($_GET)) $structure->setPreParams($_GET);
+    if (!empty($this->req->g)) $structure->setPreParams($this->req->g);
     $createData = [
       'ownPageId' => $this->page['id'],
       'type'      => $this->req->param(5),
       'colN'      => $this->req->param(4),
       'global'    => empty($this->page['id'])
     ];
-    $mm = new PageBlockModelManager($structure, $createData);
-    if ($mm->requestCreate()) return;
+    $manager = new PageBlockModelManager($structure, $createData);
+
+    if ($manager->requestCreate()) return null;
     $this->json['jsOptions'] = ['onOkClose' => 'func: window.location.reload(true)'];
-    return $mm->form;
+    return $manager->form;
   }
 
   function action_ajax_deleteBlock() {
@@ -85,6 +91,7 @@ class CtrlSbPageBlocks extends CtrlDefault {
   }
 
   function action_ajax_updateBlocks() {
+    $ids = [];
     foreach ($this->req->rq('cols') as $cols) {
       foreach ($cols as $v) {
         $r[$v['colN']][] = $v['id'];

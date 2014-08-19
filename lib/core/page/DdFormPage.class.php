@@ -11,6 +11,7 @@ class DdFormPage extends DdForm {
 
   function __construct(Fields $fields, $pageId, array $options = []) {
     $this->pageId = $pageId;
+    //die2(DbModelCore::get('pages', $this->pageId)->r);
     parent::__construct($fields, DbModelCore::get('pages', $this->pageId)->r['strName'], $options);
     if (($paths = Hook::paths('dd/formInit')) !== false) foreach ($paths as $path) include $path;
   }

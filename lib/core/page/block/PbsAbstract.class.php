@@ -113,7 +113,7 @@ abstract class PbsAbstract extends Options2 {
    * (определяются в наследуемых классах), то их наличие
    * (назначаются с помощью setPreParams()) будет проверено.
    *
-   * @return unknown
+   * @return array
    */
   function getFields() {
     if (!empty($this->fields)) return $this->fields;

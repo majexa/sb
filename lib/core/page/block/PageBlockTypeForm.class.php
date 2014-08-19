@@ -7,7 +7,7 @@ class PageBlockTypeForm extends Form {
       [
         'name' => 'type',
         'title' => 'Тип',
-        'type' => 'imagedRadio',
+        'type' => 'select',
         'options' => PageBlockCore::getTypeOptions(),
         'required' => true
       ]

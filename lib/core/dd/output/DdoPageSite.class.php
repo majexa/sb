@@ -2,6 +2,9 @@
 
 class DdoPageSite extends DdoPage {
 
+}
+class DdoPageSite_ extends DdoPage {
+
   protected function initTpls() {
     parent::initTpls();
     $this->ddddByName['title'] = '`<h2><a href="`.'.$this->ddddItemLink.'.`">`.$v.`</a></h2>`';

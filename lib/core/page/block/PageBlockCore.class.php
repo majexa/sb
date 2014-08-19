@@ -24,7 +24,7 @@ class PageBlockCore {
    * @return array
    */
   static function getTypeOptions() {
-    return array_merge(Html::defaultOption(), ClassCore::getStaticProperties('Pbs', 'title', 'title'));
+    return ClassCore::getStaticProperties('Pbs', 'title', 'title');
   }
 
   static function getTitle($type) {

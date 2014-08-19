@@ -119,6 +119,7 @@ Ngn.Pb.Col = new Class({
       // новый вариант
       new Ngn.Dialog.RequestForm({
         url: this.interface.options.controllerPath + '/json_newBlock' + (this.interface.options.simple ? 'Simple' : '') + '/' + this.eCol.get('data-n'),
+        width: 350,
         onComplete2: function() {
           window.location.reload(true);
         }
@@ -162,7 +163,6 @@ Ngn.Pb.BlockEdit = new Class({
 
   getDialogOptions: function(type) {
     if (Ngn.Pb.dialogOptions[type]) return Ngn.Pb.dialogOptions[type];
-    return {};
   },
 
   init: function() {

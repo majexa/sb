@@ -3,6 +3,7 @@ Ngn.Dialog.NewModulePageSimple = new Class({
 
   actionName: 'newModulePageSimple',
 
-  afterFormResponse: function() {}
+  afterFormResponse: function() {
+  }
 
 });

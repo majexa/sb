@@ -1,13 +1,13 @@
 <?php
 
-class TestPageBlockText extends TestCasperSb {
+class TstPageBlockText extends TestCasperSb {
 
   function testCreate() {
     $this->casper([
       ['thenUrl', ''],
       ['click', 'a.add'],
       ['waitForDialog'],
-      ['click', '.opt_text input'],
+      ['selectOption', '.name_type select', 'text'],
       ['click', '.ok .btn'],
       ['waitForDialog'],
       ['wait', 1500],
@@ -19,7 +19,7 @@ class TestPageBlockText extends TestCasperSb {
     ]);
   }
 
-  function testDelete() {
+  function tstDelete() {
     $this->casper([
       ['thenUrl', ''],
       ['wait', 500],

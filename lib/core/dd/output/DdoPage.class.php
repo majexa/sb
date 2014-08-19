@@ -2,6 +2,16 @@
 
 class DdoPage extends Ddo {
 
+  protected $page;
+  function __construct(DbModelPages $page, $layoutName, array $options = []) {
+    $this->page = $page;
+    parent::__construct($this->page['strName'], $layoutName, $options);
+  }
+
+}
+
+class DdoPage_ extends Ddo {
+
   /**
    * @var DbModelPages
    */

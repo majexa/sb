@@ -18,6 +18,12 @@ class PmiStore extends PmiDd {
       'required' => true
     ],
     [
+      'title'    => 'Категория',
+      'name'     => 'category',
+      'type'     => 'ddTagsSelect',
+      'required' => true
+    ],
+    [
       'title'    => 'Цена',
       'name'     => 'price',
       'type'     => 'price',
