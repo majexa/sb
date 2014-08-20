@@ -1,7 +1,9 @@
 window.addEvent('domready', function() {
-  new Ngn.Pb.Interface({
-    controllerPath: '/sbc/pageBlocks/' + Ngn.sb.page.id
-  });
+  if (Ngn.isAdmin) {
+    new Ngn.Pb.Interface({
+      controllerPath: '/sbc/pageBlocks/' + Ngn.sb.page.id
+    });
+  }
   Ngn.addBtnsAction('a.userReg', function() {
     new Ngn.Dialog.Auth({
       selectedTab: 1
