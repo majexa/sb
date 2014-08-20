@@ -6,6 +6,7 @@ return [
   'sb/css/top.css',
   'sb/css/pageTitle.css',
   's2/css/common/btns',
+  'sb/css/pageBlocks.css',
   's2/css/common/pageModules',
   //'i/css/common/editPages.css',
   //'s2/css/common/avatar.css',

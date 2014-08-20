@@ -1,0 +1,51 @@
+.pageBlocks .block {
+position: relative;
+}
+.pageBlocks .block .dragBox, .ddItems .item .dragBox {
+position: absolute;
+width: 23px;
+height: 23px;
+top: 5px;
+border-radius: 5px;
+}
+.pageBlocks .block .dragBox {
+/*visibility: hidden;*/
+}
+
+.col.allowBlocks .editBlock {
+margin: 5px 5px 0px 0px;
+/*width: 40px;*/
+padding: 3px 0px 3px 3px;
+background: #F2F2F2;
+border-radius: 5px;
+position: absolute;
+/*visibility: hidden;*/
+z-index: 1;
+border: 1px solid #E3E2D3;
+background: -webkit-linear-gradient(top, #fbfbf6, #F1F0DF);
+}
+.col.allowBlocks .editBlock a {
+border-color: #EDECE1;
+border-radius: 3px;
+background: #FFF;
+}
+.col.allowBlocks .editBlock a:hover {
+border-color: #ccc;
+}
+.col {
+position: relative;
+}
+
+.col.allowBlocks .editBlock.blue {
+border-color: #64A1DE;
+background: #BBD6F0;
+}
+.col.allowBlocks .editBlock.blue a {
+background: #DCE9F7;
+}
+
+.pageBlocks .block:hover .editBlock,
+.pageBlocks .block:hover .dragBox,
+.pageBlocks .block.move .dragBox {
+visibility: visible;
+}
