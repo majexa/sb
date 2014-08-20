@@ -2,7 +2,7 @@
 
 class CtrlPageVDefault extends CtrlPageV {
 
-  static function _getPage() {
+  static function page() {
     return [
       'id' => -1,
       'title' => 'Home'

@@ -2,7 +2,7 @@
 
 abstract class CtrlPageVStoreOrderAbstract extends CtrlPageV {
 
-  static function _getPage() {
+  static function page() {
     return [
       'title' => 'Заказ'
     ];

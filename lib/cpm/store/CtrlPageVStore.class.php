@@ -3,7 +3,7 @@
 class CtrlPageVStore extends CtrlPageV {
   use DdCrudCtrl;
 
-  static protected function _getPage() {
+  static protected function page() {
     return [
       'title' => 'Магазин'
     ];

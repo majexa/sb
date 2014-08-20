@@ -47,15 +47,15 @@ class Menu {
   }
 
   static function flatByPageId($pageId, $linkTpl, $sep = '') {
-    $oPagesTreeTpl = PagesTreeTpl::getObjCached($pageId);
-    $oPagesTreeTpl->setDepthLimit(1);
-    $oPagesTreeTpl->setNodesBeginTpl('');
-    $oPagesTreeTpl->setNodesEndTpl('');
-    $oPagesTreeTpl->setTpl($linkTpl);
-    $oPagesTreeTpl->setSeparator($sep);
-    $oPagesTreeTpl->setCurrentId(R::get('currentPageId'));
-    $oPagesTreeTpl->setBreadcrumbsIds(R::get('breadcrumbsPageIds'));
-    return $oPagesTreeTpl->html();
+    $treeTpl = PagesTreeTpl::getObjCached($pageId);
+    $treeTpl->setDepthLimit(1);
+    $treeTpl->setNodesBeginTpl('');
+    $treeTpl->setNodesEndTpl('');
+    $treeTpl->setTpl($linkTpl);
+    $treeTpl->setSeparator($sep);
+    $treeTpl->setCurrentId(R::get('currentPageId'));
+    $treeTpl->setBreadcrumbsIds(R::get('breadcrumbsPageIds'));
+    return $treeTpl->html();
   }
 
   static function flat($name, $linkTpl, $sep = '') {

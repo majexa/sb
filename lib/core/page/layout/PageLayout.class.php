@@ -221,7 +221,7 @@ TEXT;
           '</div>'.'<div class="mainBody">';
         //if ($ctrl->d['page']['settings']['showSubPages']) $h .= '<div class="subPages">'.Menu::getUlObjById($ctrl->d['page']['id'], 1)->html().'</div>';
         //$h .= Tt()->getTpl($ctrl->d['tpl'], $ctrl->d);
-        if (isset($ctrl->d['content'])) $h .= 'временно'.$ctrl->d['content'].'/временно';
+        if (isset($ctrl->d['content'])) $h .= '<div class="gray">content begins</div>'.$ctrl->d['content'].'<div class="gray">content ends</div>';
         $h .= '</div>';
 //        <div class="body moduleBody{$ctrl->d['bodyClass']}">
         $html .= <<<TEXT

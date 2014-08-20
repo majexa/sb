@@ -9,11 +9,6 @@
  */
 class SbRouter extends DefaultRouter {
 
-  protected function getFrontendName__() {
-    return 'sb';
-    //return Misc::isAdmin() ? 'sbAdmin' : 'sb';
-  }
-
   function _getController() {
     if (isset($this->req->params[1]) and $this->req->params[0] == 'sbc') {
       $class = 'CtrlSb'.ucfirst($this->req->params[1]);
@@ -29,6 +24,7 @@ class SbRouter extends DefaultRouter {
    */
   protected function getPageOrController() {
     if (isset($this->req->params[0]) and is_numeric($this->req->params[0]) and ($page = DbModelCore::get('pages', $this->req->params[0])) !== false) {
+      // по ID
       if (empty($page['path'])) return false;
       $pathParams2 = (count($this->req->params) > 1) ? '/'.implode('/', array_splice($this->req->params, 1, count($this->req->params))) : '';
       header('Location: /'.$page['path'].$pathParams2.($_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : ''));
@@ -40,6 +36,11 @@ class SbRouter extends DefaultRouter {
         return PageControllersCore::getStaticCtrl('default', $this);
       }
       else {
+        if ($this->req->params[0] == 'sitemap') {
+          return PageControllersCore::getStaticCtrl('sitemap', $this);
+        }
+
+
         $ctrlName = $this->req->param(0);
         if (($routes = Config::getVar('routes')) and isset($routes[$ctrlName])) $ctrlName = $routes[$ctrlName];
         if (PageControllersCore::staticCtrlExists($ctrlName)) {
