@@ -2,7 +2,7 @@ Ngn.Pb.BlockEdit.Items = new Class({
   Extends: Ngn.Pb.BlockEdit,
 
   init: function() {
-    if (!Ngn.isAdmin) return;
+    /*
     this.addEditBlockBtn({
       cls: 'list',
       caption: 'Редактировать новости'
@@ -29,6 +29,7 @@ Ngn.Pb.BlockEdit.Items = new Class({
         }
       });
     });
+    */
   }
 
 });
