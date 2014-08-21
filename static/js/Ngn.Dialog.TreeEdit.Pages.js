@@ -5,7 +5,7 @@ Ngn.Dialog.TreeEdit.Pages = new Class({
     id: 'editPages',
     title: 'Редактирование разделов',
     footer: false,
-    actionUrl: '/admin/pages'
+    actionUrl: '/sbc/pages'
   },
   
   buildMessage: function() {

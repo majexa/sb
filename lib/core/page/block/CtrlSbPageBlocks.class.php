@@ -1,16 +1,9 @@
 <?php
 
-class CtrlSbPageBlocks extends CtrlDefault {
-
-  protected function getParamActionN() {
-    return 3;
-  }
-
-  protected $page;
+class CtrlSbPageBlocks extends CtrlSbAdmin {
 
   protected function init() {
-    if (!Misc::isAdmin()) throw new AccessDenied;
-    $this->hasOutput = false;
+    parent::init();
     $this->page = PageControllersCore::getPageModel($this->req->param(2));
   }
 
