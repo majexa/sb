@@ -4,13 +4,10 @@ class TestPageBlockText extends TestCasperSb {
 
   function testCreate() {
     $this->casper([
-      ['thenUrl', ''],
+      ['thenUrl', '?authLogin=admin&authPass=1234'],
       ['click', 'a.add'],
       ['waitForDialog'],
       ['selectOption', '.name_type select', 'text'],
-      //['wait', 2000],
-      //['capture'],
-      //['wait', 2000],
       ['click', '.ok .btn'],
       ['waitForDialog'],
       ['wait', 1500],
@@ -24,7 +21,7 @@ class TestPageBlockText extends TestCasperSb {
 
   function testDelete() {
     $this->casper([
-      ['thenUrl', ''],
+      ['thenUrl', '?authLogin=admin&authPass=1234'],
       ['wait', 500],
       ['click', '.pbt_text .delete'],
       ['wait', 1500],
