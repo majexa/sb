@@ -5,7 +5,7 @@ class CtrlPageVStore extends CtrlPageV {
 
   static protected function page() {
     return [
-      'title' => 'Магазин'
+      'title' => 'Магазин на диване. Для всей семьи и Дяди Вани'
     ];
   }
 

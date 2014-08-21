@@ -1,3 +1,7 @@
 .topBtns {
 float: right;
 }
+.pageTitle h1 {
+font-size: 20px;
+line-height: 0.9;
+}
