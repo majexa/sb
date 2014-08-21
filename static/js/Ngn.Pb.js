@@ -27,7 +27,6 @@ Ngn.Pb.Interface = new Class({
   initCols: function() {
     var i = 0;
     this.cols = [];
-    c([this.eWrapper, this.eWrapper.getElements('.col')]);
     this.eWrapper.getElements('.col').each(function(eCol) {
       new Ngn.Pb.Col(eCol, this);
       if (eCol.hasClass('ct_content')) this.allowGlobalBtn = true;
@@ -47,9 +46,7 @@ Ngn.Pb.Interface = new Class({
       clone: true,
       handle: this.options.handler
     });
-    c('!!!!!!!!!!!!!!!');
     this.sortables.addEvent('start', function(el, clone) {
-
       clone.setStyle('z-index', 9999);
       clone.addClass('move');
     });
