@@ -1,6 +1,6 @@
 <?php
 
-print '<div class="pageBlocks">';
+print '<div class="body pageBlocks">';
 foreach ($d['blocks'] as $b) {
   print '<div class="block pbt_'.$b['type'].
   (!empty($b['class']) ? ' '.$b['class'] : '').

@@ -198,9 +198,9 @@ class PageLayout {
         ]);
         $html .= <<<TEXT
 <div class="$class" id="col$n" data-n="$n">
-  <div class="body">
+
     $blocksHtml
-  </div>
+
 </div>
 TEXT;
       }
