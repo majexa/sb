@@ -1,13 +1,13 @@
 <?php
 
-abstract class CtrlPageV extends CtrlPage {
+abstract class CtrlPageStatic extends CtrlPage {
 
   static protected function getStaticName() {
-    return ClassCore::classToName('CtrlPageV', get_called_class());
+    return ClassCore::classToName('CtrlPageStatic', get_called_class());
   }
 
   protected function getName() {
-    return ClassCore::classToName('CtrlPageV', get_class($this));
+    return ClassCore::classToName('CtrlPageStatic', get_class($this));
   }
 
   static function getPage() {

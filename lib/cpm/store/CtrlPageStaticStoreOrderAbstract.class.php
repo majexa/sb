@@ -1,6 +1,6 @@
 <?php
 
-abstract class CtrlPageVStoreOrderAbstract extends CtrlPageV {
+abstract class CtrlPageStaticStoreOrderAbstract extends CtrlPageStatic {
 
   static function page() {
     return [

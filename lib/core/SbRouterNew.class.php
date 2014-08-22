@@ -5,7 +5,7 @@ class SbRouterNew extends DefaultRouter {
   protected $page;
 
   function _getController() {
-    return (new CtrlPageVDefault($this))->setPage($this->page);
+    return (new CtrlPageStaticDefault($this))->setPage($this->page);
   }
 
   function dispatch() {

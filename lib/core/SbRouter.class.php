@@ -20,7 +20,7 @@ class SbRouter extends DefaultRouter {
   }
 
   /**
-   * @return DbModelPages|CtrlPageV
+   * @return DbModelPages|CtrlPageStatic
    */
   protected function getPageOrController() {
     if (isset($this->req->params[0]) and is_numeric($this->req->params[0]) and ($page = DbModelCore::get('pages', $this->req->params[0])) !== false) {

@@ -1,6 +1,6 @@
 <?php
 
-class CtrlPageVDefault extends CtrlPageV {
+class CtrlPageStaticDefault extends CtrlPageStatic {
 
   static function page() {
     return [

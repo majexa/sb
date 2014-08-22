@@ -50,7 +50,7 @@ class SbRouter extends DefaultRouter {
       die();
     }
     elseif (!empty($this->page['controller'])) $controller = PageControllersCore::getController($this, $this->page);
-    if (!isset($controller)) $controller = (new CtrlPageVDefault($this))->setPage($this->page);
+    if (!isset($controller)) $controller = (new CtrlPageStaticDefault($this))->setPage($this->page);
     R::set('currentPageId', $this->page['id']);
     R::set('breadcrumbsPageIds', empty($this->page['pathData']) ? [] : Arr::get($this->page['pathData'], 'id'));
     return $controller;

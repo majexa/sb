@@ -1,6 +1,6 @@
 <?php
 
-class CtrlPageVSitemap extends CtrlPageV {
+class CtrlPageStaticSitemap extends CtrlPageStatic {
 
   static function page() {
     return [

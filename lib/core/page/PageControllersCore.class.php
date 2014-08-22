@@ -78,21 +78,21 @@ class PageControllersCore {
   }
 
   static function getStaticCtrl($ctrlName, Router $router) {
-    return O::get(ClassCore::nameToClass('CtrlPageV', $ctrlName), $router);
+    return O::get(ClassCore::nameToClass('CtrlPageStatic', $ctrlName), $router);
   }
 
   static function staticCtrlExists($ctrlName) {
-    return class_exists(ClassCore::nameToClass('CtrlPageV', $ctrlName));
+    return class_exists(ClassCore::nameToClass('CtrlPageStatic', $ctrlName));
   }
 
   static function getStaticCtrlClass($ctrlName) {
-    return ClassCore::nameToClass('CtrlPageV', $ctrlName);
+    return ClassCore::nameToClass('CtrlPageStatic', $ctrlName);
   }
 
   static function getStaticCtrlPageModels() {
     $r = [];
-    foreach (ClassCore::getClassesByPrefix('CtrlPageV', true) as $class) {
-      /* @var $class CtrlPageV */
+    foreach (ClassCore::getClassesByPrefix('CtrlPageStatic', true) as $class) {
+      /* @var $class CtrlPageStatic */
       $page = $class::getPage();
       $r[$page['id']] = $page;
     }
