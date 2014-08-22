@@ -1,6 +1,6 @@
 <?php
 
-class CtrlPageDdItems extends CtrlPageDd {
+class CtrlPageDdItemsOld extends CtrlPageDd {
   use DdParamFilterCtrl;
 
   protected $defaultAction = 'list';

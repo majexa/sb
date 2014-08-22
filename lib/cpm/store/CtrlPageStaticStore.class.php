@@ -30,7 +30,6 @@ class CtrlPageStaticStore extends CtrlPageStatic {
         'link'  => '/store/new'
       ]
     ];
-    $this->d['body'] = PageLayout::autoHtml($this->d['layoutN'], $this->page['id'], $this);
   }
 
 }

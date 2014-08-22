@@ -9,11 +9,12 @@ window.addEvent('domready', function() {
       selectedTab: 1
     });
   });
-  Ngn.addBtnAction('.topBtns .new', function() {
+  Ngn.addBtnAction('.topBtns .new', function(eBtn) {
+    c(eBtn.get('data-url'));
     new Ngn.Dialog.RequestForm({
       id: 'store',
       title: 'Добавление записи',
-      url: '/store/json_new',
+      url: eBtn.get('data-url'),
       width: 300,
       onSubmitSuccess: function() {
         window.location.reload(true);

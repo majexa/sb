@@ -1,6 +1,6 @@
 <?php
 
-abstract class CtrlPageDd extends CtrlPage {
+abstract class CtrlPageDdOld extends CtrlPage {
 
   /**
    * @var DdItemsManagerPage
