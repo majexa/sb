@@ -1,6 +1,6 @@
 <?php
 
-class PmiEmpty extends Pmi {
+class PageModuleEmpty extends PageModule {
 
   public $title = 'Пустой';
   

@@ -1,6 +1,6 @@
 <?php
 
-class PmiBehaviorSliceAddress extends PmiBehaviorAbstract {
+class PageModuleBehaviorSliceAddress extends PageModuleBehaviorAbstract {
 
   function action($pageId, $node) {
     // Текстовый слайс адреса

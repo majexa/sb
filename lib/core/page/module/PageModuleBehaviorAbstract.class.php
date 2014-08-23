@@ -1,6 +1,6 @@
 <?php
 
-abstract class PmiBehaviorAbstract {
+abstract class PageModuleBehaviorAbstract {
   
   abstract function action($pageId, $node);
   

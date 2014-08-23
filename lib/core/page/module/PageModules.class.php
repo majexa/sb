@@ -6,7 +6,7 @@ class PageModules {
 	
   function __construct() {
     $this->items = [];
-    foreach (ClassCore::getDescendants('Pmi', 'Pmi') as $v) {
+    foreach (ClassCore::getDescendants('PageModule', 'PageModule') as $v) {
       $o = O::get($v['class']);
       $this->items[$v['name']] = [
         'title' => $o->title,

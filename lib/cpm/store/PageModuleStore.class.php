@@ -1,6 +1,6 @@
 <?php
 
-class PmiStore extends PmiDd {
+class PageModuleStore extends PageModuleDd {
 
   public $title = 'Магазин';
 

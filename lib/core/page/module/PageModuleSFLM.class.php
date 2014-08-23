@@ -1,6 +1,6 @@
 <?php
 
-// работает только при наличии Pmi-класса к модулю
+// работает только при наличии PageModule-класса к модулю
 
 class PageModuleSFLM {
   use Options;

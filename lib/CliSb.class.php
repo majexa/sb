@@ -12,7 +12,7 @@ class CliSb extends CliHelpArgs {
   function getClasses() {
     return [
       [
-        'class' => 'CliPmi',
+        'class' => 'CliPageModule',
         'name' => 'pmi'
       ]
    ];

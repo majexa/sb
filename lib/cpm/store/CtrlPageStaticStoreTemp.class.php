@@ -1,6 +1,6 @@
 <?php
 
-class CtrlPageStaticStore extends CtrlPageStatic {
+class CtrlPageStaticStoreTemp extends CtrlPageStatic {
   use DdCrudCtrl;
 
   static protected function page() {

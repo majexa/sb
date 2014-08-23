@@ -34,7 +34,7 @@ class NewModulePageFormBase extends Form {
 
   protected function _update(array $data) {
     $data['parentId'] = $this->pageId;
-    Pmi::get($data['module'])->install($data);
+    PageModule::get($data['module'])->create($data);
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-class PmiBehaviorFeedback extends PmiBehaviorAbstract {
+class PageModuleBehaviorFeedback extends PageModuleBehaviorAbstract {
   
   function action($pageId, $node) {
     $oP = new PrivilegesManager();

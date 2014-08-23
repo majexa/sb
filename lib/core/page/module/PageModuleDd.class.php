@@ -1,6 +1,6 @@
 <?php
 
-abstract class PmiDd extends Pmi {
+abstract class PageModuleDd extends PageModule {
 
   /**
    * @var DdStructuresManager
@@ -44,13 +44,18 @@ abstract class PmiDd extends Pmi {
     }
   }
 
-  function install(array $node = null) {
+  function create(array $node = null) {
     $this->createStructure();
     $node['strName'] = $this->strName;
-    parent::install($node);
+    parent::create($node);
     $this->createSlices($this->page['id'], $this->page['title']);
     $this->updatePageLayout();
     return $this->page['id'];
+  }
+
+  function delete($pageId) {
+    (new DdStructuresManager)->deleteByName(DbModelCore::get('pages', $pageId)['strName']);
+    parent::delete($pageId);
   }
 
   protected function getSettings() {

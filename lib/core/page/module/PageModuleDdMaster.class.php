@@ -1,6 +1,6 @@
 <?php
 
-abstract class PmiDdMaster extends PmiDd {
+abstract class PageModuleDdMaster extends PageModuleDd {
   
   public $controller = 'ddItemsMaster';
   protected $masterStrName;

@@ -11,7 +11,7 @@ padding-top: 58px;
 }
 <?
 
-foreach (ClassCore::getDescendants('Pmi', 'Pmi') as $v) {
+foreach (ClassCore::getDescendants('PageModule', 'PageModule') as $v) {
   $module = $v['name'];
   if (!file_exists(CORE_PAGE_MODULES_PATH.'/'.$module.'/sm-page.png')) continue;
   $pageIcon = '/'.CORE_PAGE_MODULES_DIR.'/'.$module.'/sm-page.png';

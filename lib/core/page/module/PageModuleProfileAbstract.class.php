@@ -1,6 +1,6 @@
 <?php
 
-abstract class PmiProfileAbstract extends PmiDd {
+abstract class PageModuleProfileAbstract extends PageModuleDd {
   
   public $controller = 'myProfile';
   public $onMenu = false;

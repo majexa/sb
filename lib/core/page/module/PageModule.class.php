@@ -1,6 +1,12 @@
 <?php
 
-abstract class Pmi {
+// это не PageModuleInstaller, это PageInstaller
+// каждая страница имеет свою уникальную структуру
+// не имеет смысла создавать структуру для каких-то ещё разделов
+// следовательно инсталлировать ничего не нужно
+// в рамках SB структура удяляется вместе с разделом
+// значит
+abstract class PageModule {
 use Options;
 
   protected $module;
@@ -21,7 +27,7 @@ use Options;
   protected $pageBlocks = [];
 
   function __construct() {
-    $this->module = ClassCore::classToName('Pmi', $this);
+    $this->module = ClassCore::classToName('PageModule', $this);
     if ($this->controller == 'module') $this->controller = $this->module;
     Misc::checkEmpty($this->title);
     foreach ($this->requiredProperties as $name) if (!isset($this->$name)) throw new Exception("\$this->$name not defined. Class: ".get_class($this));
@@ -71,11 +77,15 @@ use Options;
    * @param   array
    * @return  integer   ID раздела
    */
-  function install(array $node = null) {
+  function create(array $node = null) {
     $this->createNode($node);
     $this->afterCreate($node);
     $this->createPageBlocks();
     return $this->page['id'];
+  }
+
+  function delete($pageId) {
+    DbModelCore::delete('pages', $pageId);
   }
 
   protected function createPageBlocks() {
@@ -96,18 +106,18 @@ use Options;
 
   /**
    * @param  string $module
-   * @return Pmi
+   * @return PageModule
    */
   static function get($module) {
-    return O::get('Pmi'.ucfirst($module));
+    return O::get('PageModule'.ucfirst($module));
   }
 
   /**
    * @param  string $module
-   * @return Pmi
+   * @return PageModule
    */
   static function take($module) {
-    return O::take('Pmi'.ucfirst($module));
+    return O::take('PageModule'.ucfirst($module));
   }
 
 }

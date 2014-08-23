@@ -1,6 +1,6 @@
 <?php
 
-class PmiTreeImporter {
+class PageModuleTreeImporter {
 
   public $defaultParentId = 0;
 
@@ -81,11 +81,11 @@ class PmiTreeImporter {
     if ($this->createAtTheBottom) {
       $v['oid'] = (int)db()->selectCell('SELECT oid FROM pages WHERE parentId=?d ORDER BY oid DESC', $v['parentId']) + 10;
     }
-    $pmi = Pmi::get($v['module']);
+    $pmi = PageModule::get($v['module']);
     if ($v['module'] == 'link') Arr::checkEmpty($v, 'link');
     if (empty($v['name'])) $v['name'] = Misc::transit($v['title'], true);
     $v['onMenu'] = (int)$pmi->onMenu;
-    $pageId = $pmi->install($v);
+    $pageId = $pmi->create($v);
     $this->n += 10;
     $this->ids[$v['n']] = $pageId;
     return $pageId;
@@ -96,7 +96,7 @@ class PmiTreeImporter {
     if (empty($v['module'])) $v['module'] = 'empty';
     if (isset($this->ids[$v['parent']])) $v['parentId'] = $this->ids[$v['parent']];
     else $v['parentId'] = $this->defaultParentId;
-    $pageId = Pmi::get($v['module'])->install($v);
+    $pageId = PageModule::get($v['module'])->create($v);
     $this->ids[$v['n']] = $pageId;
     return $pageId;
   }

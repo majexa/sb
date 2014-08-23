@@ -1,6 +1,6 @@
 <?php
 
-class PmiDdDummy extends PmiDd {
+class PageModuleDdDummy extends PageModuleDd {
 
   public $title = 'Пустышка';
   public $oid = 500;

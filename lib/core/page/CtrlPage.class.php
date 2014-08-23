@@ -13,16 +13,6 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
    */
   public $page;
 
-  function dispatch() {
-    if (!isset($this->page)) throw new Exception('page model not defined');
-    if (isset($this->page['settings']['mainTpl'])) $this->d['mainTpl'] = $this->page['settings']['mainTpl'];
-    parent::dispatch();
-    if ($this->hasOutput) {
-      Sflm::frontend('css')->addLib('sb');
-      Sflm::frontend('js')->addLib('sb');
-    }
-  }
-
   protected function init() {
     $this->d['name'] = $this->getName();
     parent::init();
@@ -41,6 +31,8 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
   }
 
   protected function afterAction() {
+    Sflm::frontend('css')->addLib('sb');
+    Sflm::frontend('js')->addLib('sb');
     $this->d['body'] = PageLayout::autoHtml($this->d['layoutN'], $this->page['id'], $this);
   }
 
@@ -110,7 +102,7 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
   }
 
   protected function extendTplData() {
-    if (empty($this->page)) return;
+    if (isset($this->page['settings']['mainTpl'])) $this->d['mainTpl'] = $this->page['settings']['mainTpl'];
     if (($paths = Hook::paths('before', $this->page['module'])) !== false) {
       foreach ($paths as $path) include $path;
     }

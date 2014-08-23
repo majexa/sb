@@ -1,7 +1,7 @@
 <?
 
-(new PmiTreeImporter)->processNode([
-  'title' => 'Новости',
+(new PageModuleTreeImporter)->processNode([
+  'title' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
   'name' => 'news',
   'module' => 'news',
 ]);
