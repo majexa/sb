@@ -1,6 +1,6 @@
 <?php
 
-class TestStore extends TestCasperSb {
+class TstStore extends TestCasperSb {
 
   function test() {
     // не круто, что одна команда

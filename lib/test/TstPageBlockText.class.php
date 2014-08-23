@@ -1,6 +1,6 @@
 <?php
 
-class TestPageBlockText extends TestCasperSb {
+class TstPageBlockText extends TestCasperSb {
 
   function testCreate() {
     $this->casper([
