@@ -48,8 +48,9 @@ abstract class PageModuleDd extends PageModule {
     $this->createStructure();
     $node['strName'] = $this->strName;
     parent::create($node);
-    $this->createSlices($this->page['id'], $this->page['title']);
-    $this->updatePageLayout();
+    $this->createSampleOnRequiredTags();
+    //$this->createSlices($this->page['id'], $this->page['title']);
+    //$this->updatePageLayout();
     return $this->page['id'];
   }
 
@@ -65,6 +66,7 @@ abstract class PageModuleDd extends PageModule {
   }
 
   protected function createSlices($pageId, $pageTitle) {
+    throw new Exception('slices is temporary deprecated');
     if (!ClassCore::hasAncestor('Ctrl'.$this->controller, 'CtrlDdItems')) return;
     if ($this->hasTopSlice) {
       Slice::replace([
@@ -89,6 +91,14 @@ abstract class PageModuleDd extends PageModule {
   protected function updatePageLayout() {
     if ($this->pageLayout === false) return;
     PageLayoutN::save($this->page['id'], $this->pageLayout);
+  }
+
+  protected function createSampleOnRequiredTags() {
+    foreach ((new DdFields($this->strName))->getTagFields() as $name => $field) {
+      if (!$field['required']) continue;
+      $tags = DdTags::get($this->strName, $name);
+      for ($i=1; $i<=3; $i++) $tags->create(['title' => $field['title'].' '.$i]);
+    }
   }
 
 } 
