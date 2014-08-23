@@ -102,7 +102,7 @@ class PageControllersCore {
   static function getPageModel($id) {
     $pages = self::getStaticCtrlPageModels();
     if (isset($pages[$id])) return $pages[$id];
-    return Misc::checkEmpty(DbModelCore::get('pages', $id));
+    return Misc::checkEmpty(DbModelCore::get('pages', $id), "pageId=$id");
   }
 
   static protected $paths = [];

@@ -10,7 +10,6 @@ window.addEvent('domready', function() {
     });
   });
   Ngn.addBtnAction('.topBtns .new', function(eBtn) {
-    c(eBtn.get('data-url'));
     new Ngn.Dialog.RequestForm({
       id: 'store',
       title: 'Добавление записи',
@@ -24,4 +23,5 @@ window.addEvent('domready', function() {
   Ngn.addBtnAction('.authBar .btnSubmit', function() {
     $('authForm').submit();
   });
+  Ngn.Milkbox.add(document.getElements('.thumb'));
 });
