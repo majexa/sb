@@ -192,7 +192,7 @@ class PageLayout {
       if ($col['type'] == 'blocks') {
         if (!empty($col['allowBlocks'])) $class .= ' allowBlocks';
         if (!empty($col['allowGlobalBlocks'])) $class .= ' allowGlobalBlocks';
-        $blocksHtml = Tt()->getTpl('page/pageBlocksOneCol', [
+        $blocksHtml = Tt()->getTpl('layout/pageBlocksOneCol', [
           'n'      => $n,
           'blocks' => PageBlockCore::getBlocksByCol($pageId, $n, $ctrl)
         ]);
