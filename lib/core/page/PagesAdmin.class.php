@@ -24,7 +24,7 @@ class PagesAdmin extends PagesTree {
   }
   
   function moveTree($id, $toId, $where) {
-    NgnTree::move($this, 'pages', $id, $toId, $where);
+    ClientTree::move($this, 'pages', $id, $toId, $where);
     $nodeAfter = Pages::getNode($id);
     $this->updateFolderStatus($nodeAfter['parentId']);
     $this->updatePath($id);

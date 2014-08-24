@@ -8,12 +8,12 @@ class PagesDbTree extends DbTree {
 
   function getRoot() {
     return [
-      'title' => 'root',
-      'id' => -1,
+      'title'    => 'root',
+      'id'       => -1,
       'parentId' => 0,
-      'active' => 1,
-      'onMenu' => 1,
-      'folder' => 1
+      'active'   => 1,
+      'onMenu'   => 1,
+      'folder'   => 1
     ];
   }
 

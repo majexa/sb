@@ -11,7 +11,7 @@ Ngn.TreeEdit.Pages = new Class({
     return this.parent().extend(['openPage']);
   },
   
-  getNgnTreeOptions: function() {
+  getClientTreeOptions: function() {
     var options = this.parent();
     if (!this.options.disableDragging) {
       options.initialize = function() {

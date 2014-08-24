@@ -1,12 +1,11 @@
 <?php
 
-class PagesTree extends NgnTree {
+class PagesTree extends ClientTree {
 
   public $childrenKey = 'children';
 
   function __construct() {
     $this->allowedDataParams = array_merge($this->allowedDataParams, ['folder', 'title', 'path', 'controller']);
-    $this->setData(DbModelPages::getTree()->getTree()['children']);
   }
 
   protected function setNodeType(array &$node, array $data) {
@@ -37,6 +36,7 @@ class PagesTree extends NgnTree {
   }
 
   protected function root() {
+    die2('depriceted. root exists in PagesDbTree');
     return $this->node([
       'id'     => -1,
       'title'  => 'root',

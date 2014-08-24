@@ -63,7 +63,7 @@ class MenuOld {
   }
 
   static function flatLevel2($curPageId, $linkTpl, $sep = '') {
-    $parents = DbModelPages::getTree()->getParentsReverse($curPageId);
+    $parents = (new PagesDbTree)->getParentsReverse($curPageId);
     return self::flatByPageId($parents[1]['id'], $linkTpl, $sep);
   }
 

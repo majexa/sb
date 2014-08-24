@@ -46,11 +46,11 @@ class CtrlAdminPages extends CtrlAdminPagesBase {
   }
 
   function action_ajax_activate() {
-    DbModelPages::getTree()->updatePropertyWithChildren($this->req->r['id'], 'active', 1);
+    (new PagesDbTree)->updatePropertyWithChildren($this->req->r['id'], 'active', 1);
   }
 
   function action_ajax_deactivate() {
-    DbModelPages::getTree()->updatePropertyWithChildren($this->req->r['id'], 'active', 0);
+    (new PagesDbTree)->updatePropertyWithChildren($this->req->r['id'], 'active', 0);
   }
 
   function action_ajax_onMenu() {
@@ -76,12 +76,12 @@ class CtrlAdminPages extends CtrlAdminPagesBase {
 
   function action_default() {
     $this->d['parent'] = DbModelCore::get('pages', $this->parentId);
-    $this->d['items'] = DbModelPages::getTree()->getChildren($this->pageId);
+    $this->d['items'] = (new PagesDbTree)->getChildren($this->pageId);
     $this->setPageTitle($this->d['parent']['title']);
   }
 
   function action_ajax_reload() {
-    $this->d['items'] = DbModelPages::getTree()->getChildren($this->pageId);
+    $this->d['items'] = (new PagesDbTree)->getChildren($this->pageId);
     $this->ajaxOutput = $this->tt->getTpl('admin/modules/pages/itemsTable', $this->d);
   }
 

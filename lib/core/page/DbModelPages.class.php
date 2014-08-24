@@ -66,7 +66,7 @@ class DbModelPages extends DbModel {
     self::check($data);
     self::addDefaultUpdateData($data);
     $id = db()->query('INSERT INTO pages SET ?a', ['title' => 'dummy']);
-    $last = Arr::last(self::getTree()->getChildren($data['parentId']));
+    $last = Arr::last((new PagesDbTree)->getChildren($data['parentId']));
     $data['oid'] = $last['oid'] + 10;
     self::_update($id, $data, $filterByFields);
     return $id;
@@ -114,11 +114,11 @@ class DbModelPages extends DbModel {
   }
 
   static function updatePath($id) {
-    (new PagesPathUpdater(self::getTree()))->update($id);
+    (new PagesPathUpdater(new PagesDbTree))->update($id);
   }
 
   static function move($id, $toId, $where) {
-    NgnTree::move(self::getTree(), 'pages', $id, $toId, $where);
+    ClientTree::move(new PagesDbTree, 'pages', $id, $toId, $where);
     DbModelPages::updatePath($id);
   }
 

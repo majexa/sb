@@ -74,7 +74,7 @@ abstract class CtrlAdminPagesBase extends CtrlAdmin {
       'link' => $this->tt->getPath(2)
     ];
     if ($this->pageId and 
-    ($parents = DbModelPages::getTree()->getParentsReverse($this->pageId)) !== false) {
+    ($parents = (new PagesDbTree)->getParentsReverse($this->pageId)) !== false) {
       $n = 1;
       foreach ($parents as $v) {
         $this->d['path'][$n] = [
