@@ -13,12 +13,9 @@ class PagesTreeTpl extends DbTreeTpl {
     ];
   }
 
-  function __construct($pageId, array $options = []) {
+  function __construct(array $options = []) {
     $this->setOptions($options);
-    $this->setLeafTpl('`<li>`.$title.`</li>`');
-    $this->setNodeTpl('`<li>`.$title');
-    $this->setNodesBeginTpl('`<ul>`');
-    $this->setNodesEndTpl('`</ul></li>`');
+    $this->init();
     $onMenuCond = $this->options['onlyOnMenu'] ? ' AND onMenu=1' : '';
     if (($tree = $this->getSubTree(db()->query("
         SELECT
@@ -34,7 +31,7 @@ class PagesTreeTpl extends DbTreeTpl {
         FROM pages
         WHERE active=1 $onMenuCond
         ORDER BY oid
-      "), $pageId))
+      "), null))
     ) {
       if (Config::getVarVar('menu', 'useTagsAsSubMenu')) {
         $this->setTagsToNodes($tree['childNodes']);
@@ -44,6 +41,13 @@ class PagesTreeTpl extends DbTreeTpl {
     else {
       $this->setNodes([]);
     }
+  }
+
+  protected function init() {
+    $this->setLeafTpl('`<li>`.$title.`</li>`');
+    $this->setNodeTpl('`<li>`.$title');
+    $this->setNodesBeginTpl('`<ul>`');
+    $this->setNodesEndTpl('`</ul></li>`');
   }
 
   protected function setTagsToNodes(array &$nodes) {
@@ -65,7 +69,6 @@ class PagesTreeTpl extends DbTreeTpl {
 
   protected function getSubTree($nodes, $id) {
     return $nodes;
-    //die2();
     foreach ($nodes as $_id => $node) {
       if ($_id == $id) return $node;
       if (isset($node['childNodes']) and ($tree = $this->getSubTree($node['childNodes'], $id))) return $tree;

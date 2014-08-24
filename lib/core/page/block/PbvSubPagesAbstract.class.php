@@ -11,21 +11,12 @@ abstract class PbvSubPagesAbstract extends PbvAbstract {
   /**
    * @var PagesTreeTpl
    */
-  public $pagesTreeTpl;
+  protected $pagesTreeTpl;
 
   protected function init() {
     Sflm::frontend('css')->addPath('i/css/common/tree.css');
     if (($pageId = $this->getPageId()) === false) return;
-    $pagesTreeTpl = PagesTreeTpl::getObjCached($pageId);
-    $linkTpl = '`<a href="`.$link.`"><span>`.$title.`</span></a>`';
-    $pagesTreeTpl->setNodesBeginTpl('`<ul>`');
-    $pagesTreeTpl->setNodesEndTpl('`</ul></li>`');
-    $pagesTreeTpl->setNodeTpl('`<li id="mi_`.Misc::name2id($name).`"`.(!empty($class) ? ` class="`.$class.`"` : ``).`>`.'.$linkTpl);
-    $pagesTreeTpl->setLeafTpl('`<li id="mi_`.Misc::name2id($name).`"`.(!empty($class) ? ` class="`.$class.`"` : ``).`>`.'.$linkTpl.'.`</li>`');
-    $pagesTreeTpl->setDepthLimit($this->pageBlock['settings']['openDepth']);
-    if (($currentPageId = R::get('currentPageId')) !== false) $pagesTreeTpl->setCurrentId($currentPageId);
-    //$pagesTreeTpl->setBreadcrumbsIds(R::get('breadcrumbsPageIds'));
-    $this->pagesTreeTpl = $pagesTreeTpl;
+    $this->pagesTreeTpl = new PagesMenuUl;
   }
 
   function _html() {

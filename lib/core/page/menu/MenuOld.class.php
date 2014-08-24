@@ -3,7 +3,7 @@
 throw new Exception(' need to refactor "currentPageId", "breadcrumbsPageIds"');
 
 
-class Menu {
+class MenuOld {
 
   /**
    * Возвращает HTML дерева разделов в виде маркерованого списка.

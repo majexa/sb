@@ -4,6 +4,7 @@ return [
   'default',
   'interface',
   'sb/css/top.css',
+  'sb/css/mainMenu.css',
   'sb/css/pageTitle.css',
   's2/css/common/btns',
   'sb/css/pageBlocks.css',
