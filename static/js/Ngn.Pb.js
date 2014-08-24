@@ -186,7 +186,7 @@ Ngn.Pb.BlockEdit = new Class({
       btnEdit.set('title', 'Редактировать блок');
       btnEdit.addEvent('click', function(e) {
         e.preventDefault();
-        new Ngn.Dialog.RequestForm($merge({
+        new Ngn.Dialog.RequestForm(Object.merge({
           url: this.interface.options.controllerPath + '/json_editBlock/' + this.id,
           width: 400,
           id: 'editBlock' + this.id,

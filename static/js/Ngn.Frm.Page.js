@@ -29,7 +29,7 @@ Ngn.Frm.Page = new Class({
     }
     var inputHightlightFx = new Fx.Tween(this.eInput, { duration: 500 });
     var obj = this;
-    this.dropdown = new Ngn.DropdownWin(this.ePlaceholder, $merge(this.options.dropdownOpt, {
+    this.dropdown = new Ngn.DropdownWin(this.ePlaceholder, Object.merge(this.options.dropdownOpt, {
       winClass: 'dropdownWin-pagesTree',
       eParent: this.ePlaceholder.getParent('.dialog'),
       onDomReady: function() {

@@ -4,19 +4,19 @@ Ngn.Dialog.NewModulePage = new Class({
   actionName: 'newModulePage',
 
   initialize: function(_opts) {
-    this.parent($merge(_opts, this.getOpt(), {
+    this.parent(Object.merge(_opts, this.getOpt(), {
       title: 'Создание нового раздела',
       url: this.options.controllerPath + '/' + _opts.pageId + '/json_' + this.actionName
     }));
   },
 
-  formResponse: function(r) {
+  urlResponse: function(r) {
     this.parent(r);
     this.message.getElement('input[name=title]').focus();
-    this.afterFormResponse();
+    this.afterUrlResponse();
   },
 
-  afterFormResponse: function() {
+  afterUrlResponse: function() {
     Ngn.Frm.initTranslateField('titlei', 'namei');
     Ngn.Frm.initCopySelectValue('modulei', 'namei');
     Ngn.Frm.initCopySelectTitle('modulei', 'titlei');
