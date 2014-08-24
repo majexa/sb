@@ -5,7 +5,8 @@ class CtrlCommonPageTree extends CtrlCammon {
   protected $defaultAction = 'json_getTree';
 
   function action_json_getTree() {
-    $this->json = (new PagesTree)->getTree();
+    Sflm::frontend('css')->addPath('i/css/common/tree.css');
+    $this->json['tree'] = (new PagesTree)->getTree();
   }
 
   function action_json_getNode() {

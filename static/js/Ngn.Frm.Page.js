@@ -4,7 +4,7 @@ Ngn.Frm.Page = new Class({
   options: {
     btnPlaceholderClass: 'pageLinkPlaceholder',
     btnClass: 'pageLink',
-    actionUrl: '/default/pageTree',
+    actionUrl: '/sbc/pages',
     dropdownOpt: {
       width: 500
     },
@@ -39,9 +39,9 @@ Ngn.Frm.Page = new Class({
           enableStorage: false,
           disableDragging: true,
           mifTreeOptions: {
-            isDisabledSelect: function(node) {
-              return !node.data.dd;
-            }
+            //isDisabledSelect: function(node) {
+            //  return !node.data.dd;
+            //}
           },
           onDataLoad: function(data) {
             (function() {

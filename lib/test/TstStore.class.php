@@ -1,6 +1,6 @@
 <?php
 
-class TestStore extends TestCasperSb {
+class TstStore extends TestCasperSb {
 
   function test() {
     // не круто, что одна команда
@@ -14,6 +14,19 @@ class TestStore extends TestCasperSb {
       ['thenUrl', 'store'],
       ['capture'],
     ]);
+    $im = DdCore::imDefault('store');
+    for ($i=0; $i<=3; $i++) {
+      $file = TEMP_PATH.'/'.time();
+      copy(MORE_PATH.'/lib/test/fixture/image.jpg', $file);
+      $im->create([
+        'title' => 'sample',
+        'category' => 1,
+        'image' => [
+          'tmp_name' => $file
+        ],
+        'price' => 123
+      ]);
+    }
 
     //output(2);
     //$id = PageModule::get('store')->create();
