@@ -33,21 +33,46 @@ use Options;
     foreach ($this->requiredProperties as $name) if (!isset($this->$name)) throw new Exception("\$this->$name not defined. Class: ".get_class($this));
   }
 
-  protected function createNode($v) {
-    $v['module'] = $this->module;
-    if (!$this->updateControllerAfterNodeCreate) $v['controller'] = $this->controller;
-    $v['settings'] = $this->getSettings();
-    $v['onMap'] = 1;
-    $v['onMenu'] = !empty($v['onMenu']) ? $v['onMenu'] : $this->onMenu;
-    $v['active'] = 1;
-    $v['folder'] = !empty($v['folder']) ? 1 : (empty($v['children']) ? 0 : 1);
-    $v['name'] = !empty($v['name']) ? $v['name'] : $this->module;
-    if (empty($v['title'])) $v['title'] = $this->title;
-    unset($v['n']);
-    if (($this->page = DbModelCore::get('pages', $v['name'], 'name'))) {
-      throw new Exception("Page with name '{$v['name']}' already exists");
+  /**
+   * Инсталлирует раздел
+   * Пример массива $node:
+   * [
+   *   [oid] => 11
+   *   [title] => Оригинальные картриджи
+   *   [parentId] => 10
+   *   [onMenu] => true
+   * ]
+   *
+   * @param   array
+   * @return  integer   ID раздела
+   */
+  function create(array $node = []) {
+    $node = $this->prepareNode($node);
+    $this->createNode($node);
+    $this->afterCreate();
+    $this->createPageBlocks();
+    return $this->page['id'];
+  }
+
+
+  protected function prepareNode(array $node) {
+    if (empty($node['title'])) $node['title'] = $this->title;
+    if (empty($node['name'])) $node['name'] = Misc::transit($node['title'], true);
+    $node['onMap'] = 1;
+    $node['onMenu'] = !empty($node['onMenu']) ? $node['onMenu'] : $this->onMenu;
+    $node['active'] = 1;
+    $node['folder'] = !empty($node['folder']) ? 1 : (empty($node['children']) ? 0 : 1);
+    $node['module'] = $this->module;
+    if (!$this->updateControllerAfterNodeCreate) $node['controller'] = $this->controller;
+    //unset($node['n']);
+    return $node;
+  }
+
+  protected function createNode(array $node) {
+    if (($this->page = DbModelCore::get('pages', $node['name'], 'name'))) {
+      throw new Exception("Page with name '{$node['name']}' already exists");
     }
-    $pageId = DbModelCore::create('pages', $v, true);
+    $pageId = DbModelCore::create('pages', $node, true);
     if ($this->updateControllerAfterNodeCreate) {
       db()->query('UPDATE pages SET controller=? WHERE id=?d', $this->controller, $pageId);
     }
@@ -62,26 +87,6 @@ use Options;
   }
 
   protected function afterCreate() {
-  }
-
-  /**
-   * Инсталлирует раздел
-   * Пример массива $node:
-   * [
-   *   [oid] => 11
-   *   [title] => Оригинальные картриджи
-   *   [parentId] => 10
-   *   [onMenu] => true
-   * ]
-   *
-   * @param   array
-   * @return  integer   ID раздела
-   */
-  function create(array $node = null) {
-    $this->createNode($node);
-    $this->afterCreate($node);
-    $this->createPageBlocks();
-    return $this->page['id'];
   }
 
   function delete($pageId) {

@@ -20,11 +20,21 @@ class NewModulePageFormBase extends Form {
         'required' => true,
         'default'  => 'content',
         'options'  => array_merge(Html::defaultOption(), Arr::get((Misc::isGod() and $this->allowAllModules) ? (new PageModules())->getItems() : (new PageModulesAllowed())->getItems(), 'title', 'KEY'))
-      ], [
+      ],
+      [
         'title'    => 'Название раздела',
         'name'     => 'title',
         'required' => true
-      ], [
+      ],
+      /*
+      [
+        'title'    => 'Имя раздела',
+        'name'     => 'name',
+        'help'     => 'будет оборажаться в пути',
+        'required' => true
+      ],
+      */
+      [
         'title' => 'Папка',
         'name'  => 'folder',
         'type'  => 'boolCheckbox'

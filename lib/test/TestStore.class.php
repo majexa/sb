@@ -1,20 +1,15 @@
 <?php
 
-class TstStore extends TestCasperSb {
+class TestStore extends TestCasperSb {
 
   function test() {
     // не круто, что одна команда
     // tst c createProject sb
     // заменяет другую:
     // pm localServer createProject test default sb
-    PageModule::get('store')->delete(DbModelCore::get('pages', 'store', 'name')['id']);
+    PageModule::get('store')->delete(DbModelCore::get('pages', 'magazin', 'name')['id']);
     PageModule::get('store')->create();
-    $this->casper([
-      ['thenUrl', '?authLogin=admin&authPass=1234'],
-      ['thenUrl', 'store'],
-      ['capture'],
-    ]);
-    $im = DdCore::imDefault('store');
+    $im = DdCore::imDefault('magazin');
     for ($i=0; $i<=3; $i++) {
       $file = TEMP_PATH.'/'.time();
       copy(MORE_PATH.'/lib/test/fixture/image.jpg', $file);
@@ -27,6 +22,13 @@ class TstStore extends TestCasperSb {
         'price' => 123
       ]);
     }
+    $this->casper([
+      ['thenUrl', '?authLogin=admin&authPass=1234'],
+      ['thenUrl', 'magazin'],
+      //['wait', 500],
+      ['capture'],
+    ]);
+    return;
 
     //output(2);
     //$id = PageModule::get('store')->create();
