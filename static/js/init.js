@@ -24,4 +24,8 @@ window.addEvent('domready', function() {
     $('authForm').submit();
   });
   Ngn.Milkbox.add(document.getElements('.thumb'));
+
+  //c(document.getElements('.ddItems .item'));
+  new Ngn.Sb.DdItems(document.getElements('.ddItems .item'));
+
 });

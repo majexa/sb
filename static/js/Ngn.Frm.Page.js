@@ -38,10 +38,10 @@ Ngn.Frm.Page = new Class({
           actionUrl: obj.options.actionUrl,
           enableStorage: false,
           disableDragging: true,
-          mifTreeOptions: {
-            //isDisabledSelect: function(node) {
-            //  return !node.data.dd;
-            //}
+          ngnTreeOptions: {
+            isDisabledSelect: function(node) {
+              return !node.data.dd;
+            }
           },
           onDataLoad: function(data) {
             (function() {

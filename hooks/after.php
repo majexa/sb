@@ -1,5 +1,6 @@
 <?php
 
+return;
 // Create Privileges
 $this->d['canCreateAuth'] = (DdCore::isDdController($this->page['controller']) and (!empty($this->d['privAuth']['create']) or in_array('new', $this->d['allowedActions'])) and $this->d['action'] != 'new');
 

@@ -1,7 +1,7 @@
 <?php
 
-class CtrlPageDdItems extends CtrlPage {
-  use DdCrudCtrl, PermissionCtrl;
+class CtrlPageDdItems extends CtrlPageDd {
+  use DdCrudParamFilterCtrl, PermissionCtrl;
 
   protected function getStrName() {
     return $this->page['strName'];
@@ -24,6 +24,10 @@ class CtrlPageDdItems extends CtrlPage {
         ]
       ];
     }
+  }
+
+  protected function id() {
+    return $this->req->param(1);
   }
 
   function action_default() {

@@ -7,7 +7,7 @@
 // в рамках SB структура удяляется вместе с разделом
 // значит
 abstract class PageModule {
-use Options;
+  use Options;
 
   protected $module;
 
@@ -44,20 +44,21 @@ use Options;
    * ]
    *
    * @param   array
-   * @return  integer   ID раздела
+   * @return  DbModelPages Созданный раздел
    */
   function create(array $node = []) {
     $node = $this->prepareNode($node);
     $this->createNode($node);
     $this->afterCreate();
     $this->createPageBlocks();
-    return $this->page['id'];
+    return $this->page;
   }
 
 
   protected function prepareNode(array $node) {
     if (empty($node['title'])) $node['title'] = $this->title;
     if (empty($node['name'])) $node['name'] = Misc::transit($node['title'], true);
+    if (empty($node['parentId'])) $node['parentId'] = -1;
     $node['onMap'] = 1;
     $node['onMenu'] = !empty($node['onMenu']) ? $node['onMenu'] : $this->onMenu;
     $node['active'] = 1;
@@ -89,10 +90,6 @@ use Options;
   protected function afterCreate() {
   }
 
-  function delete($pageId) {
-    DbModelCore::delete('pages', $pageId);
-  }
-
   protected function createPageBlocks() {
     foreach ($this->pageBlocks as $v) {
       $params = [
@@ -102,10 +99,10 @@ use Options;
         'global'    => false
       ];
       if (!empty($v['params'])) $params = array_merge($params, $v['params']);
-      $oMM = new PageBlockModelManager(PageBlockCore::getStructure($v['type'])->setPreParams([
-          'pageId' => $this->page['id']
-        ]), $params);
-      $oMM->create($v['settings']);
+      $manager = new PageBlockModelManager(PageBlockCore::getStructure($v['type'])->setPreParams([
+        'pageId' => $this->page['id']
+      ]), $params);
+      $manager->create($v['settings']);
     }
   }
 

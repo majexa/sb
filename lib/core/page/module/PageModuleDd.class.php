@@ -58,11 +58,6 @@ abstract class PageModuleDd extends PageModule {
     return $this->page['id'];
   }
 
-  function delete($pageId) {
-    (new DdStructuresManager)->deleteByName(DbModelCore::get('pages', $pageId)['strName']);
-    parent::delete($pageId);
-  }
-
   /*
   protected function createSlices($pageId, $pageTitle) {
     throw new Exception('slices is temporary deprecated');

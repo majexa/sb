@@ -3,11 +3,7 @@
 class TestStore extends TestCasperSb {
 
   function test() {
-    // не круто, что одна команда
-    // tst c createProject sb
-    // заменяет другую:
-    // pm localServer createProject test default sb
-    PageModule::get('store')->delete(DbModelCore::get('pages', 'magazin', 'name')['id']);
+    if (($page = DbModelCore::get('pages', 'magazin', 'name'))) PageModulePage::get($page)->delete();
     PageModule::get('store')->create();
     $im = DdCore::imDefault('magazin');
     for ($i=0; $i<=3; $i++) {
