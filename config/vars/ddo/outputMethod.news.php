@@ -1,26 +1,22 @@
 <?php
 return [
-  'siteItems' => 
-  [
-    'title' => 'h2ItemLinkIfText',
-    'pretext' => 'whole',
-    'datePublish' => 'date',
-    'image' => 'showDummyImage',
+  'siteItems'  => [
+    'title'       => 'h2ItemLinkIfText',
+    'pretext'     => 'whole',
+    'datePublish' => 'datetime',
+    'image'       => 'showDummyImage',
   ],
-  'siteItem' => 
-  [
+  'siteItem'   => [
     'datePublish' => 'date',
-    'image' => 'mdImageLink',
+    'image'       => 'mdImageLink',
   ],
-  'adminItems' => 
-  [
+  'adminItems' => [
     'image' => 'lightbox',
   ],
-  'pageBlock' => 
-  [
-    'title' => 'h3ItemLinkIfText',
-    'text' => 'cut200',
-    'pretext' => 'whole',
+  'pageBlock'  => [
+    'title'       => 'h3ItemLinkIfText',
+    'text'        => 'cut200',
+    'pretext'     => 'whole',
     'datePublish' => 'date',
   ],
 ];

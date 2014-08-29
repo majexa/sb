@@ -3,6 +3,7 @@
 return [
   'default',
   'interface',
+  'sb/css/layout.css',
   'sb/css/top.css',
   'sb/css/mainMenu.css',
   'sb/css/pageTitle.css',

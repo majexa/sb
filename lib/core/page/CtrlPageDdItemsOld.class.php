@@ -308,7 +308,7 @@ class CtrlPageDdItemsOld extends CtrlPageDd {
     $this->im->items->setPagination(true);
     //$this->oManager->items->cond->addF('pageId', $this->page['id']); // на ao id не заполнен
     $this->im->items->cond->setOrder($this->order);
-    $hookPaths = Hook::paths('dd/initItems', $this->page['module']);
+    $hookPaths = SbHook::paths('dd/initItems', $this->page['module']);
     if ($this->itemsCacheEnabled) {
       $cacher = new DdItemsCacher($this->im->items, $this->ddo(), ['page'.$this->page['id']]);
       if ($hookPaths) foreach ($hookPaths as $path) include $path;
@@ -322,7 +322,7 @@ class CtrlPageDdItemsOld extends CtrlPageDd {
   }
 
   protected function ddo($layout = 'siteItems') {
-    return DdoPageSite::factory($this->page, $layout);
+    return DdoPageModule::factory($this->page, $layout);
   }
 
   public $itemsCacheEnabled;

@@ -19,8 +19,6 @@ class PbvCalendar extends PbvAbstract {
     }
     $d['calendar'] = $this->getBesideMonths($month, $year);
     $d['calendar']['table'] = $calendar->getMonthView($month, $year);
-    //die2(222);
-    // Получаем существующие месяца
     if ($this->ctrl->page['settings']['dateField']) {
       $d['months'] = $this->ctrl->oManager->items->getMonths($this->ctrl->page['settings']['dateField']);
     }

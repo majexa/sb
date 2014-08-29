@@ -24,7 +24,6 @@ abstract class PageModule {
   public $oid = 0;
   protected $requiredProperties = [];
   protected $behaviorNames = [];
-  protected $pageBlocks = [];
 
   function __construct() {
     $this->module = ClassCore::classToName('PageModule', $this);
@@ -90,18 +89,23 @@ abstract class PageModule {
   protected function afterCreate() {
   }
 
+  protected function getPageBlocks() {
+    return [];
+  }
+
   protected function createPageBlocks() {
-    foreach ($this->pageBlocks as $v) {
-      $params = [
+    foreach ($this->getPageBlocks() as $v) {
+      if (!isset($v['settings'])) $v['settings'] = [];
+      $createParams = [
         'type'      => $v['type'],
         'ownPageId' => $this->page['id'],
         'colN'      => 1,
         'global'    => false
       ];
-      if (!empty($v['params'])) $params = array_merge($params, $v['params']);
+      if (!empty($v['params'])) $createParams = array_merge($createParams, $v['params']);
       $manager = new PageBlockModelManager(PageBlockCore::getStructure($v['type'])->setPreParams([
         'pageId' => $this->page['id']
-      ]), $params);
+      ]), $createParams);
       $manager->create($v['settings']);
     }
   }

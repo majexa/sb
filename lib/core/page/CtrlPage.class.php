@@ -27,18 +27,18 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
 
   protected function beforeAction() {
     parent::beforeAction();
-    $this->initLayout();
+    $this->d['layoutN'] = $this->getLayoutN();
   }
 
   protected function afterAction() {
     Sflm::frontend('css')->addLib('sb');
     Sflm::frontend('js')->addLib('sb');
-    $this->d['body'] = PageLayout::autoHtml($this->d['layoutN'], $this->page['id'], $this);
+    $this->d['body'] = PageLayout::autoHtml($this->getLayoutN(), $this->page['id'], $this);
   }
 
-  protected function initLayout() {
-    if (!isset($this->d['layoutN'])) $this->d['layoutN'] = PageLayoutN::get($this->page['id']);
-    if ($this->action == 'new' or $this->action == 'edit') $this->d['layoutN'] = 2;
+  protected function getLayoutN() {
+    if ($this->action == 'new' or $this->action == 'edit') return 2;
+    return PageLayoutN::get($this->page['id']);
   }
 
   protected function afterInit() {
@@ -103,13 +103,13 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
 
   protected function extendTplData() {
     if (isset($this->page['settings']['mainTpl'])) $this->d['mainTpl'] = $this->page['settings']['mainTpl'];
-    if (($paths = Hook::paths('before', $this->page['module'])) !== false) {
+    if (($paths = SbHook::paths('before', $this->page['module'])) !== false) {
       foreach ($paths as $path) include $path;
     }
-    if (($paths = Hook::paths('pageNames/'.$this->page['name'])) !== false) {
+    if (($paths = SbHook::paths('pageNames/'.$this->page['name'])) !== false) {
       foreach ($paths as $path) include $path;
     }
-    if (($paths = Hook::paths('after', $this->page['module'])) !== false) {
+    if (($paths = SbHook::paths('after', $this->page['module'])) !== false) {
       foreach ($paths as $path) include $path;
     }
   }

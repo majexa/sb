@@ -45,7 +45,7 @@ class PbvItems extends PbvAbstract {
 
   function _html() {
     $this->items = $this->items->getItems();
-    $ddo = new DdoPageSite($this->page, 'pageBlock');
+    $ddo = new DdoPageModule($this->page, 'pageBlock');
     $ddo->ddddByName['more'] = '`<a href="`.Tt()->getPath(0).$pagePath.`/`.$id.`"><span>`.$title.`</span></a>`';
     $ddo->setItems($this->items);
     $d['ddo'] = $ddo;

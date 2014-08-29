@@ -4,10 +4,22 @@ abstract class CtrlPageStaticStoreOrderAbstract extends CtrlPageStatic {
 
   static function page() {
     return [
-      'title' => 'Заказ'
+      'title' => 'Заказ',
+      'module' => 'store'
     ];
   }
-  
+
+  protected function getLayoutN() {
+    return 11;
+  }
+
+  protected function init() {
+    Sflm::frontend('css')->addPath('cpm/store/products.css');
+    Sflm::frontend('js')->addPath('cpm/store/site.js');
+  }
+
+  // --
+
   protected $cartItems;
   
   protected function initCartItems() {

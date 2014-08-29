@@ -27,7 +27,7 @@ class PbvTags extends PbvAbstract {
     $html = '<div class="data">'.json_encode(['groupId' => $this->tags->group->id]).'</div>';
     $param = $this->tags->group->tree ? 't2.`.$groupName.`.`.$id' : 't.`.$groupName.`.`.$name';
     $nodes = $this->tags->getData();
-    $dddd = '`<a href="'.$this->page['path'].'/'.$param.'.`"><i></i><span>`.$title.'.($this->pageBlock['settings']['showTagCounts'] ? '` <span>(`.$cnt.`)</span>' : '`').'</span></a>`';
+    $dddd = '`<a href="/'.$this->page['path'].'/'.$param.'.`"><i></i><span>`.$title.'.($this->pageBlock['settings']['showTagCounts'] ? '` <span>(`.$cnt.`)</span>' : '`').'</span></a>`';
     if ($this->pageBlock['settings']['showOnlyLeafs'] and 0) {
       $html .= DdTagsHtml::treeOnlyNotEmptyLeafs($nodes, $dddd);
     }

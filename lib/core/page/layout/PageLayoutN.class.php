@@ -5,6 +5,7 @@ class PageLayoutN {
   static protected $default = 4;
 
   static function get($pageId = 0) {
+    if ($pageId < 0) return 3;
     $r = Settings::get('pageLayout_'.$pageId, true);
     if (!$pageId or !$r) {
       // Если не существует настроек для раздела, получаем настройки по умолчанию

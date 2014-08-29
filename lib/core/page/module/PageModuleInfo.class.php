@@ -53,7 +53,6 @@ class PageModuleInfo {
   }
 
   function getFile($path) {
-    //pr("\n\n\n".$this->folderPath.'/'.$path.'.php');
     return file_exists($this->folderPath.'/'.$path.'.php') ? $this->folderPath.'/'.$path.'.php' : false;
   }
 

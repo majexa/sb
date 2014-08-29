@@ -46,3 +46,10 @@ CREATE TABLE IF NOT EXISTS `pageBlocks` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `slices` (
+  `id` varchar(255) NOT NULL,
+  `dateCreate` datetime NOT NULL,
+  `dateUpdate` datetime NOT NULL,
+  `text` text,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

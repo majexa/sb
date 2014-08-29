@@ -8,11 +8,11 @@ class StoreCart {
   static function get() {
     return new StoreCart();
   }
-  
+
   protected $sessionId;
 
   public $required = ['cartId'];
-  
+
   function __construct($sessionId = null) {
     $this->sessionId = $sessionId ? $sessionId : session_id();
     Misc::checkEmpty($this->sessionId);
@@ -30,17 +30,16 @@ class StoreCart {
   function add($pageId, $cartId, $cnt) {
     $cartId = $this->validate($cartId);
     db()->create('storeCart', [
-      'sessionId' => $this->sessionId,
-      'pageId' => $pageId,
-      'cartId' => $cartId,
-      'cnt' => $cnt,
+      'sessionId'  => $this->sessionId,
+      'pageId'     => $pageId,
+      'cartId'     => $cartId,
+      'cnt'        => $cnt,
       'dateUpdate' => dbCurTime()
     ], true);
   }
-  
+
   function delete($pageId, $cartId) {
-    db()->query('DELETE FROM storeCart WHERE sessionId=? AND pageId=? AND cartId=?',
-      $this->sessionId, $pageId, $cartId);
+    db()->query('DELETE FROM storeCart WHERE sessionId=? AND pageId=? AND cartId=?', $this->sessionId, $pageId, $cartId);
   }
 
   function getIds() {
@@ -69,14 +68,14 @@ class StoreCart {
     foreach (DdCore::extendItemsData($this->getIds()) as $v) $items[] = $v;
     return empty($items) ? false : $items;
   }
-  
+
   function updateCnt($pageId, $cartId, $cnt) {
     db()->query('UPDATE storeCart SET cnt=?d WHERE pageId=?d AND cartId=?d', $cnt, $pageId, $cartId);
   }
-  
+
   function clear() {
     db()->query('DELETE FROM storeCart WHERE sessionId=?', $this->sessionId);
     return $this;
   }
-  
+
 }

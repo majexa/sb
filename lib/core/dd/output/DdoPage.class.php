@@ -3,9 +3,16 @@
 class DdoPage extends Ddo {
 
   protected $page;
+
   function __construct(DbModelPages $page, $layoutName, array $options = []) {
     $this->page = $page;
+    $cls = empty($page['settings']['ddItemsLayout']) ? 'list' : $page['settings']['ddItemsLayout'];
+    $this->ddddItemsBegin = '`<div class="items ddItems '.$cls.' str_`.$strName.`">`';
     parent::__construct($this->page['strName'], $layoutName, $options);
+  }
+
+  protected function getSettings() {
+    return new DdoPageSettings($this->page);
   }
 
 }
@@ -43,7 +50,7 @@ class DdoPage_ extends Ddo {
 
   function initFields() {
     parent::initFields();
-    if (($hookPaths = Hook::paths('ddo/initFields', $this->page['module'])) !== false) foreach ($hookPaths as $v) include $v;
+    if (($hookPaths = SbHook::paths('ddo/initFields', $this->page['module'])) !== false) foreach ($hookPaths as $v) include $v;
     return $this;
   }
 

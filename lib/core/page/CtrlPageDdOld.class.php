@@ -104,7 +104,7 @@ abstract class CtrlPageDdOld extends CtrlPage {
     $this->im = DdCore::getItemsManager($this->page['id'], $this->getItemsManagerOptions());
     $this->im->items->setPriv($this->priv);
     $this->im->form->ctrl = $this;
-    if ($this->page['module']) if (($paths = Hook::paths('dd/initFields', $this->page['module'])) !== false) foreach ($paths as $path) include $path;
+    if ($this->page['module']) if (($paths = SbHook::paths('dd/initFields', $this->page['module'])) !== false) foreach ($paths as $path) include $path;
     $this->d['fields'] = $this->im->form->fields->getFields();
     if ($this->userGroup) $this->im->createData = ['userGroupId' => $this->userGroup['id']];
     if (!Misc::hasSuffix('edit', $this->action)) {

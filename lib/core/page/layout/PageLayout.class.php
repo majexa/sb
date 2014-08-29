@@ -9,7 +9,7 @@ class PageLayout {
   static function getTypes() {
     return Arr::get(self::getLayouts(), 'descr', 'KEY');
   }
-
+  
   static function getLayouts() {
     $contentCol = [
       'type'        => 'content',
@@ -27,35 +27,35 @@ class PageLayout {
     ];
     $layouts = [
       1  => [
-        'descr' => 'основная',
+        'descr' => 'контент',
         'cols'  => [
           1 => $contentCol + ['span' => 24]
         ]
       ],
       2  => [
-        'descr' => 'блочная - основная',
+        'descr' => 'блоки - контент',
         'cols'  => [
           1 => $blocksCol + ['span' => 5],
           2 => $contentCol + ['span' => 19]
         ]
       ],
       3  => [
-        'descr' => 'блочная - основная',
+        'descr' => 'контент - блоки',
         'cols'  => [
-          1 => $contentCol + ['span' => 10],
+          1 => $contentCol + ['span' => 19],
           2 => $blocksCol + ['span' => 5]
         ]
       ],
       4  => [
-        'descr' => 'блочная - основная - блочная',
+        'descr' => 'блоки - контент - блоки',
         'cols'  => [
           1 => $blocksCol + ['span' => 5],
-          2 => $contentCol + ['span' => 14],
+          2 => $contentCol + ['span' => 11],
           3 => $blocksCol + ['span' => 5]
         ]
       ],
       5  => [
-        'descr' => 'основная - блочная - блочная',
+        'descr' => 'контент - блоки - блоки',
         'cols'  => [
           1 => $contentCol + ['span' => 14],
           2 => $blocksCol + ['span' => 5],
@@ -63,7 +63,7 @@ class PageLayout {
         ]
       ],
       6  => [
-        'descr' => 'блочная (NG) - блочная (NG) - блочная (NG)',
+        'descr' => 'блоки (NG) - блоки (NG) - блоки (NG)',
         'cols'  => [
           1 => $blocksColNoGlobals + ['span' => 8],
           2 => $blocksColNoGlobals + ['span' => 8],
@@ -71,7 +71,7 @@ class PageLayout {
         ]
       ],
       7  => [
-        'descr' => 'блочная (NG) - блочная (NG) - блочная (NG) - блочная (NG)',
+        'descr' => 'блоки (NG) - блоки (NG) - блоки (NG) - блоки (NG)',
         'cols'  => [
           1 => $blocksColNoGlobals + ['span' => 6],
           2 => $blocksColNoGlobals + ['span' => 6],
@@ -80,14 +80,14 @@ class PageLayout {
         ]
       ],
       8  => [
-        'descr' => 'блочная (NG) - блочная (NG)',
+        'descr' => 'блоки (NG) - блоки (NG)',
         'cols'  => [
           1 => $blocksColNoGlobals + ['span' => 12],
           2 => $blocksColNoGlobals + ['span' => 12]
         ]
       ],
       9  => [
-        'descr' => 'блочная - основная - блочная',
+        'descr' => 'блоки - контент - блоки',
         'cols'  => [
           1 => $blocksCol + ['span' => 5],
           2 => $contentCol + ['span' => 19],
@@ -95,7 +95,7 @@ class PageLayout {
         ]
       ],
       10 => [
-        'descr' => 'блочная (NG) - блочная (NG) - блочная (NG)',
+        'descr' => 'блоки (NG) - блоки (NG) - блоки (NG)',
         'cols'  => [
           1 => $blocksColNoGlobals + ['span' => 5],
           2 => $blocksColNoGlobals + ['span' => 19],
@@ -103,14 +103,14 @@ class PageLayout {
         ]
       ],
       11 => [
-        'descr' => 'основная - блочная',
+        'descr' => 'контент - блоки',
         'cols'  => [
-          1 => $contentCol + ['span' => 14],
+          1 => $contentCol + ['span' => 11],
           2 => $blocksCol + ['span' => 10]
         ]
       ],
       12 => [
-        'descr' => 'блочная - блочная - блочная - блочная - блочная',
+        'descr' => 'блоки - блоки - блоки - блоки - блоки',
         'cols'  => [
           1 => $blocksCol + ['span' => 24],
           2 => $blocksCol + ['span' => 3],
@@ -120,7 +120,7 @@ class PageLayout {
         ]
       ],
       13 => [
-        'descr' => 'блочная (NG) - блочная (NG) - блочная (NG)',
+        'descr' => 'блоки (NG) - блоки (NG) - блоки (NG)',
         'cols'  => [
           1 => $blocksColNoGlobals + ['span' => 6],
           2 => $blocksColNoGlobals + ['span' => 12],
@@ -128,28 +128,28 @@ class PageLayout {
         ]
       ],
       14 => [
-        'descr' => 'блочная - основная',
+        'descr' => 'блоки - контент',
         'cols'  => [
           1 => $blocksCol + ['span' => 6],
           2 => $contentCol + ['span' => 18]
         ]
       ],
       15 => [
-        'descr' => 'основная - блочная',
+        'descr' => 'контент - блоки',
         'cols'  => [
           1 => $contentCol + ['span' => 16],
           2 => $blocksCol + ['span' => 8]
         ]
       ],
       16 => [
-        'descr' => 'блочная - основная',
+        'descr' => 'блоки - контент',
         'cols'  => [
           1 => $blocksCol + ['span' => 8],
           2 => $contentCol + ['span' => 16]
         ]
       ],
       17 => [
-        'descr' => 'блочная 8 - основная 10 - блочная 6',
+        'descr' => 'блоки 8 - контент 10 - блоки 6',
         'cols'  => [
           1 => $blocksCol + ['span' => 8],
           2 => $contentCol + ['span' => 10],
@@ -216,12 +216,18 @@ TEXT;
 TEXT;
         }
         $h = '<div class="mainHeader">'. //
-          Tt()->getTpl('common/pathNav', $ctrl->d). //
           Tt()->getTpl('common/pageTitle', $ctrl->d). //
+          Tt()->getTpl('common/pathNav', $ctrl->d). //
           '</div>'.'<div class="mainBody">';
         //if ($ctrl->d['page']['settings']['showSubPages']) $h .= '<div class="subPages">'.Menu::getUlObjById($ctrl->d['page']['id'], 1)->html().'</div>';
         //$h .= Tt()->getTpl($ctrl->d['tpl'], $ctrl->d);
-        if (isset($ctrl->d['content'])) $h .= '<div class="gray">content begins</div>'.$ctrl->d['content'].'<div class="gray">content ends</div>';
+        //if (isset($ctrl->d['content'])) $h .= '<div class="gray">content begins</div>'.$ctrl->d['content'].'<div class="gray">content ends</div>';
+        //die2();
+        if ($ctrl->d['tpl'] != 'default') {
+          $ctrl->d['content'] = Tt()->getTpl($ctrl->d['tpl'], $ctrl->d);
+          $ctrl->d['tpl'] = 'default';
+        }
+        if (isset($ctrl->d['content'])) $h .= $ctrl->d['content'];
         $h .= '</div>';
 //        <div class="body moduleBody{$ctrl->d['bodyClass']}">
         $html .= <<<TEXT

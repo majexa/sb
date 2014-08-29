@@ -36,8 +36,16 @@ class PageModuleStore extends PageModuleDd {
     ]
   ];
 
+  protected function prepareNode(array $node) {
+    $node = parent::prepareNode($node);
+    $node['settings']['smW'] = 150;
+    $node['settings']['smH'] = 150;
+    return $node;
+  }
+
   protected function createStructure() {
     parent::createStructure();
+    db()->importFile(__DIR__.'/dump.sql');
     if (!$this->sm->items->getItemByField('name', 'orders')) {
       $this->sm->create([
         'title' => 'Заказы',
@@ -72,6 +80,16 @@ class PageModuleStore extends PageModuleDd {
       $fm = new DdFieldsManager('orders');
       foreach ($fields as $field) $fm->create($field);
     }
+  }
+
+  function getPageBlocks() {
+    return [[
+      'type' => 'tags',
+      'settings' => [
+        'tagField' => 'category',
+        'showTagCounts' => true
+      ]
+    ]];
   }
 
 }

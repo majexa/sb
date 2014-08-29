@@ -32,7 +32,6 @@ Ngn.Sb.DdItems = new Class({
       this.options.useUserId = true;
     }
     this.editBlockTpl = Ngn.tpls.editBlock;
-    //c('+++++++++');
     this.esItems.each(function(eItem) {
       if (Ngn.isAdmin || eItem.get('data-userId') == this.options.curUserId)
         this.addEditBlock(eItem);
@@ -47,17 +46,17 @@ Ngn.Sb.DdItems = new Class({
       clone: true,
       handle: '.dragBox'
     });
-    this.sortables.addEvent('start', function(el, clone){
+    this.sortables.addEvent('start', function(el, clone) {
       clone.setStyle('z-index', 9999);
       clone.addClass('move');
     });
-    this.sortables.addEvent('stop', function(el, clone){
+    this.sortables.addEvent('stop', function(el, clone) {
       el.removeClass('nonActive');
       clone.removeClass('move');
     });
     // Строка отвечающая за изменение порядка
     this.orderState = this.sortables.serialize().join(',');
-    this.sortables.addEvent('complete', function(el, clone){
+    this.sortables.addEvent('complete', function(el, clone) {
       //if (this.orderState == this.sortables.serialize().join(',')) return;
       el.addClass('loading');
       new Request({
@@ -67,7 +66,7 @@ Ngn.Sb.DdItems = new Class({
           this.orderState = this.sortables.serialize().join(',');
         }.bind(this)
       }).POST({
-          ids: this.sortables.serialize(false, function(eItem, index){
+          ids: this.sortables.serialize(false, function(eItem, index) {
             if (eItem.hasClass('move')) return;
             return eItem.get('data-id');
           }.bind(this))
@@ -82,10 +81,12 @@ Ngn.Sb.DdItems = new Class({
     eEditBlock.inject(eCont);
     if (this.options.sortables) Elements.from('<div class="dragBox"></div>')[0].inject(eCont, 'top');
     this.initSortables(eItem);
-    eCont.setStyle('position', 'relative');
-    Ngn.setToTopRight(eEditBlock, eCont, [10, 3]);
-    eEditBlock.setStyle('width', eEditBlock.getSize().x+'px');
-    eEditBlock.setStyle('position', 'absolute');
+
+    //eCont.setStyle('position', 'relative');
+    //Ngn.setToTopRight(eEditBlock, eCont, [10, 3]);
+    //eEditBlock.setStyle('width', eEditBlock.getSize().x + 'px');
+    //eEditBlock.setStyle('position', 'absolute');
+
     var btnEdit = eEditBlock.getElement('.edit');
     btnEdit.removeEvent('click');
 
@@ -124,10 +125,7 @@ Ngn.Sb.DdItems = new Class({
         e.preventDefault();
         eItem.addClass('loading');
         new Ngn.Request({
-          url: btnActivate.get('href').replace(
-            'activate',
-            active ? 'ajax_deactivate' : 'ajax_activate'
-          ),
+          url: btnActivate.get('href').replace('activate', active ? 'ajax_deactivate' : 'ajax_activate'),
           onComplete: function() {
             eItem.removeClass('loading');
             if (active) {
@@ -170,12 +168,11 @@ Ngn.Sb.DdItems.prev = function(esItems, curId) {
 };
 
 Ngn.Sb.DdItems._next = function(esItems, curId, next) {
-  for (var i=0; i<esItems.length; i++)
+  for (var i = 0; i < esItems.length; i++)
     if (esItems[i].get('data-id') == curId)
       if (next)
-        return esItems[i+1] ? esItems[i+1] : esItems[0];
-      else
-        return esItems[i-1] ? esItems[i-1] : esItems[esItems.length-1];
+        return esItems[i + 1] ? esItems[i + 1] : esItems[0]; else
+        return esItems[i - 1] ? esItems[i - 1] : esItems[esItems.length - 1];
 };
 
 Ngn.Sb.DdItems.EquailSizes = new Class({
@@ -189,11 +186,11 @@ Ngn.Sb.DdItems.EquailSizes = new Class({
   init: function() {
     if (!this.esItems.length) return;
     this.cacheId = Ngn.getPath();
-    var esImg = $$(this.selector+' img');
+    var esImg = $$(this.selector + ' img');
     var imgLinks = [];
-    for (var i=0; i<esImg.length; i++) imgLinks.push(esImg[i].get('src'));
+    for (var i = 0; i < esImg.length; i++) imgLinks.push(esImg[i].get('src'));
     new Asset.images(imgLinks, {
-      onComplete: function(){
+      onComplete: function() {
         Ngn.equalItemHeights(this.esItems);
       }.bind(this)
     });

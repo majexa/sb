@@ -10,12 +10,10 @@ class DdoPageSettings extends DdoSettings {
   }
 
   protected function getKey($prefix, $suffix = null) {
-    if (!empty($this->page['module'])) {
-      foreach (PageModuleCore::getAncestorNames($this->page['module']) as $module) {
-        $key = $prefix.'.'.$module.($suffix ? '.'.$suffix : '');
-        if (($r = Config::getVar($key, true)) !== false) {
-          return $key;
-        }
+    foreach (PageModuleCore::getAncestorNames($this->page['module']) as $module) {
+      $key = $prefix.'.'.$module.($suffix ? '.'.$suffix : '');
+      if (($r = Config::getVar($key, true)) !== false) {
+        return $key;
       }
     }
     return parent::getKey($prefix, $suffix);

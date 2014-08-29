@@ -11,9 +11,9 @@ abstract class CtrlPageStatic extends CtrlPage {
   }
 
   static function getPage() {
-    $r = static::page();
     $r['module'] = $r['path'] = self::getStaticName();
     $r['active'] = true;
+    $r = array_merge($r, static::page());
     if (empty($r['id'])) $r['id'] = -(round(hexdec(md5($r['module'])) / 10000000000000000000000000000000000));
     return new DbModelVirtual($r);
   }

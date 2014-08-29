@@ -4,7 +4,6 @@ include_once LIB_PATH.'/more/config_core.php';
 $smFolderClosedIcon = STATIC_PATH.'/img/icons/sm-folder-closed.png';
 $smFolderOpenedIcon = STATIC_PATH.'/img/icons/sm-folder-opened.png';
 $smHomeIcon = STATIC_PATH.'/img/icons/sm-home.png';
-//die2(CORE_PAGE_MODULES_PATH.'/*');
 foreach (glob(CORE_PAGE_MODULES_PATH.'/*') as $dir) {
   $pageIcon = $dir.'/sm-page.png';
   if (!file_exists($pageIcon)) continue;  

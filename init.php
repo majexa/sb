@@ -11,4 +11,5 @@ Ngn::addBasePath(NGN_ENV_PATH.'/layout', 2);
 //setConstant('SITE_SET', 'basic');
 //Ngn::addBasePath(SB_PATH.'/siteSet/'.SITE_SET, 4);
 Sflm::$absBasePaths['sb'] = __DIR__.'/static';
+Sflm::$absBasePaths['cpm'] = __DIR__.'/lib/cpm';
 O::replaceInjection('DefaultRouter', 'SbRouter');
