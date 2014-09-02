@@ -1,6 +1,6 @@
 <?php
 
-class TestPageBlockText extends TestCasperSb {
+class TestPageBlockText extends TestUiSb {
 
   function testCreate() {
     $this->casper([
@@ -26,7 +26,7 @@ class TestPageBlockText extends TestCasperSb {
       ['click', '.pbt_text .delete'],
       ['wait', 1500],
       ['capture'],
-      ['checkNonExistence', '.pbt_text']
+      ['!checkExistence', '.pbt_text']
     ]);
   }
 }

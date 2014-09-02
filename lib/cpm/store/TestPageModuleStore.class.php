@@ -1,6 +1,6 @@
 <?php
 
-class TestPageModuleStore extends TestCasperSb {
+class TestPageModuleStore extends TestUiSb {
 
   function test() {
     $strName = 'magazin';
