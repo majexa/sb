@@ -6,12 +6,12 @@ Ngn.TreeEdit.Pages = new Class({
     actionUrl: '/admin/pages',
     activeIfSelected: ['delete', 'openPage']
   },
-  
-  getActiveButtonNames: function() {
-    return this.parent().extend(['openPage']);
-  },
-  
-  getClientTreeOptions: function() {
+
+  //getActiveButtonNames: function() {
+  //  return this.parent().extend(['openPage']);
+  //},
+
+  getTreeOptions: function() {
     var options = this.parent();
     if (!this.options.disableDragging) {
       options.initialize = function() {
@@ -23,7 +23,7 @@ Ngn.TreeEdit.Pages = new Class({
     options.types.page.dropDenied = ['inside'];
     return options;
   },
-  
+
   bindButtons: function() {
     this.parent();
     this.createButton('openPage', this.eButtons.getElement('a[class~=link]'), function() {
@@ -37,10 +37,14 @@ Ngn.TreeEdit.Pages = new Class({
   toggleButtons: function() {
     this.parent();
     this.tree.addEvent('selectChange', function(node) {
-      this.toggleButton('add', node.data.folder == 1);
-      this.toggleButton('openPage', this.tree.selected ? true : false);
-      this.toggleButton('reload', true);
+      this._toggleButtons(node);
     }.bind(this));
+  },
+
+  _toggleButtons: function(node) {
+    this.toggleButton('add', node.data.folder == 1);
+    this.toggleButton('openPage', this.tree.selected ? true : false);
+    this.toggleButton('reload', true);
   }
   
 });

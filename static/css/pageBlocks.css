@@ -15,6 +15,9 @@ border-radius: 5px;
 position: absolute;
 z-index: 1;
 border: 1px solid #E3E2D3;
+position: absolute;
+top: 5px;
+right: 5px;
 background: -webkit-linear-gradient(top, #fbfbf6, #F1F0DF);
 }
 .editBlock.bordered.smIcons a, .editBlock a.smIcons.bordered {

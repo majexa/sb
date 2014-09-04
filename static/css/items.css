@@ -1,4 +1,7 @@
 .items.tile .item {
+position: relative;
+}
+.items.tile .item {
 float: left;
 margin-right: 15px;
 }

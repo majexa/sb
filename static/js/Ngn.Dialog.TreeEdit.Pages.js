@@ -39,6 +39,7 @@ Ngn.Dialog.TreeEdit.Pages = new Class({
       }
     ).init();
     tree.addEvent('dataLoad', function() {
+      c('1111111111');
       this.eTreeContainer.setStyle('height',
         (this.message.getSize().y - this.eTreeMenu.getSize().y) + 'px');
       this.initReduceHeight(true);
