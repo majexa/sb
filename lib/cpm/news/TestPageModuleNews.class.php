@@ -1,6 +1,6 @@
 <?php
 
-class TestPageModuleNews extends TestUiSb {
+class TestPageModuleNews extends TestUiPageModule {
 
   function test() {
     $strName = 'news';
@@ -8,23 +8,20 @@ class TestPageModuleNews extends TestUiSb {
     PageModule::get('news')->create(['title' => 'news']);
     $page = DbModelCore::get('pages', $strName, 'name');
     $im = new DdItemsManagerPage($page, new DdItems($strName), new DdForm(new DdFields($strName), $strName));
-    for ($i=0; $i<=3; $i++) {
-      $file = TEMP_PATH.'/'.time();
-      copy(MORE_PATH.'/lib/test/fixture/image.jpg', $file);
+    for ($i = 0; $i <= 3; $i++) {
       $im->create([
-        'title' => 'sample',
-        'text' => 'sample',
-        'category' => 'рубрика 1',
+        'title'       => 'sample',
+        'pretext'     => TestRunnerNgn::largeTextFixture(),
+        'text'        => TestRunnerNgn::largeTextFixture(),
+        'category'    => 'рубрика 1',
         'datePublish' => explode('.', date('d.m.Y.H.i')),
-        'image' => [
-          'tmp_name' => $file
-        ]
+        'image'       => TestRunnerNgn::tempImageFixture()
       ]);
     }
     $this->casper([
       ['thenUrl', '?authLogin=admin&authPass=1234'],
       ['thenUrl', $strName],
-      //['checkText', '#ti'.$category, 'Категория 1 (4)']
+      // ['checkText', '#ti'.$category, 'Категория 1 (4)']
     ]);
   }
 

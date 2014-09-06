@@ -1,8 +1,8 @@
 <?php
+
 return [
   'siteItems'  => [
     'title'       => 1,
-    'text_body'   => 1,
     'image'       => 1,
     'pretext'     => 1,
     'datePublish' => 1,

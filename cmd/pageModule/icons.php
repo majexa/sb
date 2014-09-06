@@ -6,7 +6,7 @@ $smFolderOpenedIcon = STATIC_PATH.'/img/icons/sm-folder-opened.png';
 $smHomeIcon = STATIC_PATH.'/img/icons/sm-home.png';
 foreach (glob(CORE_PAGE_MODULES_PATH.'/*') as $dir) {
   $pageIcon = $dir.'/sm-page.png';
-  if (!file_exists($pageIcon)) continue;  
+  if (!file_exists($pageIcon)) continue;
   $folderClosedIcon = $dir.'/sm-folder-closed.png';
   $folderOpenedIcon = $dir.'/sm-folder-opened.png';
   $homeIcon = $dir.'/sm-home.png';

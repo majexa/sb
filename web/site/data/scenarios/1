@@ -1,0 +1,2 @@
+pm localServer createProject test default sb
+(new PageModuleNews)->
