@@ -11,7 +11,10 @@ abstract class PmsbAbstract implements ProcessDynamicPageBlock {
   protected $ctrl;
   
   protected $name;
-  
+
+  /**
+   * @var array
+   */
   public $blocks = [];
   
   public $module, $enable = true;
@@ -26,10 +29,6 @@ abstract class PmsbAbstract implements ProcessDynamicPageBlock {
   protected function init() {}
 
   abstract protected function initBlocks();
-  
-  function blocks() {
-    return empty($this->blocks) ? false : $this->blocks;
-  }
   
   protected function addBlock(array $data) {
     $data['className'] = $this->name;

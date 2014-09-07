@@ -13,13 +13,6 @@ abstract class CtrlPageStaticStoreOrderAbstract extends CtrlPageStatic {
     return 11;
   }
 
-  protected function init() {
-    Sflm::frontend('css')->addPath('cpm/store/products.css');
-    Sflm::frontend('js')->addPath('cpm/store/site.js');
-  }
-
-  // --
-
   protected $cartItems;
   
   protected function initCartItems() {

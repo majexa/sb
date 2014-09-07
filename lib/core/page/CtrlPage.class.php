@@ -15,8 +15,11 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
 
   protected function init() {
     $this->d['name'] = $this->getName();
+    //$this->d['modulePackage'] = $this->getModulePackage();
     parent::init();
   }
+
+  //abstract function getModulePackage();
 
   function action_default() {
   }
@@ -33,6 +36,7 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
   protected function afterAction() {
     Sflm::frontend('css')->addLib('sb');
     Sflm::frontend('js')->addLib('sb');
+    if (($sflm = PageModuleCore::sflm($this->page['module'])) !== false) $this->d['head'] = $sflm->html();
     $this->d['body'] = PageLayout::autoHtml($this->getLayoutN(), $this->page['id'], $this);
   }
 

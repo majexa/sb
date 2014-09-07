@@ -8,10 +8,4 @@ HTML;
 });
 
 class DdoPageModuleStore extends DdoPageModule {
-
-  protected function afterConstruct() {
-    Sflm::frontend('css')->addPath('cpm/store/site.css');
-    Sflm::frontend('js')->addPath('cpm/store/site.js');
-  }
-
 }

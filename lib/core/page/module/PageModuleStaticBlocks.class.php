@@ -3,6 +3,10 @@
 class PageModuleStaticBlocks {
 
   public $blocks = [];
+
+  /**
+   * @var PmsbAbstract[]
+   */
   protected $blocksObjs = [];
 
   function __construct(CtrlPage $controller) {
@@ -18,10 +22,7 @@ class PageModuleStaticBlocks {
         $this->blocksObjs[] = O::get($class, $controller);
       }
     }
-    foreach ($this->blocksObjs as $o) {
-      /* @var PmsbAbstract $o */
-      if (($blocks = $o->blocks()) !== false) $this->blocks = array_merge($this->blocks, $blocks);
-    }
+    foreach ($this->blocksObjs as $o) $this->blocks = array_merge($this->blocks, $o->blocks);
   }
 
   function processDynamicBlockModels(array &$blockModels) {

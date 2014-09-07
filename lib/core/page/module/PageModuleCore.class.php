@@ -8,17 +8,7 @@
 class PageModuleCore {
 
   static function exists($module) {
-    return !self::isVirtual($module);
-  }
-
-  /**
-   * Если модуль не имеет PageModule - значит он виртуальный
-   *
-   * @param string $module
-   * @return bool
-   */
-  static function isVirtual($module) {
-    return !class_exists(ClassCore::nameToClass('PageModule', self::getBaseName($module)));
+    return class_exists(ClassCore::nameToClass('PageModule', self::getBaseName($module)));
   }
 
   static function getBaseName($module) {
@@ -53,9 +43,9 @@ class PageModuleCore {
    * Возвращает фиктивных предков класса, полученных из иерархии предков класса PageModule
    */
   static function getAncestorClasses($module, $prefix) {
-    return array_values(array_filter(array_map(function($v) use ($prefix) {
-        return $prefix.$v;
-      }, self::getAncestorNames($module, false)), function($class) {
+    return array_values(array_filter(array_map(function ($v) use ($prefix) {
+      return $prefix.$v;
+    }, self::getAncestorNames($module, false)), function ($class) {
       return class_exists($class);
     }));
   }
@@ -68,16 +58,16 @@ class PageModuleCore {
     if ($slave) $module = Misc::removeSuffix('Slave', $module);
     $class = 'PageModule'.ucfirst($module);
     if (!class_exists($class)) return [$firstLower ? $module : ucfirst($module)];
-    $r = array_map(function($v) use ($firstLower, $slave) {
-        $r = str_replace('PageModule', '', $v).($slave ? 'Slave' : '');
-        if (!$r) return '';
-        return $firstLower ? lcfirst($r) : $r;
-      }, ClassCore::getAncestorsByPrefix($class, 'PageModule'));
+    $r = array_map(function ($v) use ($firstLower, $slave) {
+      $r = str_replace('PageModule', '', $v).($slave ? 'Slave' : '');
+      if (!$r) return '';
+      return $firstLower ? lcfirst($r) : $r;
+    }, ClassCore::getAncestorsByPrefix($class, 'PageModule'));
     return Arr::filterEmptiesR($r);
   }
 
   static function getInfo($module) {
-    return PageModuleCore::isVirtual($module) ? false : new PageModuleInfo($module);
+    return PageModuleCore::exists($module) ? new PageModuleInfo($module) : false;
   }
 
   static function initPage(DbModelPages $page) {
@@ -89,6 +79,11 @@ class PageModuleCore {
       if (($v = Config::getVar('pms/'.$v, true)) !== false) return $v;
     }
     return [];
+  }
+
+  static public function sflm($module) {
+    if (!PageModuleCore::exists($module)) return false;
+    return new PageModuleSflm(Sflm::frontendName(), $module);
   }
 
 }
