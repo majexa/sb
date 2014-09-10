@@ -23,7 +23,11 @@ class TestPageModuleStore extends TestUiPageModule {
       ['thenUrl', '?authLogin=admin&authPass=1234'],
       ['thenUrl', $strName],
       ['checkExistence', '#ti'.$category],
-      ['wait', 500]
+      ['click', '.pbt_tags .edit'],
+      ['thenUrl', $strName],
+      //['closeDialog'],
+      ['click', '.pbt_tags .tag2'],
+      ['wait', 2000],
     ]);
   }
 

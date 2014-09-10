@@ -2,7 +2,14 @@
 <head>
   <?= Sflm::getTags() ?>
   <style>
+    body {
+      margin: 20px;
+    }
+    h2 {
+      margin-top: 10px;
+    }
     img {
+      width: 160px;
       border: 1px solid #ccc;
     }
   </style>
