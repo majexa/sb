@@ -21,13 +21,11 @@ class TestPageModuleStore extends TestUiPageModule {
     }
     $this->casper([
       ['thenUrl', '?authLogin=admin&authPass=1234'],
-      ['thenUrl', $strName],
+      ['~thenUrl', $strName],
       ['checkExistence', '#ti'.$category],
-      ['click', '.pbt_tags .edit'],
+      ['~click', '.pbt_tags .edit'],
       ['thenUrl', $strName],
-      //['closeDialog'],
-      ['click', '.pbt_tags .tag2'],
-      ['wait', 2000],
+      ['~click', '.pbt_tags .tag2'],
     ]);
   }
 
