@@ -1,5 +1,6 @@
 window.addEvent('domready', function() {
   if (Ngn.isAdmin) {
+    document.getElement('.layout').addClass('admin');
     new Ngn.Pb.Interface({
       controllerPath: '/sbc/pageBlocks/' + Ngn.Sb.page.id
     });

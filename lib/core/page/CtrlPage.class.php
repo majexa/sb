@@ -15,11 +15,9 @@ abstract class CtrlPage extends CtrlCommon /*implements ProcessDynamicPageBlock*
 
   protected function init() {
     $this->d['name'] = $this->getName();
-    //$this->d['modulePackage'] = $this->getModulePackage();
+    die2(222);
     parent::init();
   }
-
-  //abstract function getModulePackage();
 
   function action_default() {
   }

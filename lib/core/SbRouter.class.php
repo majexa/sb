@@ -39,8 +39,6 @@ class SbRouter extends DefaultRouter {
         if ($this->req->params[0] == 'sitemap') {
           return PageControllersCore::getStaticCtrl('sitemap', $this);
         }
-
-
         $ctrlName = $this->req->param(0);
         if (($routes = Config::getVar('routes')) and isset($routes[$ctrlName])) $ctrlName = $routes[$ctrlName];
         if (PageControllersCore::staticCtrlExists($ctrlName)) {

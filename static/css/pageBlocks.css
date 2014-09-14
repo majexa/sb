@@ -1,5 +1,11 @@
 .pageBlocks .block {
-
+border-bottom: 1px solid #ccc;
+padding-bottom: 7px;
+margin-bottom: 10px;
+position: relative;
+}
+.layout.admin .pageBlocks .block {
+margin-bottom: 32px;
 }
 .pageBlocks .dragBox, .ddItems .item .dragBox {
 position: absolute;
@@ -9,7 +15,7 @@ top: 5px;
 border-radius: 5px;
 }
 .pageBlocks .editBlock, .pageBlocks .dragBox {
-top: -21px;
+top: -28px;
 }
 .pageBlocks .dragBox {
 position: absolute;

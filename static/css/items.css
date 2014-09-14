@@ -5,3 +5,8 @@ position: relative;
 float: left;
 margin-right: 15px;
 }
+.items.list .item {
+border-bottom: 1px solid #ccc;
+padding-bottom: 7px;
+margin-bottom: 15px;
+}
