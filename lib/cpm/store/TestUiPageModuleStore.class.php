@@ -1,8 +1,9 @@
 <?php
 
-class TestPageModuleStore extends TestUiPageModule {
+class TestUiPageModuleStore extends TestUiPageModule {
 
   function test() {
+    /*
     $strName = 'magazin';
     if (($page = DbModelCore::get('pages', $strName, 'name'))) PageModulePage::get($page)->delete();
     PageModule::get('store')->create();
@@ -19,12 +20,13 @@ class TestPageModuleStore extends TestUiPageModule {
         'price'    => 123
       ]);
     }
+    */
     $this->casper([
       ['thenUrl', '?authLogin=admin&authPass=1234'],
-      ['~thenUrl', $strName],
-      ['checkExistence', '#ti'.$category],
+      ['~thenUrl', static::moduleName()],
+      //['checkExistence', '#ti'.$category],
       ['~click', '.pbt_tags .edit'],
-      ['thenUrl', $strName],
+      ['thenUrl', static::moduleName()],
       ['~click', '.pbt_tags .tag2'],
     ]);
   }

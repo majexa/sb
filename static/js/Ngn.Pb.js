@@ -176,10 +176,10 @@ Ngn.Pb.BlockEdit = new Class({
     this.eEditBlock = el.getElement('.editBlock');
     var eDragBox = Elements.from('<div class="dragBox"></div>')[0].inject(el, 'top');
     // Выравниваем editBlock по правому краю
-    (function() {
-      Ngn.setToTopRight(this.eEditBlock, el, [6, 0]);
-      Ngn.setToTopRight(eDragBox, el, [this.eEditBlock.getSize().x + 15, 0]);
-    }.bind(this)).delay(100);
+    //(function() {
+    //  Ngn.setToTopRight(this.eEditBlock, el, [6, 0]);
+    //  Ngn.setToTopRight(eDragBox, el, [this.eEditBlock.getSize().x + 15, 0]);
+    //}.bind(this)).delay(100);
     var btnEdit = el.getElement('a[class~=edit]');
     if (btnEdit) {
       btnEdit.set('href', '#');

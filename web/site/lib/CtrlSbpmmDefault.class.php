@@ -13,6 +13,7 @@ class CtrlSbpmmDefault extends CtrlDefault {
       $r[$n]['items'] = array_map(function($path) {
         return str_replace(WEBROOT_PATH, '', $path);
       }, glob("$subFolder/*"));
+      asort($r[$n]['items']);
     }
     return $r;
   }

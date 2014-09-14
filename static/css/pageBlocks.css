@@ -1,12 +1,20 @@
 .pageBlocks .block {
-position: relative;
+
 }
-.pageBlocks .block .dragBox, .ddItems .item .dragBox {
+.pageBlocks .dragBox, .ddItems .item .dragBox {
 position: absolute;
 width: 23px;
 height: 23px;
 top: 5px;
 border-radius: 5px;
+}
+.pageBlocks .editBlock, .pageBlocks .dragBox {
+top: -21px;
+}
+.pageBlocks .dragBox {
+position: absolute;
+width: 21px;
+height: 21px;
 }
 .editBlock {
 padding: 2px 0 2px 2px;
