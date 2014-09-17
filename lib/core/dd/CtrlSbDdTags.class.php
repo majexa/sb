@@ -35,7 +35,7 @@ class CtrlSbDdTags extends CtrlSbAdmin {
 
   function action_json_getItems() {
     $this->json = $this->getGrid();
-    $this->json['title'] = 'Тэги поля «'.$this->tags->group->title.'»';
+    $this->json['title'] = 'Тэги поля «'.DdTagsGroup::getById($this->groupId())->title.'»';
   }
 
 }
