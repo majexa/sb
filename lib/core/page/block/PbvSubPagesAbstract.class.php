@@ -1,8 +1,8 @@
 <?php
 
-//throw new Exception(' need to refactor "breadcrumbsPageIds"');
+// throw new Exception(' need to refactor "breadcrumbsPageIds"');
 
-abstract class PbvSubCtrlgesAbstract extends PbvAbstract {
+abstract class PbvSubPagesAbstract extends PbvAbstract {
 
   public $cssClass = 'pbSubMenu';
 

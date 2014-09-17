@@ -5,8 +5,9 @@ class PbvCalendar extends PbvAbstract {
   static $cachable = false;
 
   function _html() {
-    if (!DdCore::isItemsController($this->ctrl->page['controller'])) return;
-    if ($this->ctrl->action != 'list') return;
+    //die2($this->pageBlock['settings']);
+    //if (!DdCore::isItemsController($this->ctrl->page['controller'])) return;
+    //if ($this->ctrl->action != 'list') return;
     if (!isset($this->ctrl->page['settings']['dateField']) or !$this->ctrl->page['settings']['dateField']) return;
     $calendar = new CalendarItems($this->ctrl->page['path'], $this->ctrl->oManager->items);
     $calendar->items->dateField = $this->ctrl->page['settings']['dateField'];

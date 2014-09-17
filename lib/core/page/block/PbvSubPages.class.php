@@ -1,6 +1,6 @@
 <?php
 
-class PbvSubCtrlges extends PbvSubCtrlgesAbstract {
+class PbvSubPages extends PbvSubPagesAbstract {
 
   protected function getPageId() {
     return $this->pageBlock['settings']['pageId'];

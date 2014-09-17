@@ -7,6 +7,7 @@ Ngn.Pb.BlockEdit.Tags = new Class({
       cls: 'tag2',
       caption: 'Редактировать рубрики'
     }, function() {
+      c('!!!');
       new Ngn.DdTags.Dialog.Flat({
         blockId: this.id,
         basePath: '/sbc/ddTags',

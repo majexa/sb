@@ -24,6 +24,20 @@ window.addEvent('domready', function() {
       }
     });
   });
+  Ngn.addBtnAction('#btnPermission', function(eBtn) {
+    alert('!');
+    /*
+    new Ngn.Dialog.RequestForm({
+      id: 'store',
+      title: 'Добавление записи',
+      url: eBtn.get('data-url'),
+      width: 300,
+      onSubmitSuccess: function() {
+        window.location.reload(true);
+      }
+    });
+    */
+  });
   Ngn.addBtnAction('.authBar .btnSubmit', function() {
     $('authForm').submit();
   });

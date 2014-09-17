@@ -1,31 +1,31 @@
 <?php
 
 abstract class SubCtrlMsgs extends SubCtrl {
-  
+
   public $id1;
-  
+
   public $id2;
-  
+
   /**
    * @var Msgs
    */
-  public $oMsgs;
-  
+  public $msgs;
+
   public $redirect;
-  
+
   public $editTime;
-  
+
   public $msgId;
-  
+
   public $msgData;
-  
+
   public $anonym = false;
-  
+
   /**
    * @var FormSpamBotBlocker
    */
   public $oFSBB;
-  
+
   function __construct(CtrlCommon $ctrl, $id1, $id2) {
     parent::__construct($ctrl);
     Misc::checkEmpty($id1);
@@ -33,9 +33,9 @@ abstract class SubCtrlMsgs extends SubCtrl {
     $this->id1 = $id1;
     $this->id2 = $id2;
   }
-  
+
   function init() {
-    $this->editTime = 30*30*0.5;
+    $this->editTime = 30 * 30 * 0.5;
     $this->msgId = !empty($this->ctrl->req->r['id']) ? $this->ctrl->req->r['id'] : null;
     $this->d['tpl'] = 'common/msgs';
     $this->setAnonym();
@@ -44,74 +44,73 @@ abstract class SubCtrlMsgs extends SubCtrl {
     //$this->d['priv'] = $this->ctrl->priv;
     $this->d['ctrl'] = $this->ctrl;
   }
-  
+
   protected function setAnonym() {
     if (!empty($this->ctrl->settings['allowAnonym']) and !Auth::get('id')) {
       $this->d['anonym'] = $this->anonym = true;
     }
   }
-  
+
   protected function setLevel() {
-    $this->d['level'] = 
-      db()->selectCell('SELECT level FROM level_users WHERE userId=?d', Auth::get('id'));
+    $this->d['level'] = db()->selectCell('SELECT level FROM level_users WHERE userId=?d', Auth::get('id'));
   }
 
   protected function getMsgData() {
     if (!$this->msgId) return false;
-    $this->msgData = $this->oMsgs->getMsg($this->msgId);
+    $this->msgData = $this->msgs->getMsg($this->msgId);
     return $this->msgData;
   }
-    
+
   abstract protected function initMsgs();
-  
+
   function action_default() {
-    $this->d['items'] = $this->oMsgs->getMsgsPaged();
-    $this->d['pagination']['pNums'] = $this->oMsgs->pNums;
+    $this->d['items'] = $this->msgs->getMsgsPaged();
+    $this->d['pagination']['pNums'] = $this->msgs->pNums;
     //$this->setSpamBotBlocker(); // Инициализируем анти-спам систему
     //$this->d['fsbbTags'] = $this->oFSBB->makeTags(); // Получаем скрытые анти-спам поля
-    $this->d['subscribed'] = $this->oMsgs->isSubscribed(Auth::get('id'));
+    $this->d['subscribed'] = $this->msgs->isSubscribed(Auth::get('id'));
   }
-  
+
   function action_ajax_getText() {
     if (!$msgData = $this->getMsgData()) return;
     $this->ctrl->ajaxOutput = $msgData['text'];
-  }  
+  }
 
   function action_ajax_update() {
-    if (!$msgId = (int)$this->ctrl->req->r['id'] or !$msgData = $this->oMsgs->getMsg($msgId)) return;
-    $this->oMsgs->update($this->ctrl->req->r['id'], $this->ctrl->req->r['text']);
-    $msgData = $this->oMsgs->getMsg($msgId);
+    if (!$msgId = (int)$this->ctrl->req->r['id'] or !$msgData = $this->msgs->getMsg($msgId)) return;
+    $this->msgs->update($this->ctrl->req->r['id'], $this->ctrl->req->r['text']);
+    $msgData = $this->msgs->getMsg($msgId);
     $this->ctrl->ajaxOutput = $msgData['text_f'];
   }
-  
+
   function action_ajax_activate() {
-    $this->oMsgs->activate($this->ctrl->req->r['id']);
+    $this->msgs->activate($this->ctrl->req->r['id']);
     $this->ctrl->ajaxSuccess = true;
   }
-  
+
   function action_ajax_deactivate() {
-    $this->oMsgs->deactivate($this->ctrl->req->r['id']);
+    $this->msgs->deactivate($this->ctrl->req->r['id']);
     $this->ctrl->ajaxSuccess = true;
   }
-  
+
   function action_ajax_delete() {
-    $this->oMsgs->delete($this->ctrl->req->r['id']);
+    $this->msgs->delete($this->ctrl->req->r['id']);
     $this->ctrl->ajaxSuccess = true;
   }
-  
+
   function action_json_refrash() {
   }
-  
+
   function action_json_create() {
     if (($id = $this->create()) === false) {
       $this->ctrl->json['error'] = $this->error;
       return;
     }
-    $msg = $this->oMsgs->getMsgF($id);
+    $msg = $this->msgs->getMsgF($id);
     $this->ctrl->json['msgsIds'][] = $id;
     $this->ctrl->json['msgsHtml'][] = Tt()->getTpl('common/msg', $msg);
   }
-  
+
   function action_create() {
     if ($this->anonym and !$this->ctrl->req->r['nick']) {
       $this->d['errors'][] = 'Введите ник';
@@ -121,9 +120,9 @@ abstract class SubCtrlMsgs extends SubCtrl {
     $this->create();
     $this->redirect();
   }
-  
+
   protected $error;
-  
+
   protected function create() {
     if (trim($this->ctrl->req->r['text']) == '') {
       $this->error = 'Текст пустой';
@@ -133,34 +132,33 @@ abstract class SubCtrlMsgs extends SubCtrl {
       $d = $this->ctrl->req->r;
       $d['userId'] = Auth::get('id');
       $d['userGroupId'] = $this->ctrl->userGroup ? $this->ctrl->userGroup['id'] : 0;
-      $this->oMsgs->create($d);
+      $this->msgs->create($d);
     } catch (NgnValidError $e) {
       $this->error = $e->getMessage();
       return false;
     }
-    if (method_exists($this->ctrl, 'updateCommentsDate'))
-      $this->ctrl->updateCommentsDate();
+    if (method_exists($this->ctrl, 'updateCommentsDate')) $this->ctrl->updateCommentsDate();
     return $id;
   }
-  
+
   function action_subscribe() {
-    $this->oMsgs->subscribe(Auth::get('id'));
+    $this->msgs->subscribe(Auth::get('id'));
     $this->redirect();
   }
-  
+
   function action_unsubscribe() {
-    $this->oMsgs->unsubscribe(Auth::get('id'));
+    $this->msgs->unsubscribe(Auth::get('id'));
     $this->redirect();
   }
-  
+
   /**
    * Inline Images Upload
    */
   function action_iiUpload() {
     $this->d['mainTpl'] = 'popups/uploadImage';
-    $this->d['file'] = $this->oMsgs->iiUpload($_FILES['image']);
+    $this->d['file'] = $this->msgs->iiUpload($_FILES['image']);
   }
-  
+
   protected function setSpamBotBlockerAction() {
     $this->setSpamBotBlocker();
     if ($_POST) $param = $_POST;
@@ -169,7 +167,7 @@ abstract class SubCtrlMsgs extends SubCtrl {
     $this->d['nospam'] = $this->oFSBB->checkTags($param);
     return $this->d['nospam'] ? true : false;
   }
-  
+
   protected function setSpamBotBlocker() {
     return;
     $this->oFSBB = new FormSpamBotBlocker();
@@ -178,5 +176,5 @@ abstract class SubCtrlMsgs extends SubCtrl {
     $this->oFSBB->hasSession = false;
     // $submissions = $_SESSION[$blocker->sesName];  
   }
-  
+
 }
