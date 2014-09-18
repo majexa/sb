@@ -26,6 +26,8 @@ class TestUiPageModuleStore extends TestUiPageModule {
       ['~thenUrl', static::moduleName()],
       //['checkExistence', '#ti'.$category],
       ['~click', '.pbt_tags .edit'],
+      ['~click', '.edit'],
+      //['~click', '.edit'],
       ['thenUrl', static::moduleName()],
       ['~click', '.pbt_tags .tag2'],
     ]);

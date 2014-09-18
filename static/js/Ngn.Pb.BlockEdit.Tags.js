@@ -7,14 +7,12 @@ Ngn.Pb.BlockEdit.Tags = new Class({
       cls: 'tag2',
       caption: 'Редактировать рубрики'
     }, function() {
-      c('!!!');
       new Ngn.DdTags.Dialog.Flat({
         blockId: this.id,
         basePath: '/sbc/ddTags',
         data: JSON.decode(this.eBlock.getElement('.bcont').getElement('.data').get('html'))
       });
     }.bind(this));
-    //if (pageBlock.settings.hideSubLevels) ->
     new Ngn.UlMenu(this.eBlock.getElement('ul'));
   }
 

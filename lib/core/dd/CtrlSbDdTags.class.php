@@ -6,9 +6,13 @@ class CtrlSbDdTags extends CtrlSbAdmin {
     return $this->req->param(2);
   }
 
+  protected function tags() {
+    return DdTags::getByGroupId($this->groupId());
+  }
+
   function action_json_getTree() {
     Sflm::frontend('css')->addPath('i/css/common/tree.css');
-    $this->json['tree'] = (new ClientTree(DdTags::getByGroupId($this->groupId())))->getTree();
+    $this->json['tree'] = (new ClientTree($this->tags()))->getTree();
   }
 
   protected function getGrid() {
@@ -36,6 +40,14 @@ class CtrlSbDdTags extends CtrlSbAdmin {
   function action_json_getItems() {
     $this->json = $this->getGrid();
     $this->json['title'] = 'Тэги поля «'.DdTagsGroup::getById($this->groupId())->title.'»';
+  }
+
+  function action_ajax_rename() {
+    $this->tags()->update($this->req->rq('id'), ['title' => $this->req->rq('title')]);
+  }
+
+  function action_ajax_delete() {
+    $this->tags()->delete($this->req->rq('id'));
   }
 
 }
