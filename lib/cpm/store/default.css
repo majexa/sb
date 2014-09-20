@@ -61,16 +61,16 @@ text-decoration: underline;
 }
 .cnt input.fld {
 width: 40px;
-height: 15px;
+height: 19px;
 vertical-align: middle;
 border-left: none;
 border-right: none;
-margin: 0px;
+margin: 0;
 }
 .btnInput {
 width: 15px;
 height: 19px;
-padding: 0px;
+padding: 0;
 border: 1px solid #CCC;
 vertical-align: middle;
 display: inline-block;
