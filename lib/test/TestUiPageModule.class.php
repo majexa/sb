@@ -3,13 +3,19 @@
 abstract class TestUiPageModule extends TestUiSb {
 
   protected function casper(array $steps) {
+    if (TestCore::$debug) {
+      parent::casper($steps);
+      return;
+    }
+    $steps = array_merge([
+      ['thenUrl', '?authLogin=admin&authPass=1234'],
+      ['~thenUrl', static::moduleName()],
+      ['~click', '.ddItems .editBlock .edit'],
+      ['thenUrl', static::moduleName()],
+    ], $steps);
     parent::casper($steps, [
-      'captureFolder' => 'pageModules/'.$this->captureFolderName()
+      'captureFolder' => 'pageModules/'.static::moduleName()
     ]);
-  }
-
-  protected function captureFolderName() {
-    return lcfirst(Misc::removePrefix('TestPageModule', get_class($this)));
   }
 
   static function moduleName() {
