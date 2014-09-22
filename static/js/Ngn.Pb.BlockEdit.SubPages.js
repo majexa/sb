@@ -1,4 +1,4 @@
-Ngn.Pb.BlockEdit.SubCtrlges = new Class({
+Ngn.Pb.BlockEdit.SubPages = new Class({
   Extends: Ngn.Pb.BlockEdit,
 
   init: function() {
