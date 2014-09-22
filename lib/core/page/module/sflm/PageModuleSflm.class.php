@@ -35,6 +35,11 @@ class PageModuleSflm {
   protected $info;
 
   /**
+   * @var SflmFrontend
+   */
+  protected $sflmFrontend;
+
+  /**
    * @param string $frontendName
    * @param $module
    * @param array $options
@@ -43,17 +48,28 @@ class PageModuleSflm {
     $this->setOptions($options);
     $this->frontendName = $frontendName;
     $this->module = $module;
+
     $this->info = new PageModuleInfo($module);
+    $this->sflmFrontend = Sflm::frontend('js', $this->frontendName);
+    $classPaths = $this->sflmFrontend->classes->classPaths;
+    $this->sflmFrontend->classes->classPaths = new PageModuleSflmJsClassPaths($module); // пути модуля
+    $this->addAction();
+    $this->sflmFrontend->classes->classPaths = $classPaths;
+  }
+
+  protected function addAction() {
     $this->addStaticPath('css');
     $this->addStaticPath('js');
     if (($this->dynamic = $this->info->getData($this->frontendName)) !== false) {
       $this->initDynamic('css');
       $this->initDynamic('js');
+      /*
       if (isset($this->dynamic['depends'])) {
-        $this->wPaths = (new self($frontendName, $this->dynamic['depends'], [
-          'exceptStatic' => isset($this->dynamic['exceptStatic']) ? $this->dynamic['exceptStatic'] : true
+        $this->wPaths = (new self($this->frontendName, $this->dynamic['depends'], [
+          //'exceptStatic' => isset($this->dynamic['exceptStatic']) ? $this->dynamic['exceptStatic'] : true
         ]))->wPaths;
       }
+      */
       $this->addDynamicPaths('css');
       $this->addDynamicPaths('js');
     }
@@ -70,15 +86,14 @@ class PageModuleSflm {
   protected function addStaticPath($type) {
     if (($paths = $this->info->getFilePaths("{$this->frontendName}.$type")) === false) return;
     if ($type == 'js') {
-      Sflm::frontend('js', $this->frontendName)->classes->processCode(file_get_contents($paths[0]), 'PageModuleSflm::addStaticPath()');
-      //Sflm::frontend('js', $this->frontendName)->classes->processCode(file_get_contents($paths[0]), 'stop');
+      $this->sflmFrontend->classes->processCode(file_get_contents($paths[0]), 'PageModuleSflm::addStaticPath()');
     }
     $this->wPaths[$type][] = $paths[1];
   }
 
   protected function addDynamicPaths($type) {
     if (!isset($this->dynamic[$type])) return;
-    $this->wPaths[$type] = Arr::append($this->wPaths[$type], $this->dynamic[$type]);
+    $this->wPaths[$type] = array_merge($this->dynamic[$type], $this->wPaths[$type]);
   }
 
   function html() {

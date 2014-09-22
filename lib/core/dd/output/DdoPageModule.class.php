@@ -25,8 +25,9 @@ href="`.$pagePath.`/`.$id.`#msgs"><i></i>
    * @return DdoPageFields
    */
   protected function ddoFields() {
-    $class = 'DdoPageFields'.ucfirst($this->page['module']);
-    if (!class_exists($class)) $class = 'DdoPageFields';
+    $ancestorClasses = PageModuleCore::getAncestorClasses($this->page['module'], 'DdoPageFields');
+    if ($ancestorClasses and class_exists($ancestorClasses[0])) $class = $ancestorClasses[0];
+    else $class = 'DdoPageFields';
     return new $class($this->settings, $this->layoutName, $this->strName, empty($this->options['fieldOptions']) ? [] : $this->options['fieldOptions']);
   }
 
@@ -37,9 +38,9 @@ href="`.$pagePath.`/`.$id.`#msgs"><i></i>
    * @return DdoPageModule
    */
   static function factory(DbModelPages $page, $layoutName, array $options = []) {
-    //$class = empty($page['module']) ? 'DdoPageModule' : 'DdoPageModule'.ucfirst($page['module']);
-    $class = 'DdoPageModule'.ucfirst($page['module']);
-    if (!class_exists($class)) $class = 'DdoPageModule';
+    $ancestorClasses = PageModuleCore::getAncestorClasses($page['module'], 'DdoPageModule');
+    if ($ancestorClasses and class_exists($ancestorClasses[0])) $class = $ancestorClasses[0];
+    else $class = 'DdoPageModule';
     return new $class($page, $layoutName, $options);
   }
 

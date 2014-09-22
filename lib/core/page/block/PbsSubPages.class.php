@@ -1,6 +1,6 @@
 <?php
 
-class PbsSubCtrlges extends PbsSubCtrlgesAbstract {
+class PbsSubPages extends PbsSubPagesAbstract {
 
   static $title = 'Подразделы определенного раздела';
   

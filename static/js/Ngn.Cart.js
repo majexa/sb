@@ -111,7 +111,6 @@ Ngn.Cart.Block = new Class({
   eProduct: null,
 
   initialize: function(eCart, options) {
-    //c('!');
     this.setOptions(options);
     this.eCart = eCart;
     this.eCart.set('html', '');

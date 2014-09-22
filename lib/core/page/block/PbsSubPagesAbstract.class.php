@@ -1,6 +1,6 @@
 <?php
 
-abstract class PbsSubCtrlgesAbstract extends PbsAbstract {
+abstract class PbsSubPagesAbstract extends PbsAbstract {
 
   protected function initFields() {
     $this->fields[] = [

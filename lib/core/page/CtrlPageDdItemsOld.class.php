@@ -220,7 +220,7 @@ class CtrlPageDdItemsOld extends CtrlPageDd {
    */
   protected function getLongJob() {
     $this->initFilterByParams();
-    return O::gett('DdXls', $this->im->items);
+    return O::di('DdXls', $this->im->items);
   }
 
   // ----------

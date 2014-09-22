@@ -5,13 +5,14 @@ class StoreOrderForm extends Form {
   function __construct(array $cartItems, array $options = []) {
     $this->cartItems = $cartItems;
     $this->im = new DdItemsManager(new DdItems('orders'), new DdForm(new DdFields('orders'), 'orders'));
-    parent::__construct(new Fields(), array_merge(['submitTitle' => 'Отправить заказ'], $options));
+    parent::__construct(new Fields(), $options);
   }
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
       'cartProductsTitle'  => 'Вы покупаете следующите товары',
-      'jsOrderListOptions' => []
+      'jsOrderListOptions' => [],
+      'submitTitle' => 'Отправить заказ'
     ]);
   }
 

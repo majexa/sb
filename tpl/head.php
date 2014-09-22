@@ -9,6 +9,5 @@
   <script src="/i/js/tiny_mce/tiny_mce.js"></script>
   <script>
     Ngn.isAdmin = <?= Misc::isAdmin() ? 'true' : 'false' ?>;
-
   </script>
 </head>

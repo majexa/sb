@@ -25,10 +25,14 @@ abstract class CtrlPageStaticStoreOrderAbstract extends CtrlPageStatic {
       $this->d['tpl'] = 'pageModules/storeOrder/empty';
       return;
     }
-    if ($this->processForm(new StoreOrderForm($this->cartItems))) {
+    if ($this->processForm($this->storeOrderForm())) {
       StoreCart::get()->clear();
       $this->redirect($this->tt->getPath(1).'/complete');
     }
+  }
+
+  protected function storeOrderForm() {
+    return new StoreOrderForm($this->cartItems);
   }
 
   function action_complete() {

@@ -53,16 +53,22 @@ class PageModuleCore {
   /**
    * Возвращает предков модуля (предков класса PageModule)
    */
-  static function getAncestorNames($module, $firstLower = true) {
+  static function getAncestorNames($module, $firstLower = true, $exceptingAbstract = false) {
     $slave = Misc::hasSuffix('Slave', $module);
     if ($slave) $module = Misc::removeSuffix('Slave', $module);
     $class = 'PageModule'.ucfirst($module);
     if (!class_exists($class)) return [$firstLower ? $module : ucfirst($module)];
-    $r = array_map(function ($v) use ($firstLower, $slave) {
-      $r = str_replace('PageModule', '', $v).($slave ? 'Slave' : '');
+    $classes = ClassCore::getAncestorsByPrefix($class, 'PageModule');
+    if ($exceptingAbstract) {
+      $classes = array_filter($classes, function($class) {
+        return !(new ReflectionClass($class))->isAbstract();
+      });
+    }
+    $r = array_map(function ($class) use ($firstLower, $slave, $exceptingAbstract) {
+      $r = str_replace('PageModule', '', $class).($slave ? 'Slave' : '');
       if (!$r) return '';
       return $firstLower ? lcfirst($r) : $r;
-    }, ClassCore::getAncestorsByPrefix($class, 'PageModule'));
+    }, $classes);
     return Arr::filterEmptiesR($r);
   }
 
