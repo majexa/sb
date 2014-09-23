@@ -4,6 +4,7 @@ position: relative;
 .items.tile .item {
 float: left;
 margin-right: 15px;
+margin-bottom: 15px;
 }
 .items.list .item {
 border-bottom: 1px solid #ccc;

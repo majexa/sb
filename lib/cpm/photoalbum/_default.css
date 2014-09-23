@@ -1,0 +1,16 @@
+.ddItems .thumb {
+position: relative;
+}
+.ddItems .thumbHover {
+position: absolute;
+top: -120px;
+left: 0;
+width: 120px;
+height: 120px;
+z-index: 10;
+background: url(/i/img/magnifying-glass.png) no-repeat 30px 45px;
+visibility: hidden;
+}
+.ddItems a.thumb:hover .thumbHover {
+visibility: visible;
+}

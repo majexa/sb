@@ -28,9 +28,9 @@ Ngn.Pb.Interface = new Class({
     var i = 0;
     this.cols = [];
     this.eWrapper.getElements('.col').each(function(eCol) {
-      new Ngn.Pb.Col(eCol, this);
-      if (eCol.hasClass('ct_content')) this.allowGlobalBtn = true;
+      if (eCol.hasClass('ct_content')) this.allowGlobalBtn = true; // если есть колонка с контентом, глобальные блоки на других колонках разрешены
       if (!eCol.hasClass('allowBlocks')) return;
+      new Ngn.Pb.Col(eCol, this);
       var eColBody = eCol.getElement(this.options.colBodySelector);
       if (!eColBody) throw new Error('col body not found by selector: ' + this.options.colBodySelector + ', col #' + (i + 1));
       this.cols[i] = eColBody;

@@ -10,10 +10,6 @@ abstract class PageModuleDd extends PageModule {
   public $controller = 'ddItems';
   public $hasTopSlice = true;
   public $hasBottomSlice = false;
-  protected $ddFields;
-  protected $requiredProperties = [
-    'ddFields',
-  ];
 
   function __construct(array $options = []) {
     parent::__construct($options);
@@ -23,6 +19,8 @@ abstract class PageModuleDd extends PageModule {
 
   protected function init() {
   }
+
+  abstract protected function ddFields();
 
   protected function prepareNode(array $node) {
     $node = parent::prepareNode($node);
@@ -45,7 +43,7 @@ abstract class PageModuleDd extends PageModule {
       throw new Exception($this->sm->form->lastError);
     }
     $fm = new DdFieldsManager($this->page['strName']);
-    foreach ($this->ddFields as $field) {
+    foreach ($this->ddFields() as $field) {
       if (!$fm->create($field)) throw new Exception($fm->form->lastError);
     }
   }

@@ -29,3 +29,11 @@ margin-right: 5px;
 #top .item #searchBox a {
 width: 60px;
 }
+
+#top .siteTitle {
+font-family: 'Roboto Condensed';
+font-size: 22px;
+padding-left: 10px;
+background: url(/m/img/mlogo.png) no-repeat 0px 10px;
+height: 30px;
+}

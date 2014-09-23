@@ -5,18 +5,20 @@ class PageModulePhotoalbum extends PageModuleDd {
   public $title = 'Фотоальбом';
   public $oid = 20;
 
-  protected $ddFields = [
-    [
-      'title' => 'Изображение',
-      'name'  => 'image',
-      'type'  => 'imagePreview'
-    ],
-    [
-      'title' => 'Описание',
-      'name'  => 'text',
-      'type'  => 'wisiwigSimple'
-    ],
-  ];
+  protected function ddFields() {
+    return [
+      [
+        'title' => 'Изображение',
+        'name'  => 'image',
+        'type'  => 'imagePreview'
+      ],
+      [
+        'title' => 'Описание',
+        'name'  => 'text',
+        'type'  => 'wisiwigSimple'
+      ],
+    ];
+  }
 
   protected function prepareNode(array $node) {
     $node = parent::prepareNode($node);

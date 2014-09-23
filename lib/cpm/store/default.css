@@ -1,3 +1,8 @@
+.f_buyBtn {
+position: absolute;
+top: -5px;
+left: 5px;
+}
 .f_buyBtn .added {
 display: inline-block;
 margin-left: 10px;

@@ -4,37 +4,39 @@ class PageModuleStore extends PageModuleDd {
 
   public $title = 'Магазин';
 
-  protected $ddFields = [
-    [
-      'title'    => 'Название',
-      'name'     => 'title',
-      'type'     => 'typoText',
-      'required' => true
-    ],
-    [
-      'title'    => 'Главное изображение',
-      'name'     => 'image',
-      'type'     => 'imagePreview',
-      'required' => true
-    ],
-    [
-      'title'    => 'Категория',
-      'name'     => 'category',
-      'type'     => 'ddTagsSelect',
-      'required' => true
-    ],
-    [
-      'title'    => 'Цена',
-      'name'     => 'price',
-      'type'     => 'price',
-      'required' => true
-    ],
-    [
-      'title' => 'Описание',
-      'name'  => 'descr',
-      'type'  => 'typoTextarea'
-    ]
-  ];
+  protected function ddFields() {
+    return [
+      [
+        'title'    => 'Название',
+        'name'     => 'title',
+        'type'     => 'typoText',
+        'required' => true
+      ],
+      [
+        'title'    => 'Главное изображение',
+        'name'     => 'image',
+        'type'     => 'imagePreview',
+        'required' => true
+      ],
+      [
+        'title'    => 'Категория',
+        'name'     => 'category',
+        'type'     => 'ddTagsSelect',
+        'required' => true
+      ],
+      [
+        'title'    => 'Цена',
+        'name'     => 'price',
+        'type'     => 'price',
+        'required' => true
+      ],
+      [
+        'title' => 'Описание',
+        'name'  => 'descr',
+        'type'  => 'typoTextarea'
+      ]
+    ];
+  }
 
   protected function prepareNode(array $node) {
     $node = parent::prepareNode($node);

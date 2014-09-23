@@ -10,4 +10,6 @@
   <script>
     Ngn.isAdmin = <?= Misc::isAdmin() ? 'true' : 'false' ?>;
   </script>
+  <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed&subset=latin,cyrillic' rel='stylesheet'
+        type='text/css'>
 </head>
