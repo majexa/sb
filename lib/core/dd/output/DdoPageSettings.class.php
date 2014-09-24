@@ -9,14 +9,22 @@ class DdoPageSettings extends DdoSettings {
     parent::__construct($this->page['strName']);
   }
 
-  protected function getKey($prefix, $suffix = null) {
-    foreach (PageModuleCore::getAncestorNames($this->page['module']) as $module) {
-      $key = $prefix.'.'.$module.($suffix ? '.'.$suffix : '');
-      if (($r = Config::getVar($key, true)) !== false) {
-        return $key;
+  protected function getFile($prefix, $suffix = null) {
+    foreach (PageModuleCore::getAncestorNames($this->page['module'], true, true) as $module) {
+      $path = $prefix.($suffix ? '.'.$suffix : '');
+      if (($file = O::get('PageModuleInfo', $module)->getFile($path)) !== false) {
+        return $file;
       }
     }
-    return parent::getKey($prefix, $suffix);
+    return false;
+    //return parent::getKey($prefix, $suffix);
+  }
+
+  protected function getVar($prefix, $suffix = null) {
+    if (($file = $this->getFile($prefix, $suffix)) !== false) {
+      return require $file;
+    }
+    return Config::getVar($this->getKey($prefix, $suffix), true);
   }
 
   function delete() {

@@ -41,7 +41,7 @@ window.addEvent('domready', function() {
   Ngn.addBtnAction('.authBar .btnSubmit', function() {
     $('authForm').submit();
   });
-  Ngn.Milkbox.add(document.getElements('.thumb'));
+  Ngn.Milkbox.add(document.getElements('.lightbox'));
 
   new Ngn.Sb.DdItems(document.getElements('.ddItems .item'));
 

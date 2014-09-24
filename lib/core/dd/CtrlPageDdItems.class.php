@@ -11,9 +11,12 @@ class CtrlPageDdItems extends CtrlPageDd {
     return '/'.$this->req->param(0);
   }
 
+  protected $list;
+
   protected function beforeAction() {
     parent::beforeAction();
-    if ($this->hasOutput and $this->permission()->allow('new')) {
+    $this->list = !(isset($this->req->params[1]) and is_numeric($this->req->params[1]));
+    if ($this->hasOutput and $this->list and $this->permission()->allow('new')) {
       $this->d['topBtns'][] = [
         'title' => 'Создать',
         'class' => 'new',
@@ -43,17 +46,13 @@ class CtrlPageDdItems extends CtrlPageDd {
     return $this->list ? 'siteItems' : 'siteItem';
   }
 
-  protected $list;
-
   function action_default() {
-    if (isset($this->req->params[1]) and is_numeric($this->req->params[1])) {
-      $this->list = false;
-      $this->d['content'] = $this->ddo()->setItem($this->items()->getItem($this->req->params[1]))->els();
-      $this->d['content'] .= Tt()->getTpl('msgs/default');
+    if ($this->list) {
+      $this->d['content'] = $this->ddo()->setItems($this->items()->getItems())->els();
     }
     else {
-      $this->list = true;
-      $this->d['content'] = $this->ddo()->setItems($this->items()->getItems())->els();
+      $this->d['content'] = $this->ddo()->setItem($this->items()->getItem($this->req->params[1]))->els();
+      $this->d['content'] .= Tt()->getTpl('msgs/default');
     }
   }
 

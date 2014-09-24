@@ -12,6 +12,7 @@
 
 <div class="clear"></div>
 <div class="footer">
+  <!--
   <style>
     .slice a {
       float: none !important;
@@ -19,6 +20,7 @@
     }
   </style>
   <span class="slice">It's a footer. Nooter</span>
+  -->
 </div>
 
 <script>

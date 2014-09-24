@@ -12,8 +12,8 @@ class DbModelPages extends DbModel {
 
   static function unpack(array &$r) {
     parent::unpack($r);
-    $default = empty($r['module']) ? [] : PageModuleCore::getDefaultSettings($r['module']);
-    $r['settings'] = array_merge($default, (array)$r['settings']);
+    $r['settings'] = empty($r['module']) ? [] : PageModuleCore::getDefaultSettings($r['module']);
+    //$r['settings'] = array_merge($default, (array)$r['settings']);
     $r['settings'] = array_merge(PageControllersCore::getDefaultSettings($r['controller']), (array)$r['settings']);
   }
 

@@ -7,8 +7,9 @@ return [
     'image'       => 'showDummyImage',
   ],
   'siteItem'   => [
-    'datePublish' => 'date',
-    'image'       => 'mdImageLink',
+    'datePublish' => 'datetime',
+    'image'       => 'directImageLink',
+    'text'     => 'whole',
   ],
   'adminItems' => [
     'image' => 'lightbox',

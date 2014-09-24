@@ -41,14 +41,4 @@ class PageModuleNews extends PageModuleDd {
     ];
   }
 
-  protected function prepareNode(array $node) {
-    $node = parent::prepareNode($node);
-    $node['settings']['dateField'] = 'datePublish';
-    $node['settings']['smW'] = 80;
-    $node['settings']['smH'] = 50;
-    $node['settings']['mdW'] = 200;
-    $node['settings']['mdH'] = 150;
-    return $node;
-  }
-
 }
