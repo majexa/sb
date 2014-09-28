@@ -8,4 +8,4 @@ if (empty($_SERVER['argv'][1])) {
 }
 define('PROJECT', $_SERVER['argv'][1]);
 require '/home/user/ngn-env/run/siteStandAloneInit.php';
-new CliHelpArgsSingle(array_slice($_SERVER['argv'], 1), new Sb);
+new SbCli;
