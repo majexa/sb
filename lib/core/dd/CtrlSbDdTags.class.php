@@ -18,20 +18,20 @@ class CtrlSbDdTags extends CtrlSbAdmin {
   protected function getGrid() {
     $group = DdTagsGroup::getById($this->groupId());
     return Items::grid([
-      'head' => ['ID', 'Тэг','Кол-во записей'],
-      'body' => array_map(function($v) {
+      'head' => ['ID', 'Тэг', 'Кол-во записей'],
+      'body' => array_map(function ($v) {
         return [
-          'id' => $v['id'],
+          'id'    => $v['id'],
           'tools' => [
             'delete' => 'Удалить',
-            'edit' => [
-              'type' => 'inlineTextEdit',
-              'action' => 'ajax_rename',
+            'edit'   => [
+              'type'      => 'inlineTextEdit',
+              'action'    => 'ajax_rename',
               'paramName' => 'title',
-              'elN' => 1
+              'elN'       => 1
             ]
           ],
-          'data' => Arr::filterByKeys($v, ['id', 'title', 'cnt'])
+          'data'  => Arr::filterByKeys($v, ['id', 'title', 'cnt'])
         ];
       }, (new DdTagsTagsFlat($group))->getTags())
     ]);
@@ -48,6 +48,12 @@ class CtrlSbDdTags extends CtrlSbAdmin {
 
   function action_ajax_delete() {
     $this->tags()->delete($this->req->rq('id'));
+  }
+
+  function action_ajax_create() {
+    $this->tags()->create([
+      'title' => $this->req->rq('title'),
+    ]);
   }
 
 }

@@ -86,7 +86,7 @@ class PageModuleSflm {
   protected function addStaticPath($type) {
     if (($paths = $this->info->getFilePaths("{$this->frontendName}.$type")) === false) return;
     if ($type == 'js') {
-      $this->sflmFrontend->classes->processCode(file_get_contents($paths[0]), 'PageModuleSflm::addStaticPath()');
+      $this->sflmFrontend->processCode(file_get_contents($paths[0]), 'PageModuleSflm('.$this->module.')::addStaticPath()');
     }
     $this->wPaths[$type][] = $paths[1];
   }

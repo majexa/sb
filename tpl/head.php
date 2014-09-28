@@ -1,7 +1,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title><?= $d['pageHeadTitle'] ?></title>
-  <?= Sflm::getTags() ?>
+  {sflm}
   <?= $d['head'] ?>
   <style>
     <?= CssCore::btnColors('#F1F0DF') ?>

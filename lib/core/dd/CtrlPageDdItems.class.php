@@ -54,6 +54,29 @@ class CtrlPageDdItems extends CtrlPageDd {
       $this->d['content'] = $this->ddo()->setItem($this->items()->getItem($this->req->params[1]))->els();
       $this->d['content'] .= Tt()->getTpl('msgs/default');
     }
+    $this->initListTagPath();
+  }
+
+  // --
+
+  /**
+   * Возвращает данные по первому тегу, присутствующему в фильтре
+   */
+  protected function getFirstFilteringTag() {
+    foreach ($this->tagFilters as $tagField => $tagName) {
+      $r = DdTags::get($this->paramFilterItems()->strName, $tagField)->getData();
+      return Arr::getValueByKey($r, 'name', $tagName);
+    }
+    return false;
+  }
+
+  /**
+   * Меняет название страницы и добавляет ссылку на тэг в хлебные крошки
+   */
+  protected function initListTagPath() {
+    if (($tag = $this->getFirstFilteringTag()) === false) return;
+    $this->setPageTitle($tag['title']);
+    $this->setPathData($this->tt->getPath(), $tag['title']);
   }
 
 }

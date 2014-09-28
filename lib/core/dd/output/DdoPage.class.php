@@ -7,7 +7,7 @@ class DdoPage extends Ddo {
   function __construct(DbModelPages $page, $layoutName, array $options = []) {
     $this->page = $page;
     $cls = empty($page['settings']['ddItemsLayout']) ? 'list' : $page['settings']['ddItemsLayout'];
-    $this->ddddItemsBegin = '`<div class="items ddItems '.$cls.' str_`.$strName.`">`';
+    $this->ddddItemsBegin = '`<div class="items ddItems '.$cls.' str_`.$strName.` l_`.$layoutName.`">`';
     $this->ddddItemLink = '`/'.$this->page['path'].'/`.$id';
     parent::__construct($this->page['strName'], $layoutName, $options);
   }
