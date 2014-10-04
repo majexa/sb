@@ -84,6 +84,7 @@ Ngn.Pb.Interface = new Class({
   initBlocks: function() {
     this.eWrapper.getElements('.block').each(function(el) {
       var typeClsName = 'Ngn.Pb.BlockEdit.' + ucfirst(Ngn.Pb.getType(el));
+      c(typeClsName);
       var typeCls = eval(typeClsName);
       typeCls ? c('init ' + typeClsName) : c('init Ngn.Pb.BlockEdit');
       var cls = typeCls || Ngn.Pb.BlockEdit;

@@ -66,20 +66,17 @@ class PageBlockCore {
   }
 
   static function getBlockHtmlData(DbModel $pbm, CtrlPage $ctrl = null) {
-    try {
-      $pbv = O::get(ClassCore::nameToClass('Pbv', $pbm['type']), $pbm, $ctrl);
-      $class = ClassCore::nameToClass('Pbvug', $pbm['type']);
-      if (isset($ctrl) and class_exists($class) and $ctrl->userGroup) {
-        LogWriter::str('dd', $pbm['id']);
-        $block = O::get($class, $pbv)->getData();
-      }
-      else {
-        $block = $pbv->getData();
-      }
-    } catch (Exception $e) {
-      $block['colN'] = $pbm['colN'];
-      if (IS_DEBUG) $block['html'] = Err::getErrorText($e);
+    /* @var $pbv PbvAbstract */
+    $pbv = O::get(ClassCore::nameToClass('Pbv', $pbm['type']), $pbm, $ctrl);
+    $class = ClassCore::nameToClass('Pbvug', $pbm['type']);
+    if (isset($ctrl) and class_exists($class) and $ctrl->userGroup) {
+      LogWriter::str('dd', $pbm['id']);
+      $block = O::get($class, $pbv)->getData();
     }
+    else {
+      $block = $pbv->getData();
+    }
+    //$block['colN'] = $pbm['colN'];
     return $block;
   }
 

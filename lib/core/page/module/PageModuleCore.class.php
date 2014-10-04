@@ -81,7 +81,7 @@ class PageModuleCore {
   }
 
   static function getDefaultSettings($module) {
-    foreach (self::getAncestorNames($module) as $_module) {
+    foreach (self::getAncestorNames($module, true, true) as $_module) {
       if (($r = (new PageModuleInfo($_module))->getData('pms')) !== false) {
         return $r;
       }

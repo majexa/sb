@@ -85,8 +85,13 @@ abstract class PbvAbstract {
    */
   function getData() {
     $r = $this->pageBlock->r;
+    try {
+      $html = $this->html();
+    } catch (Exception $e) {
+      $html = IS_DEBUG ? Err::getErrorText($e) : '';
+    }
     return array_merge($r, [
-      'html'   => $this->html(),
+      'html'   => $html,
       'class'  => $this->cssClass,
       'styles' => $this->styles()
     ]);

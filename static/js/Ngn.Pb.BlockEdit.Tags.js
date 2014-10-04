@@ -5,7 +5,7 @@ Ngn.Pb.BlockEdit.Tags = new Class({
     if (!Ngn.isAdmin) return;
     this.replaceEditBlockBtn({
       cls: 'tag2',
-      caption: 'Редактировать рубрики'
+      caption: 'Редактировать теги'
     }, function() {
       new Ngn.DdTags.Dialog.Flat({
         blockId: this.id,
