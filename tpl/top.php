@@ -24,7 +24,7 @@
         <a href="/balance" class="money"><i></i><?= DbModelCore::get('users', Auth::get('id'))['extra']['balance'] ?> Ᵽ</a>
       </div>
       */?>
-      <div class="item gray"><a href="<?= $d['path'] ?>?logout=1">Выйти</a></div>
+      <div class="item gray"><a href="<?= $d['path'] ?>?logout=1"><?= Lang::get('logout') ?></a></div>
     </div>
   <? } ?>
   <? if ($d['topItems']) foreach ($d['topItems'] as $v) { ?>
