@@ -1,6 +1,6 @@
 <div class="authBar">
   <? if (!Auth::get('id')) { ?>
-    <form action="<?= $_SERVER['REQUEST_URI']?>" method="post" id="authForm">
+    <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post" id="authForm">
       <div class="item"><input type="text" class="fld" name="authLogin" id="authLogin" placeholder="Login"/></div>
       <div class="item"><input type="password" class="fld" name="authPass" id="authPass" placeholder="Password"/></div>
       <div class="item" style="position:relative">
@@ -16,14 +16,7 @@
   else {
     ?>
     <div id="personal" class="iconsSet">
-      <div class="item myLogin"><a class="pseudoLink"><i></i><b><?= UsersCore::getTitle(Auth::get('id')) ?></b></a>
-      </div>
-      <?/*
-      <div class="item"><a href="/interviews" class="list"><i></i>Мои опросы</a></div>
-      <div class="item">
-        <a href="/balance" class="money"><i></i><?= DbModelCore::get('users', Auth::get('id'))['extra']['balance'] ?> Ᵽ</a>
-      </div>
-      */?>
+      <div class="item myLogin"><a class="pseudoLink"><i></i><b><?= UsersCore::getTitle(Auth::get('id')) ?></b></a></div>
       <div class="item gray"><a href="<?= $d['path'] ?>?logout=1"><?= Lang::get('logout') ?></a></div>
     </div>
   <? } ?>

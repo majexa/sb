@@ -57,11 +57,9 @@ class CtrlPageDdItems extends CtrlPageDd {
     $this->initListTagPath();
   }
 
-  function action_authors() {
-    die2(db()->selectCol('SELECT userId FROM dd_i_'.$this->getStrName().' GROUP BY userId'));
-    //$this->items()->get
-    //die2(123);
-  }
+  //function action_authors() {
+  //  die2(db()->selectCol('SELECT userId FROM dd_i_'.$this->getStrName().' GROUP BY userId'));
+  //}
 
   // --
 

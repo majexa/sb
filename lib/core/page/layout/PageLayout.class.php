@@ -219,17 +219,15 @@ TEXT;
           Tt()->getTpl('common/pageTitle', $ctrl->d). //
           Tt()->getTpl('common/pathNav', $ctrl->d). //
           '</div>'.'<div class="mainBody">';
-        //if ($ctrl->d['page']['settings']['showSubPages']) $h .= '<div class="subPages">'.Menu::getUlObjById($ctrl->d['page']['id'], 1)->html().'</div>';
-        //$h .= Tt()->getTpl($ctrl->d['tpl'], $ctrl->d);
-        //if (isset($ctrl->d['content'])) $h .= '<div class="gray">content begins</div>'.$ctrl->d['content'].'<div class="gray">content ends</div>';
-        //die2();
+        // if ($ctrl->d['page']['settings']['showSubPages']) $h .= '<div class="subPages">'.Menu::getUlObjById($ctrl->d['page']['id'], 1)->html().'</div>';
+        // $h .= Tt()->getTpl($ctrl->d['tpl'], $ctrl->d);
+        // if (isset($ctrl->d['content'])) $h .= '<div class="gray">content begins</div>'.$ctrl->d['content'].'<div class="gray">content ends</div>';
         if ($ctrl->d['tpl'] != 'default') {
           $ctrl->d['content'] = Tt()->getTpl($ctrl->d['tpl'], $ctrl->d);
           $ctrl->d['tpl'] = 'default';
         }
         if (isset($ctrl->d['content'])) $h .= $ctrl->d['content'];
         $h .= '</div>';
-//        <div class="body moduleBody{$ctrl->d['bodyClass']}">
         $html .= <<<TEXT
 <div class="$class" id="col$n" data-n="$n">
   <div class="body moduleBody">
