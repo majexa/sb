@@ -1,6 +1,6 @@
 <?php
 
-class SbCli extends CliHelpArgsSingle {
+class SbCli extends CliAccessArgsSingle {
 
   protected $project;
 
