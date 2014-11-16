@@ -31,13 +31,15 @@ class PagesPathUpdater {
       $pids[] = $node['parentId'];
       $level++;
     }
-    $path = implode(PAGE_PATH_SEP, $path);
+    $path = implode(self::PAGE_PATH_SEP, $path);
     $pids = implode(',', $pids);
     $items[count($items) - 1]['link'] = '/'.$path;
     $items = !empty($items) ? serialize($items) : '';
     db()->query("UPDATE {$this->tree->table} SET pids=?, path=?, pathData=? WHERE id=?d", $pids, $path, $items, $id);
     DbModelCore::cc($this->tree->table, $id);
   }
+
+  const PAGE_PATH_SEP = '.';
 
   function update($id) {
     $this->updateNode($id);

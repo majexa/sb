@@ -259,15 +259,19 @@ class Msgs {
    */
   function iiUpload($uploadFileData) {
     if (!$uploadFileData['tmp_name'] or !file_exists($uploadFileData['tmp_name'])) return false;
-    $dir = UPLOAD_PATH.'/'.INLINE_IMAGES_DIR.'/'.$this->id2.'/';
+    $dir = UPLOAD_PATH.'/'.self::INLINE_IMAGES_DIR.'/'.$this->id2.'/';
     Dir::make($dir);
     $fname = 'ii'.rand(1, 10000).'-'.Misc::transit($uploadFileData['name'], true);
     $fpath = $dir.$fname;
     copy($uploadFileData['tmp_name'], $fpath);
     unlink($uploadFileData['tmp_name']);
-    return UPLOAD_DIR.INLINE_IMAGES_DIR.'/'.$this->id2.'/'.$fname;
+    return UPLOAD_DIR.self::INLINE_IMAGES_DIR.'/'.$this->id2.'/'.$fname;
   }
-  
+
+  const INLINE_IMAGES_DIR = 'ii';
+  const INLINE_IMAGES_THUMB_DIR = 'ii_thmb';
+  const INLINE_IMAGES_TEMP_DIR = 'ii_tmp';
+
   function subscribeItem() {
     //Notify_SubscribeItems::update(
       //Auth::get('id'), 'comments_newMsgs', $this->id1, $this->id2);

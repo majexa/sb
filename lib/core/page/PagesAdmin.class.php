@@ -58,7 +58,7 @@ class PagesAdmin extends PagesTree {
       $pids[] = $page['parentId'];
       $level++;
     }
-    $path = implode(PAGE_PATH_SEP, $path);
+    $path = implode(self::PAGE_PATH_SEP, $path);
     $pids = implode(',', $pids); 
     $items[count($items)-1]['link'] = '/'.$path;
     $items = !empty($items) ? serialize($items) : '';
