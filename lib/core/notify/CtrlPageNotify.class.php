@@ -87,7 +87,7 @@ abstract class CtrlPageNotify extends CtrlPage {
   }
   
   function setSubmenu() {
-    $this->d['submenu'] = getLinks([
+    $this->d['submenu'] = Tpl::getLinks([
       [
         'title' => 'Настройка уведомлений',
         'link' => $this->tt->getPath(1),

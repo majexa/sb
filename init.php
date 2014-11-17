@@ -1,6 +1,6 @@
 <?php
 
-if (file_exists(SITE_PATH.'/config/constants/sb.php')) require SITE_PATH.'/config/constants/sb.php';
+if (file_exists(PROJECT_PATH.'/config/constants/sb.php')) require PROJECT_PATH.'/config/constants/sb.php';
 define('SB_PATH', __DIR__);
 define('CORE_PAGE_MODULES_DIR', 'cpm');
 define('CORE_PAGE_MODULES_PATH', SB_PATH.'/lib/'.CORE_PAGE_MODULES_DIR);

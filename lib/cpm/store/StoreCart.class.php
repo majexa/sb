@@ -34,7 +34,7 @@ class StoreCart {
       'pageId'     => $pageId,
       'cartId'     => $cartId,
       'cnt'        => $cnt,
-      'dateUpdate' => dbCurTime()
+      'dateUpdate' => Date::db()
     ], true);
   }
 

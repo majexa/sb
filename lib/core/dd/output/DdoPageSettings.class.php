@@ -28,7 +28,7 @@ class DdoPageSettings extends DdoSettings {
   }
 
   function delete() {
-    //Dir::deleteFiles(SITE_PATH."/config/vars/ddo", '*.'.$this->pageModule.'.*');
+    //Dir::deleteFiles(PROJECT_PATH."/config/vars/ddo", '*.'.$this->pageModule.'.*');
   }
 
   function renameField($old, $new) {

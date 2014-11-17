@@ -82,7 +82,7 @@ class DdItemsPage extends DdItems {
       'userId'  => $userUnicId,
       'hash'    => isset($hash) ? $hash : ''
     ];
-    $d['dateUpdate'] = $d['datePublish'] = $d['dateCreate'] = dbCurTime();
+    $d['dateUpdate'] = $d['datePublish'] = $d['dateCreate'] = Date::db();
     db()->query('INSERT INTO dd_items SET ?a', $d);
     db()->query('REPLACE INTO comments_active SET parentId=?d, id2=?d, active=?d', $this->pageId, $id, isset($data['active']) ? $data['active'] : 1);
 
@@ -91,14 +91,14 @@ class DdItemsPage extends DdItems {
   }
 
   function updatePublishDate($id) {
-    db()->query("UPDATE {$this->table} SET datePublish=? WHERE id=?d", dbCurTime(), $id);
+    db()->query("UPDATE {$this->table} SET datePublish=? WHERE id=?d", Date::db(), $id);
   }
 
   // $data должен иметь весь массив данных записи
   function update($id, array $data) {
     parent::update($id, $data);
     // Если обновился title, то меняем его и в dd_titles
-    if (isset($data['title'])) db()->query("UPDATE dd_items SET title=?, dateUpdate=? WHERE itemId=?d AND strName=?", isset($data['title']) ? $data['title'] : '', dbCurTime(), $id, $this->strName);
+    if (isset($data['title'])) db()->query("UPDATE dd_items SET title=?, dateUpdate=? WHERE itemId=?d AND strName=?", isset($data['title']) ? $data['title'] : '', Date::db(), $id, $this->strName);
     $this->clearCache($id);
   }
 
@@ -256,7 +256,7 @@ class DdItemsPage extends DdItems {
   ///////////// Publish //////////////////////////////////
 
   function publish($id) {
-    db()->query("UPDATE {$this->table} SET active=1, datePublish=?d WHERE id=?d", dbCurTime());
+    db()->query("UPDATE {$this->table} SET active=1, datePublish=?d WHERE id=?d", Date::db());
   }
 
   ///////////// Authors ////////////////

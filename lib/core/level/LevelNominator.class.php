@@ -59,7 +59,7 @@ abstract class LevelNominator {
       if ($curLevels[$userId] >= $this->level)
         continue;
       db()->query('REPLACE INTO level_users SET userId=?d, level=?d, nominateDate=?',
-        $userId, $this->level, dbCurTime());
+        $userId, $this->level, Date::db());
       $this->nominatedUserIds[] = $userId;
     }
     
@@ -80,12 +80,12 @@ abstract class LevelNominator {
       if (isset($curLevels[$userId])) {
         //if ($curLevels[$userId]['nominateDate'] < time() - $this->interval) {
           db()->query('UPDATE level_users SET level=?d, nominateDate=? WHERE userId=?d',
-            $this->level, dbCurTime(), $userId);
+            $this->level, Date::db(), $userId);
           $this->nominatedUserIds[] = $userId;
         //}
       } else {
         db()->query('INSERT INTO level_users SET level=?d, nominateDate=? WHERE userId=?d',
-          $this->level, dbCurTime(), $userId);
+          $this->level, Date::db(), $userId);
         $this->nominatedUserIds[] = $userId;
       } 
     }

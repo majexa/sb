@@ -146,7 +146,7 @@ class Msgs {
     else $data['ansUserId'] = null;
     $data[$this->id1Field] = $this->id1;
     $data[$this->id2Field] = $this->id2;
-    if (!isset($data['dateCreate'])) $data['dateCreate'] = dbCurTime();
+    if (!isset($data['dateCreate'])) $data['dateCreate'] = Date::db();
     $data['dateUpdate'] = $data['dateCreate'];
     $data['ip'] = $_SERVER['REMOTE_ADDR'];
     $d = $data;
@@ -175,7 +175,7 @@ class Msgs {
         {$this->id1Field}=?d AND
         {$this->id2Field}=?d
         ",
-      $text, $textF, dbCurTime(), $id, $this->id1, $this->id2);
+      $text, $textF, Date::db(), $id, $this->id1, $this->id2);
     $this->clearCache();
   }
   

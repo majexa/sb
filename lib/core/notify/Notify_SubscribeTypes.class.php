@@ -87,7 +87,7 @@ class Notify_SubscribeTypes {
     db()->query(
       "REPLACE INTO notify_subscribe_types SET 
        userId=?d, type=?, dateCreate=?, dateSent=?",
-      $userId, $type, dbCurTime(), dbCurTime());
+      $userId, $type, Date::db(), Date::db());
   }  
   
   static function touch($userId, $type, $minus = 0) {
@@ -101,7 +101,7 @@ class Notify_SubscribeTypes {
       "WHERE userId IN (".implode(', ', $userIds).")" : '';
     db()->query(
       "UPDATE notify_subscribe_types SET dateSent=? $cond",
-      dbCurTime());
+      Date::db());
   }
   
   /**

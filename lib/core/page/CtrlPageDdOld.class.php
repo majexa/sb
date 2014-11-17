@@ -116,7 +116,7 @@ abstract class CtrlPageDdOld extends CtrlPage {
 
   function updateCommentsDate() {
     if (!$this->itemId) throw new Exception('$this->itemId not defined');
-    $this->im->items->updateField($this->itemId, 'commentsUpdate', dbCurTime());
+    $this->im->items->updateField($this->itemId, 'commentsUpdate', Date::db());
   }
 
   protected function setFormTpl($form) {
