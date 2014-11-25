@@ -3,7 +3,7 @@
 return [
   'core',
   'pageBlocks',
-  'i/js/ngn/Ngn.Btn.js',
+  //'i/js/ngn/Ngn.Btn.js',
   'sb/js/init.js',
   //'siteAuth',
   //'pageLink',
