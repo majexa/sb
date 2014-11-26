@@ -7,7 +7,7 @@ class DdoPageModule extends DdoPage {
     parent::initTpls();
     $this->ddddByName['title'] = '`<h2><a href="`.'.$this->ddddItemLink.'.`">`.$v.`</a></h2>`';
     $this->ddddByType['date'] = 'dateStrSql($v, `d.m.Y`, `Y-m-d`)';
-    $this->ddddByType['datetime'] = 'datetimeStrSql($v)';
+    $this->ddddByType['datetime'] = 'Date::datetimeStrSql($v)';
     $this->ddddByType['commentsCount'] = '
 $v ? (`<div class="smIcons">
 <a class="comments`.($v > 2 ? `2` : ``).` shortComments"
