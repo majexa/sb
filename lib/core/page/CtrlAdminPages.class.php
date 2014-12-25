@@ -150,16 +150,16 @@ class CtrlAdminPages extends CtrlAdminPagesBase {
     $this->redirect('referer');
   }
 
-  protected function getControllerRequiredFieldsHtml($controller) {
-    $oF = new DdForm(new PageControllerSettingsFields($controller), null);
-    $oF->setNameArray('settings');
-    if (!$oF->fields->getRequired()) return '';
-    $oF->onlyRequired = true;
-    $oF->disableSubmit = true;
-    $oF->disableFormTag = true;
-    if ($this->pageId) $oF->setElementsData(DbModelCore::get('pages', $this->pageId)->r['initSettings']);
-    return $oF->html();
-  }
+//  protected function getControllerRequiredFieldsHtml($controller) {
+//    $oF = new DdForm(new PageControllerSettingsFields($controller), null);
+//    $oF->setNameArray('settings');
+//    if (!$oF->fields->getRequired()) return '';
+//    $oF->onlyRequired = true;
+//    $oF->disableSubmit = true;
+//    $oF->disableFormTag = true;
+//    if ($this->pageId) $oF->setElementsData(DbModelCore::get('pages', $this->pageId)->r['initSettings']);
+//    return $oF->html();
+//  }
 
   function action_ajax_controllerRequiredFields() {
     if (empty($this->req->r['controller'])) return;
