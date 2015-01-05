@@ -2,6 +2,7 @@ Ngn.Pb.BlockEdit.Tags = new Class({
   Extends: Ngn.Pb.BlockEdit,
 
   init: function() {
+    new Ngn.UlMenu(this.eBlock.getElement('ul'));
     if (!Ngn.isAdmin) return;
     this.replaceEditBlockBtn({
       cls: 'tag2',
@@ -13,7 +14,6 @@ Ngn.Pb.BlockEdit.Tags = new Class({
         data: JSON.decode(this.eBlock.getElement('.bcont').getElement('.data').get('html'))
       });
     }.bind(this));
-    new Ngn.UlMenu(this.eBlock.getElement('ul'));
   }
 
 });
