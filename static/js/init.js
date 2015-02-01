@@ -72,7 +72,7 @@ window.addEvent('domready', function() {
       w += el.getSizeWithMargin().x;
     });
     eTopBtns.setStyle('width', w);
-    document.getElement('.topBtns').inject(Ngn.btn2('Редактировать лейаут', 'page'));
+    document.getElement('.topBtns').inject(Ngn.Btn.btn2('Редактировать лейаут', 'page'));
      new Ngn.Dialog.RequestForm({
      url: '/sbc/pageLayout/' + Ngn.Sb.page.id + '/json_edit'
      });

@@ -115,7 +115,7 @@ Ngn.Pb.Col = new Class({
   },
 
   addBtnCreate: function() {
-    Ngn.btn2('Добавить блок в ' + this.eCol.get('data-n') + '-ю колонку', 'add').inject(this.eBtns).addEvent('click', function(e) {
+    Ngn.Btn.btn2('Добавить блок в ' + this.eCol.get('data-n') + '-ю колонку', 'add').inject(this.eBtns).addEvent('click', function(e) {
       e.preventDefault();
       // новый вариант
       new Ngn.Dialog.RequestForm({
@@ -219,7 +219,7 @@ Ngn.Pb.BlockEdit = new Class({
       }.bind(this));
     }
     if (this.interface.allowGlobalBtn) {
-      Ngn.btn2Flag(parseInt(this.eBlock.get('data-global')), {
+      Ngn.Btn.flag2(parseInt(this.eBlock.get('data-global')), {
         title: 'Сделать локальным',
         cls: 'global',
         url: this.interface.options.controllerPath + '/ajax_setGlobal/' + this.id + '/' + 0
@@ -249,7 +249,7 @@ Ngn.Pb.BlockEdit = new Class({
   },
 
   addEditBlockBtn: function(opts, func) {
-    Ngn.btn(opts).inject(this.eEditBlock, 'top').addEvent('click', function(e) {
+    Ngn.Btn.btn(opts).inject(this.eEditBlock, 'top').addEvent('click', function(e) {
       e.preventDefault();
       func();
     });

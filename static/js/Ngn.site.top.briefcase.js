@@ -18,7 +18,7 @@ Ngn.site.top.briefcase.Menu = new Class({
         var eCont = Elements.from('<div class="iconsSet"></div>')[0];
         for (var i=0; i<Ngn.site.top.briefcase.btns.length; i++) {
           var btn = Ngn.site.top.briefcase.btns[i];
-          new Ngn.Btn(Ngn.btn1(btn[0], btn[1]).inject(eCont), btn[2].bind(obj));
+          new Ngn.Btn(Ngn.Btn.btn1(btn[0], btn[1]).inject(eCont), btn[2].bind(obj));
         }
         eCont.inject(this.eBody)
       }

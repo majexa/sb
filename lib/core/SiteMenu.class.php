@@ -9,7 +9,7 @@ class SiteMenu {
 var eBtns = new Element('div', {
   'class': 'editBlock smIcons bordered blue'
 }).inject($('menu'), 'top');
-Ngn.btn1('Редактировать', 'edit').inject(eBtns).addEvent('click', function(e){
+Ngn.Btn.btn1('Редактировать', 'edit').inject(eBtns).addEvent('click', function(e){
   e.preventDefault();
   new Ngn.Dialog.TreeEdit.Pages();
 });
