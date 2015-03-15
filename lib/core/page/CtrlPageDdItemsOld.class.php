@@ -77,7 +77,7 @@ class CtrlPageDdItemsOld extends CtrlPageDd {
     }
   }
 
-  protected function paramFilterItems() {
+  protected function _paramFilterItems() {
     return $this->im->items;
   }
 
