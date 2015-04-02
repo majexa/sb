@@ -7,5 +7,5 @@ if (empty($_SERVER['argv'][1])) {
   return;
 }
 define('PROJECT', $_SERVER['argv'][1]);
-require '/home/user/ngn-env/run/siteStandAloneInit.php';
+require '/home/user/ngn-env/run/projectStandAloneInit.php';
 new SbCli;
