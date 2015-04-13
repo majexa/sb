@@ -39,16 +39,16 @@ class DdoPageSettings extends DdoSettings {
       $prefixesSubvalues = ['itemsShow', 'outputMethod'];
       foreach ($prefixes as $prefix) {
         $key = "ddo/$prefix.{$this->page['strName']}";
-        if (($file = SiteConfig::hasSiteVar($key)) !== false) {
-          SiteConfig::updateVar($key, Arr::replaceKey(include $file, $old, $new));
+        if (($file = ProjectConfig::hasSiteVar($key)) !== false) {
+          ProjectConfig::updateVar($key, Arr::replaceKey(include $file, $old, $new));
         }
       }
       foreach ($prefixesSubvalues as $prefix) {
         $key = "ddo/$prefix.{$this->page['strName']}";
-        if (($file = SiteConfig::hasSiteVar($key)) !== false) {
+        if (($file = ProjectConfig::hasSiteVar($key)) !== false) {
           $r = include $file;
           foreach ($r as $k => $v) $r[$k] = Arr::replaceKey($v, $old, $new);
-          SiteConfig::updateVar($key, $r);
+          ProjectConfig::updateVar($key, $r);
         }
       }
     }
