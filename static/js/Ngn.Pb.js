@@ -275,9 +275,9 @@ Ngn.Pb.dialogOptions.textAndImage = {
 /*
  Ngn.Pb.Text = new Class({
  initialize: function(eForm) {
- Ngn.dialogs.getValues().getLast().dialog.setStyle('width', '800px');
- //Ngn.dialogs.getValues().getLast().message.setStyle('height', '600px');
- Ngn.dialogs.getValues().getLast().screenСenter();
+ Ngn.Dialog.dialogs.getValues().getLast().dialog.setStyle('width', '800px');
+ //Ngn.Dialog.dialogs.getValues().getLast().message.setStyle('height', '600px');
+ Ngn.Dialog.dialogs.getValues().getLast().screenСenter();
  eForm.getElement('.type_wisiwig').setStyle('padding', 0);
  eForm.getElement('.type_wisiwig > p.label').setStyle('display', 'none');
  }
