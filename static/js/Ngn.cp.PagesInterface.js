@@ -104,7 +104,7 @@ Ngn.cp.PagesInterface = new Class({
   openPagePropDialog: function(pageId) {
     new Ngn.Dialog.RequestForm({
       title: 'Редактирование параметров раздела',
-      url: Ngn.getPath(2) + '/' + pageId + '/json_editPageProp',
+      url: Ngn.Url.getPath(2) + '/' + pageId + '/json_editPageProp',
       onSubmitSuccess: function() {
         if (this.tree) this.tree.reload();
         this.reloadItemsList();
@@ -114,7 +114,7 @@ Ngn.cp.PagesInterface = new Class({
   
   openControllerSettingsDialog: function(pageId) {
     new Ngn.Dialog.Queue.Request({
-      url: Ngn.getPath(2) + '/' + pageId + '?a=json_editControllerSettings',
+      url: Ngn.Url.getPath(2) + '/' + pageId + '?a=json_editControllerSettings',
       width: 600,
       reduceHeight: true
     });

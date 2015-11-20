@@ -26,7 +26,7 @@ Ngn.sb.DdItems = new Class({
     this.setOptions(options);
     this.esItems = esItems;
     if (!this.options.editPath) {
-      this.options.editPath = Ngn.getPath(1);
+      this.options.editPath = Ngn.Url.getPath(1);
     } else {
       this.options.useUserId = true;
     }
@@ -59,7 +59,7 @@ Ngn.sb.DdItems = new Class({
       //if (this.orderState == this.sortables.serialize().join(',')) return;
       el.addClass('loading');
       new Request({
-        url: Ngn.getPath(1) + '/ajax_reorder',
+        url: Ngn.Url.getPath(1) + '/ajax_reorder',
         onComplete: function() {
           el.removeClass('loading');
           this.orderState = this.sortables.serialize().join(',');
@@ -185,7 +185,7 @@ Ngn.sb.DdItems.EquailSizes = new Class({
 
   init: function() {
     if (!this.esItems.length) return;
-    this.cacheId = Ngn.getPath();
+    this.cacheId = Ngn.Url.getPath();
     var esImg = $$(this.selector+' img');
     var imgLinks = [];
     for (var i=0; i<esImg.length; i++) imgLinks.push(esImg[i].get('src'));

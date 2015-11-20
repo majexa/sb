@@ -8,7 +8,7 @@ Ngn.site.top.auth.init = function(options) {
 
 Ngn.site.top.auth.reload = function() {
   if (!Ngn.site.top.auth.exists) return;
-  $('top').load('/c/auth/ajax_top?path=' + Ngn.getPath());
+  $('top').load('/c/auth/ajax_top?path=' + Ngn.Url.getPath());
   new Ngn.site.top.Auth(Ngn.site.top.auth.options);
 };
 
