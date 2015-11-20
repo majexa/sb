@@ -183,11 +183,11 @@ Ngn.Cart.Block = new Class({
   },
 
   storeData: function() {
-    Ngn.storage.json.set('cart', this.data);
+    Ngn.Storage.json.set('cart', this.data);
   },
 
   restoreData: function() {
-    this.data = Ngn.storage.json.get('cart') || {};
+    this.data = Ngn.Storage.json.get('cart') || {};
   },
 
   addItem: function(pageId, cartId, cnt) {
