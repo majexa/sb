@@ -24,6 +24,6 @@
 </div>
 
 <script>
-  Ngn.toObj('Ngn.sb');
+  Ngn.Object.fromString('Ngn.sb');
   Ngn.Sb.page = <?= Arr::jsObj($d['page']->r) ?>;
 </script>

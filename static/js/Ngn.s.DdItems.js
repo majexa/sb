@@ -9,7 +9,7 @@
  });
  */
 
-//Ngn.toObj('Ngn.sb');
+//Ngn.Object.fromString('Ngn.sb');
 
 Ngn.sb.DdItems = new Class({
   Implements: [Options],

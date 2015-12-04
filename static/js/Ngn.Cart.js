@@ -134,7 +134,7 @@ Ngn.Cart.Block = new Class({
   initData:  function() {
     this.restoreData();
     this.initCount();
-    this.refrashElement();
+    this.refreshElement();
     Ngn.Cart.utils.initData(function(d) {
       if (d.length == 0) {
         this.data = {};
@@ -148,7 +148,7 @@ Ngn.Cart.Block = new Class({
       }
       this.storeData();
       this.initCount();
-      this.refrashElement();
+      this.refreshElement();
     }.bind(this));
   },
 
@@ -179,7 +179,7 @@ Ngn.Cart.Block = new Class({
   update: function() {
     this.storeData();
     this.initCount();
-    this.refrashElement();
+    this.refreshElement();
   },
 
   storeData: function() {
@@ -200,7 +200,7 @@ Ngn.Cart.Block = new Class({
     this.showMove();
   },
 
-  refrashElement: function() {
+  refreshElement: function() {
     this.eCaption.setStyle('display', this.count ? 'block' : 'none');
     this.eCount.set('html', this.count);
   },
